@@ -6,6 +6,11 @@ export default function FilmDetail() {
     const {id} = useParams();
     console.log(id);
     const {data: film, loading, error} = useDetails<Film>('films', id!);
+
+     const getID = (url: string) => {
+    const parts = url.split("/").filter(Boolean);
+    return parts[parts.length - 1];
+  }
     
     type Film = {
         title: string;
@@ -19,11 +24,11 @@ export default function FilmDetail() {
     }
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <div className="text-center text-gray-500 text-lg">Loading...</div>;
     }
 
     if (error) {
-        return <div>Error: {error}</div>;
+        return <div className="text-center text-red-500 text-lg">Error: {error}</div>;
     }
     return (
         <div className="p-4">
@@ -44,7 +49,7 @@ export default function FilmDetail() {
                                     <h3 className="text-xl font-bold mb-2">Vehicles:</h3>
                                     <ul>
                                         {film.vehicles.map((vehicle: string) => (
-                                            <li key={vehicle}><a href={`/detail/vehicle/${vehicle}`} className="text-blue-500 hover:underline cursor-pointer">{vehicle}</a></li>
+                                            <li key={vehicle}><a href={`/detail/vehicle/${getID(vehicle)}`} className="text-blue-500 hover:underline cursor-pointer">{vehicle}</a></li>
                                         ))}
                                     </ul>
                                 </div>
@@ -57,7 +62,7 @@ export default function FilmDetail() {
                                     <h3 className="text-xl font-bold mb-2">Starships:</h3>
                                     <ul>
                                         {film.starships.map((starship: string) => (
-                                            <li key={starship}><a href={`/detail/starship/${starship}`} className="text-blue-500 hover:underline cursor-pointer">{starship}</a></li>
+                                            <li key={starship}><a href={`/detail/starship/${getID(starship)}`} className="text-blue-500 hover:underline cursor-pointer">{starship}</a></li>
                                         ))}
                                     </ul>
                                 </div>

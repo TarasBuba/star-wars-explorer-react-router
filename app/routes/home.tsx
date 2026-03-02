@@ -19,8 +19,10 @@ export default function Home() {
         <Link to="/films">Films</Link>
         <Link to="/planets">Planets</Link>
         <Link to="/people">People</Link>
-        <Link to="/padawans">Padawans</Link>
-        <Link to="/masters">Masters</Link>
+        <Link to="/species">Species</Link>
+        <Link to="/starships">Starships</Link>
+        <Link to="/vehicles">Vehicles</Link>
+
       </div>
       
     </div>

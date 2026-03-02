@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-type typeOfResource = 'films' | 'planets' | 'people' |'masters' | 'padawans';
+type typeOfResource = 'films' | 'planets' | 'people' |'species' | 'vehicles' | 'starships';
 export default function useDetails<T>(resource: typeOfResource, id: string  ) {
     const[data, setDate] = useState<T | null>(null);
     const [loading, setLoading] = useState(true);
