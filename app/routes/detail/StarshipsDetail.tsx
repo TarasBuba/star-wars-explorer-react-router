@@ -9,7 +9,7 @@ export default function StarshipsDetail() {
 
     const getID = (url: string) => {
     const parts = url.split("/").filter(Boolean);
-    return parts[parts.length - 1];
+    return {resource: parts[parts.length - 2], id: parts[parts.length - 1]};
   }
     
     type Starships = {
@@ -36,7 +36,7 @@ export default function StarshipsDetail() {
     }
 
     if (error) {
-        return <div className="text-center text-red-500 text-lg">Error: {error}</div>;
+        return <div className="text-center text-red-500 text-lg">Error: {error.message}</div>;
     }
     return (
         <div>
@@ -65,7 +65,7 @@ export default function StarshipsDetail() {
                                         <ul>
                                             {starships.pilots.map((pilot) => (
                                                 <li key={pilot} className=" text-blue-500 hover:underline cursor-pointer">
-                                                    <Link to={`/detail/${getID(pilot)}`}>{pilot}</Link>
+                                                    <Link to={`/${getID(pilot).resource}/${getID(pilot).id}`}>{pilot}</Link>
                                                 </li>
                                             ))}
                                         </ul>
@@ -79,7 +79,7 @@ export default function StarshipsDetail() {
                                         <ul>
                                             {starships.films.map((film) => (
                                                 <li key={film} className=" text-blue-500 hover:underline cursor-pointer">
-                                                    <Link to={`/detail/${getID(film)}`}>{film}</Link>
+                                                    <Link to={`/${getID(film).resource}/${getID(film).id}`}>{film}</Link>
                                                 </li>
                                             ))}
                                         </ul>

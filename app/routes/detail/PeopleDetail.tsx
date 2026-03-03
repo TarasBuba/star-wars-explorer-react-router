@@ -7,9 +7,9 @@ export default function PlanetsDetail() {
   // console.log(id);
   const { data: people, loading, error } = useDetails<People>("people", id!);
 
-   const getID = (url: string) => {
+    const getID = (url: string) => {
     const parts = url.split("/").filter(Boolean);
-    return parts[parts.length - 1];
+    return {resource: parts[parts.length - 2], id: parts[parts.length - 1]};
   }
 
   type People = {
@@ -34,7 +34,7 @@ export default function PlanetsDetail() {
 
   if (error) {
     return (
-      <div className="text-center text-red-500 text-lg">Error: {error}</div>
+      <div className="text-center text-red-500 text-lg">Error: {error.message}</div>
     );
   }
   return (
@@ -88,7 +88,7 @@ export default function PlanetsDetail() {
                       key={specie}
                       className=" text-blue-500 hover:underline cursor-pointer"
                     >
-                      <Link to={`/detail/${getID(specie)}`}>
+                      <Link to={`/${getID(specie).resource}/${getID(specie).id}`}>
                         {specie}
                       </Link>
                     </li>
@@ -105,7 +105,7 @@ export default function PlanetsDetail() {
                       key={starship}
                       className=" text-blue-500 hover:underline cursor-pointer"
                     >
-                      <Link to={`/detail/${getID(starship)}`}>
+                      <Link to={`/${getID(starship).resource}/${getID(starship).id}`}>
                         {starship}
                       </Link>
                     </li>
@@ -122,7 +122,7 @@ export default function PlanetsDetail() {
                       key={vehicle}
                       className=" text-blue-500 hover:underline cursor-pointer"
                     >
-                      <Link to={`/detail/${getID(vehicle)}`}>
+                      <Link to={`/${getID(vehicle).resource}/${getID(vehicle).id}`}>
                         {vehicle}
                       </Link>
                     </li>

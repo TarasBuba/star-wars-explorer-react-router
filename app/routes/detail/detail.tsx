@@ -4,7 +4,7 @@ type typeOfResource = 'films' | 'planets' | 'people' |'species' | 'vehicles' | '
 export default function useDetails<T>(resource: typeOfResource, id: string  ) {
     const[data, setDate] = useState<T | null>(null);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState<Error | null>(null);
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -16,7 +16,7 @@ export default function useDetails<T>(resource: typeOfResource, id: string  ) {
                 console.log(data);
                 setDate(data);
             } catch (error) {
-                setError(error.message);
+                setError(error as Error);
             } finally {
                 setLoading(false);
             }

@@ -7,9 +7,9 @@ export default function VehiclesDetail() {
     // console.log(id);
     const {data: vehicles, loading, error} = useDetails<Vehicles>('vehicles', id!);
 
-    const getID = (url: string) => {
+     const getID = (url: string) => {
     const parts = url.split("/").filter(Boolean);
-    return parts[parts.length - 1];
+    return {resource: parts[parts.length - 2], id: parts[parts.length - 1]};
   }
     
     type Vehicles = {
@@ -34,7 +34,7 @@ export default function VehiclesDetail() {
     }
 
     if (error) {
-        return <div className="text-center text-red-500 text-lg">Error: {error}</div>;
+        return <div className="text-center text-red-500 text-lg">Error: {error.message}</div>;
     }
     return (
         <div>
@@ -60,7 +60,7 @@ export default function VehiclesDetail() {
                                     <ul>
                                         {vehicles.pilots.map((pilotId) => (
                                             <li key={pilotId}>
-                                                <Link to={`/detail/pilots/${getID(pilotId)}`}>{pilotId}</Link>
+                                                <Link to={`/${getID(pilotId).resource}/${getID(pilotId).id}`} className="text-blue-500 hover:underline">{pilotId}</Link>
                                             </li>
                                         ))}
                                     </ul>
@@ -72,7 +72,7 @@ export default function VehiclesDetail() {
                                     <ul>
                                         {vehicles.films.map((filmId) => (
                                             <li key={filmId}>
-                                                <Link to={`/detail/films/${getID(filmId)}`}>{filmId}</Link>
+                                                <Link to={`/${getID(filmId).resource}/${getID(filmId).id}`} className="text-blue-500 hover:underline">{filmId}</Link>
                                             </li>
                                         ))}
                                     </ul>

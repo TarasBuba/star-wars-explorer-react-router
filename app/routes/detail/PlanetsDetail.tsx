@@ -9,7 +9,7 @@ export default function PlanetsDetail() {
 
     const getID = (url: string) => {
     const parts = url.split("/").filter(Boolean);
-    return parts[parts.length - 1];
+    return {resource: parts[parts.length - 2], id: parts[parts.length - 1]};
   }
     
     type Planets = {
@@ -29,7 +29,7 @@ export default function PlanetsDetail() {
     }
 
     if (error) {
-        return <div className="text-center text-red-500 text-lg">Error: {error}</div>;
+        return <div className="text-center text-red-500 text-lg">Error: {error.message}</div>;
     }
     return (
         <div>
@@ -53,7 +53,7 @@ export default function PlanetsDetail() {
                                             <ul>
                                                 {planet.residents.map((resident) => (
                                                     <li key={resident} className=" text-blue-500 hover:underline cursor-pointer">
-                                                        <Link to={`/detail/${getID(resident)}`}>{resident}</Link>
+                                                        <Link to={`/${getID(resident).resource}/${getID(resident).id}`}>{resident}</Link>
                                                     </li>
                                                 ))}
                                             </ul>
@@ -67,7 +67,7 @@ export default function PlanetsDetail() {
                                             <ul>
                                                 {planet.films.map((film) => (
                                                     <li key={film} className=" text-blue-500 hover:underline cursor-pointer">
-                                                        <Link to={`/detail/${getID(film)}`}>{film}</Link>
+                                                        <Link to={`/${getID(film).resource}/${getID(film).id}`}>{film}</Link>
                                                     </li>
                                                 ))}
                                             </ul>

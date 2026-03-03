@@ -7,9 +7,9 @@ export default function SpeciesDetail() {
     // console.log(id);
     const {data: species, loading, error} = useDetails<Species>('species', id!);
 
-    const getID = (url: string) => {
+     const getID = (url: string) => {
     const parts = url.split("/").filter(Boolean);
-    return parts[parts.length - 1];
+    return {resource: parts[parts.length - 2], id: parts[parts.length - 1]};
   }
     
     type Species = {
@@ -33,7 +33,7 @@ export default function SpeciesDetail() {
     }
 
     if (error) {
-        return <div className="text-center text-red-500 text-lg">Error: {error}</div>;
+        return <div className="text-center text-red-500 text-lg">Error: {error.message}</div>;
     }
     return (
         <div>
@@ -50,7 +50,7 @@ export default function SpeciesDetail() {
                         <p>Hair Colors: {species.hair_colors}</p>
                         <p>Eye Colors: {species.eye_colors}</p>
                         <p>Language: {species.language}</p>
-                        <p>Homeworld: <a href={`/planets/${getID(species.homeworld)}`} className="text-blue-500 hover:underline">{species.homeworld}</a></p>
+                        <p>Homeworld: <a href={`/${getID(species.homeworld).resource}/${getID(species.homeworld).id}`} className="text-blue-500 hover:underline">{species.homeworld}</a></p>
                     </article>
                    )}
                 </div>
