@@ -1,6 +1,8 @@
 import { type RouteConfig, index, route } from "@react-router/dev/routes";
+import MainLayout from "./components/layout/MainLayout";
 
 export default [
+  
   index("routes/home.tsx"),
   
   route("people", "routes/people.tsx"),
