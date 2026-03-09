@@ -1,9 +1,10 @@
 
 import MainLayout from "~/components/layout/MainLayout";
-import useDetails from "./detail";
+import useDetails from "~/hooks/useDetails";
 import { Link, useParams } from "react-router";
 import Errors from "~/components/Errors";
 import Loading from "~/components/Loading";
+import parseURL from "~/utils/parseURL";
 
 
  type Species = {
@@ -25,23 +26,16 @@ import Loading from "~/components/Loading";
 export default function SpeciesDetail() {
     const {id} = useParams();
     // console.log(id);
-    const {data: species, loading, error} = useDetails<Species>('species', id!);
+    const {data: species, loading, error} = useDetails<Species>({resource: 'species', id: id});
 
-     const getID = (url: string) => {
-    const parts = url.split("/").filter(Boolean);
-    return {resource: parts[parts.length - 2], id: parts[parts.length - 1]};
-  }
-    
-   
-    
     return (
-        <MainLayout>
+        <>
 
 
             {loading ? (
                 <Loading />
             ) : error ? (
-                <Errors message={error.message} />
+                <Errors message={error} />
             ) : (
 
             <div>
@@ -58,7 +52,7 @@ export default function SpeciesDetail() {
                             <p>Hair Colors: {species.hair_colors}</p>
                             <p>Eye Colors: {species.eye_colors}</p>
                             <p>Language: {species.language}</p>
-                            <p>Homeworld: <a href={`/${getID(species.homeworld).resource}/${getID(species.homeworld).id}`} className="text-blue-500 hover:underline">{species.homeworld}</a></p>
+                            <p>Homeworld: <a href={`/${parseURL(species.homeworld).resource}/${parseURL(species.homeworld).id}`} className="text-blue-500 hover:underline">{species.homeworld}</a></p>
                         </article>
                        )}
                     </div>
@@ -66,7 +60,7 @@ export default function SpeciesDetail() {
                 </section>
     
             </div>)}
-        </MainLayout>
+        </>
         
     )
 

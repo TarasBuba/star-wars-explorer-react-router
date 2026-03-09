@@ -1,9 +1,11 @@
 
 import MainLayout from "~/components/layout/MainLayout";
-import useDetails from "./detail";
+import useDetails from "~/hooks/useDetails";
 import { useParams } from "react-router";
 import Errors from "~/components/Errors";
 import Loading from "~/components/Loading";
+import parseURL from "~/utils/parseURL";
+
 
 type Film = {
     title: string;
@@ -18,24 +20,19 @@ type Film = {
 export default function FilmDetail() {
     const { id } = useParams();
     console.log(id);
-    const { data: film, loading, error } = useDetails<Film>('films', id!);
-
-    const getID = (url: string) => {
-        const parts = url.split("/").filter(Boolean);
-        return { resource: parts[parts.length - 2], id: parts[parts.length - 1] };
-    }
-
+    const { data: film, loading, error } = useDetails<Film>({ resource: 'films', id });
 
 
     return (
 
 
-        <MainLayout>
+
+        <>
 
             {loading ? (
                 <Loading />
             ) : error ? (
-                <Errors message={error.message} />
+                <Errors message={error} />
             ) : (
 
 
@@ -58,7 +55,7 @@ export default function FilmDetail() {
                                             <h3 className="text-xl font-bold mb-2">Vehicles:</h3>
                                             <ul>
                                                 {film.vehicles.map((vehicle: string) => (
-                                                    <li key={vehicle}><a href={`/${getID(vehicle).resource}/${getID(vehicle).id}`} className="text-blue-500 hover:underline cursor-pointer">{vehicle}</a></li>
+                                                    <li key={vehicle}><a href={`/${parseURL(vehicle).resource}/${parseURL(vehicle).id}`} className="text-blue-500 hover:underline cursor-pointer">{vehicle}</a></li>
                                                 ))}
                                             </ul>
                                         </div>
@@ -71,7 +68,7 @@ export default function FilmDetail() {
                                             <h3 className="text-xl font-bold mb-2">Starships:</h3>
                                             <ul>
                                                 {film.starships.map((starship: string) => (
-                                                    <li key={starship}><a href={`/${getID(starship).resource}/${getID(starship).id}`} className="text-blue-500 hover:underline cursor-pointer">{starship}</a></li>
+                                                    <li key={starship}><a href={`/${parseURL(starship).resource}/${parseURL(starship).id}`} className="text-blue-500 hover:underline cursor-pointer">{starship}</a></li>
                                                 ))}
                                             </ul>
                                         </div>
@@ -86,9 +83,10 @@ export default function FilmDetail() {
                 </div>
 
             )}
+        </>
 
 
-                </MainLayout>
+
 
     )
 

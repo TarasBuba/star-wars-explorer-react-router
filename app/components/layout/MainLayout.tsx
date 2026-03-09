@@ -1,32 +1,38 @@
 
+import {Outlet, Link} from "react-router";
 
-
-const MainLayout = ({children}: {children: React.ReactNode}) => {
+const MainLayout = () => {
     return (
         <>
             <header>
                 <nav>
                     <ul className="flex justify-center gap-4 p-4 bg-gray-800 text-amber-400">
                         <li>
-                            <a href="/" className="hover:underline">Home</a>
+                            <Link to="/">Home</Link>
                         </li>
-                        <li>                    <a href="/people" className="hover:underline">People</a>
+                        <li>
+                            <Link to="/people">People</Link>
                         </li>
-                        <li>                    <a href="/films" className="hover:underline">Films</a>
+                        <li>
+                            <Link to="/films">Films</Link>
                         </li>
-                        <li>                    <a href="/planets" className="hover:underline">Planets</a>
+                        <li>
+                            <Link to="/planets">Planets</Link>
                         </li>
-                        <li>                    <a href="/species" className="hover:underline">Species</a>
+                        <li>
+                            <Link to="/species">Species</Link>
                         </li>
-                        <li>                    <a href="/starships" className="hover:underline">Starships</a>
+                        <li>
+                            <Link to="/starships">Starships</Link>
                         </li>
-                        <li>                    <a href="/vehicles" className="hover:underline">Vehicles</a>
+                        <li>
+                            <Link to="/vehicles">Vehicles</Link>
                         </li>
                     </ul>
                 </nav>
             </header>
             <main>
-                {children}
+                <Outlet />
             </main>
         </>
     )

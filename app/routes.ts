@@ -1,26 +1,26 @@
-import { type RouteConfig, index, route } from "@react-router/dev/routes";
-import MainLayout from "./components/layout/MainLayout";
+import { type RouteConfig, index, route, layout } from '@react-router/dev/routes';
 
 export default [
-  
-  index("routes/home.tsx"),
-  
-  route("people", "routes/people.tsx"),
-  route("people/:id", "routes/detail/PeopleDetail.tsx"),
+  index('routes/home.tsx'),
+  layout('components/layout/MainLayout.tsx', [
+    // index('routes/home.tsx'),
 
-  route("films", "routes/films.tsx"),
-  route("films/:id", "routes/detail/FilmDetail.tsx"),
+    route('people', 'routes/people.tsx'),
+    route('people/:id', 'routes/detail/PeopleDetail.tsx'),
 
-  route("planets", "routes/planets.tsx"),
-  route("planets/:id", "routes/detail/PlanetsDetail.tsx"),
+    route('films', 'routes/films.tsx'),
+    route('films/:id', 'routes/detail/FilmDetail.tsx'),
 
-  route("species", "routes/species.tsx"),
-  route("species/:id", "routes/detail/SpeciesDetail.tsx"),
+    route('planets', 'routes/planets.tsx'),
+    route('planets/:id', 'routes/detail/PlanetsDetail.tsx'),
 
-  route("starships", "routes/starships.tsx"),
-  route("starships/:id", "routes/detail/StarshipsDetail.tsx"),
+    route('species', 'routes/species.tsx'),
+    route('species/:id', 'routes/detail/SpeciesDetail.tsx'),
 
-  route("vehicles", "routes/vehicles.tsx"),
-  route("vehicles/:id", "routes/detail/VehiclesDetail.tsx"),
+    route('starships', 'routes/starships.tsx'),
+    route('starships/:id', 'routes/detail/StarshipsDetail.tsx'),
+
+    route('vehicles', 'routes/vehicles.tsx'),
+    route('vehicles/:id', 'routes/detail/VehiclesDetail.tsx'),
+  ]),
 ] satisfies RouteConfig;
-

@@ -1,9 +1,10 @@
 
 import MainLayout from "~/components/layout/MainLayout";
-import useDetails from "./detail";
+import useDetails from "~/hooks/useDetails";
 import { Link, useParams } from "react-router";
 import Errors from "~/components/Errors";
 import Loading from "~/components/Loading";
+import parseURL from "~/utils/parseURL";
 
 
 
@@ -28,7 +29,7 @@ type Vehicles = {
 export default function VehiclesDetail() {
     const { id } = useParams();
     // console.log(id);
-    const { data: vehicles, loading, error } = useDetails<Vehicles>('vehicles', id!);
+    const { data: vehicles, loading, error } = useDetails<Vehicles>({resource: 'vehicles', id: id});
 
     const getID = (url: string) => {
         const parts = url.split("/").filter(Boolean);
@@ -38,12 +39,12 @@ export default function VehiclesDetail() {
 
 
     return (
-        <MainLayout>
+        <>
 
             {loading ? (
                 <Loading />
             ) : error ? (
-                <Errors message={error.message} />
+                <Errors message={error} />
             ) : (
                 <div>
                     <section className="p-4 grid place-items-center">
@@ -68,7 +69,7 @@ export default function VehiclesDetail() {
                                                 <ul>
                                                     {vehicles.pilots.map((pilotId) => (
                                                         <li key={pilotId}>
-                                                            <Link to={`/${getID(pilotId).resource}/${getID(pilotId).id}`} className="text-blue-500 hover:underline">{pilotId}</Link>
+                                                            <Link to={`/${parseURL(pilotId).resource}/${parseURL(pilotId).id}`} className="text-blue-500 hover:underline">{pilotId}</Link>
                                                         </li>
                                                     ))}
                                                 </ul>
@@ -80,7 +81,7 @@ export default function VehiclesDetail() {
                                                 <ul>
                                                     {vehicles.films.map((filmId) => (
                                                         <li key={filmId}>
-                                                            <Link to={`/${getID(filmId).resource}/${getID(filmId).id}`} className="text-blue-500 hover:underline">{filmId}</Link>
+                                                            <Link to={`/${parseURL(filmId).resource}/${parseURL(filmId).id}`} className="text-blue-500 hover:underline">{filmId}</Link>
                                                         </li>
                                                     ))}
                                                 </ul>
@@ -95,7 +96,7 @@ export default function VehiclesDetail() {
                     </section>
 
                 </div>)}
-        </MainLayout>
+        </>
 
     )
 

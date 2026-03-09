@@ -1,9 +1,14 @@
 // import { get } from "http";
 import MainLayout from "~/components/layout/MainLayout";
-import useDetails from "./detail";
+import useDetails from "~/hooks/useDetails";
 import { Link, useParams } from "react-router";
 import Errors from "~/components/Errors";
 import Loading from "~/components/Loading";
+import parseURL from "~/utils/parseURL";
+
+
+
+
   type People = {
     name: string;
     birth_year: string;
@@ -22,19 +27,15 @@ import Loading from "~/components/Loading";
 export default function PlanetsDetail() {
   const { id } = useParams();
   // console.log(id);
-  const { data: people, loading, error } = useDetails<People>("people", id!);
+  const { data: people, loading, error } = useDetails<People>({resource:"people", id:id});
 
-    const getID = (url: string) => {
-    const parts = url.split("/").filter(Boolean);
-    return {resource: parts[parts.length - 2], id: parts[parts.length - 1]};
-  }
 
   return (
-    <MainLayout>
+    <>
       {loading ? (
         <Loading />
       ) : error ? (
-        <Errors message={error.message} />
+        <Errors message={error} />
       ) : (
       <div>
         {people && (
@@ -60,7 +61,7 @@ export default function PlanetsDetail() {
                 Mass: {people.mass}
               </h2>
               <h2 className="text-2xl font-bold mb-4 text-center">
-                Homeworld: <Link to={`/${getID(people.homeworld).resource}/${getID(people.homeworld).id}`} className=" text-blue-500 hover:underline cursor-pointer">{people.homeworld}</Link>
+                Homeworld: <Link to={`/${parseURL(people.homeworld).resource}/${parseURL(people.homeworld).id}`} className=" text-blue-500 hover:underline cursor-pointer">{people.homeworld}</Link>
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
@@ -71,7 +72,7 @@ export default function PlanetsDetail() {
                         key={film}
                         className=" text-blue-500 hover:underline cursor-pointer"
                       >
-                        <Link to={`/${getID(film).resource}/${getID(film).id}`}>
+                        <Link to={`/${parseURL(film).resource}/${parseURL(film).id}`}>
                           {film}
                         </Link>
                       </li>
@@ -86,7 +87,7 @@ export default function PlanetsDetail() {
                         key={specie}
                         className=" text-blue-500 hover:underline cursor-pointer"
                       >
-                        <Link to={`/${getID(specie).resource}/${getID(specie).id}`}>
+                        <Link to={`/${parseURL(specie).resource}/${parseURL(specie).id}`}>
                           {specie}
                         </Link>
                       </li>
@@ -103,7 +104,7 @@ export default function PlanetsDetail() {
                         key={starship}
                         className=" text-blue-500 hover:underline cursor-pointer"
                       >
-                        <Link to={`/${getID(starship).resource}/${getID(starship).id}`}>
+                        <Link to={`/${parseURL(starship).resource}/${parseURL(starship).id}`}>
                           {starship}
                         </Link>
                       </li>
@@ -120,7 +121,7 @@ export default function PlanetsDetail() {
                         key={vehicle}
                         className=" text-blue-500 hover:underline cursor-pointer"
                       >
-                        <Link to={`/${getID(vehicle).resource}/${getID(vehicle).id}`}>
+                        <Link to={`/${parseURL(vehicle).resource}/${parseURL(vehicle).id}`}>
                           {vehicle}
                         </Link>
                       </li>
@@ -132,6 +133,6 @@ export default function PlanetsDetail() {
           </section>
         )}
       </div>)}
-    </MainLayout>
+    </>
   );
 }

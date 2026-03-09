@@ -1,29 +1,31 @@
 
 import MainLayout from "~/components/layout/MainLayout";
-import useDetails from "./detail";
+import useDetails from "~/hooks/useDetails";
 import { Link, useParams } from "react-router";
 import Errors from "~/components/Errors";
 import Loading from "~/components/Loading";
+import parseURL from "~/utils/parseURL";
+
 
 type Planets = {
-        name: string;
-        diameter: string;
-        climate: string;
-        population: string;
-        terrain: string;
-        residents: string[];
-        films: string[];
-        rotation_period: string;
-        orbital_period: string;
-    }
+    name: string;
+    diameter: string;
+    climate: string;
+    population: string;
+    terrain: string;
+    residents: string[];
+    films: string[];
+    rotation_period: string;
+    orbital_period: string;
+}
 
 export default function PlanetsDetail() {
-    
+
 
 
     const { id } = useParams();
     // console.log(id);
-    const { data: planet, loading, error } = useDetails<Planets>('planets', id!);
+    const { data: planet, loading, error } = useDetails<Planets>({ resource: 'planets', id: id });
 
     const getID = (url: string) => {
         const parts = url.split("/").filter(Boolean);
@@ -32,11 +34,11 @@ export default function PlanetsDetail() {
 
 
     return (
-        <MainLayout>
+        <>
             {loading ? (
                 <Loading />
             ) : error ? (
-                <Errors message={error.message} />
+                <Errors message={error} />
             ) : (
 
 
@@ -61,7 +63,7 @@ export default function PlanetsDetail() {
                                                 <ul>
                                                     {planet.residents.map((resident) => (
                                                         <li key={resident} className=" text-blue-500 hover:underline cursor-pointer">
-                                                            <Link to={`/${getID(resident).resource}/${getID(resident).id}`}>{resident}</Link>
+                                                            <Link to={`/${parseURL(resident).resource}/${parseURL(resident).id}`}>{resident}</Link>
                                                         </li>
                                                     ))}
                                                 </ul>
@@ -75,7 +77,7 @@ export default function PlanetsDetail() {
                                                 <ul>
                                                     {planet.films.map((film) => (
                                                         <li key={film} className=" text-blue-500 hover:underline cursor-pointer">
-                                                            <Link to={`/${getID(film).resource}/${getID(film).id}`}>{film}</Link>
+                                                            <Link to={`/${parseURL(film).resource}/${parseURL(film).id}`}>{film}</Link>
                                                         </li>
                                                     ))}
                                                 </ul>
@@ -83,8 +85,7 @@ export default function PlanetsDetail() {
                                         )}
                                     </div>
                                 </div>
-                                {/* <h2 className="text-2xl font-bold mb-4 text-center">Residents: {planet.residents}</h2>
-                                <h2 className="text-2xl font-bold mb-4 text-center">Films: {planet.films}</h2> */}
+                                
                             </article>
 
                         )}
@@ -93,7 +94,7 @@ export default function PlanetsDetail() {
 
                 </div>
             )}
-        </MainLayout>
+        </>
 
     )
 
