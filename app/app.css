@@ -1,55 +1,69 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
-    --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
-        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-sans:
+    'Inter', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
 body {
-    font-family: var(--font-sans);
-   
+  font-family: var(--font-sans);
 }
 
 .bg-main {
-     background-image:linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(../public/bg-main.jpg);
-    background-size: cover;
-    background-position: center;
-     background-attachment: fixed;
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url(../public/bg-main.jpg);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 .bg-films {
-    background-image:linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(../public/films.jpg);
-    background-size: cover;
-    background-position: center;
-     background-attachment: fixed;
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url(../public/films.jpg);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 .bg-planets {
-    background-image:linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(../public/planets.jpg);
-    background-size: cover;
-    background-position: center;
-     background-attachment: fixed;
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url(../public/planets.jpg);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 .bg-people {
-    background-image:linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(../public/people.jpg);
-    background-size: cover;
-    background-position: center;
-     background-attachment: fixed;
-     opacity: 0.9;
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url(../public/people.jpg);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  opacity: 0.9;
 }
 .bg-species {
-    background-image:linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(../public/species.jpg);
-    background-size: cover;
-    background-position: center;
-     background-attachment: fixed;
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url(../public/species.jpg);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 .bg-starships {
-    background-image:linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(../public/starships.jpg);
-    background-size: cover;
-    background-position: center;
-     background-attachment: fixed;
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url(../public/starships.jpg);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 .bg-vehicles {
-    background-image:linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(../public/vehiecles.jpg);
-    background-size: cover;
-    background-position: center;
-     background-attachment: fixed;
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url(../public/vehiecles.jpg);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
