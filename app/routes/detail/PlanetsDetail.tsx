@@ -4,32 +4,47 @@ import { Link, useParams } from 'react-router';
 import Errors from '~/components/Errors';
 import Loading from '~/components/Loading';
 import parseURL from '~/utils/parseURL';
+import LinkResolved from '~/utils/link-resolved';
 
 type Planets = {
   name: string;
   diameter: string;
   climate: string;
-  population: string;
   terrain: string;
-  residents: string[];
-  films: string[];
-  rotation_period: string;
+  population: string;
+  gravity: string;
+  surface_water: string;
   orbital_period: string;
+  rotation_period: string;
+  region: string;
+  sector: string;
+  system: string;
+  suns: string;
+  moons: string;
+  affiliation: string[];
+  notable_locations: string[];
+  native_species: string[];
+  canon: boolean;
 };
 
 export default function PlanetsDetail() {
   const { id } = useParams();
   // console.log(id);
+  const allDataAffiliated = useDetails<Planets[]>({
+    resource: 'organizations',
+  });
+  // const allDataLocations = useDetails<Planets[]>({
+  //   resource: 'planets',
+  // });
+  const allDataSpecies = useDetails<Planets[]>({
+    resource: 'species',
+  });
+
   const {
     data: planet,
     loading,
     error,
   } = useDetails<Planets>({ resource: 'planets', id: id });
-
-  const getID = (url: string) => {
-    const parts = url.split('/').filter(Boolean);
-    return { resource: parts[parts.length - 2], id: parts[parts.length - 1] };
-  };
 
   return (
     <>
@@ -65,20 +80,25 @@ export default function PlanetsDetail() {
                 </h2>
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                   <div>
-                    {planet.residents && (
+                    {planet.affiliation && (
                       <div>
-                        <h3 className="mb-2 text-xl font-bold">Residents:</h3>
+                        <h3 className="mb-2 text-xl font-bold">
+                          Affiliations:
+                        </h3>
                         <ul>
-                          {planet.residents.map((resident) => (
+                          {planet.affiliation.map((affiliation) => (
                             <li
-                              key={resident}
+                              key={affiliation}
                               className="cursor-pointer text-blue-500 hover:underline"
                             >
-                              <Link
-                                to={`/${parseURL(resident).resource}/${parseURL(resident).id}`}
-                              >
-                                {resident}
-                              </Link>
+                              <LinkResolved
+                                key={affiliation}
+                                value={affiliation}
+                                resource="organizations"
+                                idKey="id"
+                                matchKey="name"
+                                collection={allDataAffiliated.data || []}
+                              />
                             </li>
                           ))}
                         </ul>
@@ -86,20 +106,44 @@ export default function PlanetsDetail() {
                     )}
                   </div>
                   <div>
-                    {planet.films && (
+                    {planet.notable_locations && (
                       <div>
-                        <h3 className="mb-2 text-xl font-bold">Films:</h3>
+                        <h3 className="mb-2 text-xl font-bold">
+                          Notable Locations:
+                        </h3>
                         <ul>
-                          {planet.films.map((film) => (
+                          {planet.notable_locations.map((location) => (
                             <li
-                              key={film}
+                              key={location}
                               className="cursor-pointer text-blue-500 hover:underline"
                             >
-                              <Link
-                                to={`/${parseURL(film).resource}/${parseURL(film).id}`}
-                              >
-                                {film}
-                              </Link>
+                              {location}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                  <div>
+                    {planet.native_species && (
+                      <div>
+                        <h3 className="mb-2 text-xl font-bold">
+                          Native Species:
+                        </h3>
+                        <ul>
+                          {planet.native_species.map((species) => (
+                            <li
+                              key={species}
+                              className="cursor-pointer text-blue-500 hover:underline"
+                            >
+                              <LinkResolved
+                                key={species}
+                                value={species}
+                                resource="species"
+                                idKey="id"
+                                matchKey="id"
+                                collection={allDataSpecies.data || []}
+                              />
                             </li>
                           ))}
                         </ul>

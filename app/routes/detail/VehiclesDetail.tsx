@@ -4,25 +4,31 @@ import { Link, useParams } from 'react-router';
 import Errors from '~/components/Errors';
 import Loading from '~/components/Loading';
 import parseURL from '~/utils/parseURL';
+import LinkResolved from '~/utils/link-resolved';
 
 type Vehicles = {
   name: string;
   model: string;
   manufacturer: string;
+  class: string;
   cost_in_credits: string;
   length: string;
   max_atmosphering_speed: string;
   crew: string;
   passengers: string;
   cargo_capacity: string;
-  consumables: string;
+  armor: string;
   vehicle_class: string;
-  pilots?: string[];
-  films?: string[];
+  armament: string[];
+  affiliation: string[];
+  canon: boolean;
 };
 
 export default function VehiclesDetail() {
   const { id } = useParams();
+  const allDataAffiliation = useDetails<{ name: string; url: string }[]>({
+    resource: 'organizations',
+  });
   // console.log(id);
   const {
     data: vehicles,
@@ -30,10 +36,10 @@ export default function VehiclesDetail() {
     error,
   } = useDetails<Vehicles>({ resource: 'vehicles', id: id });
 
-  const getID = (url: string) => {
-    const parts = url.split('/').filter(Boolean);
-    return { resource: parts[parts.length - 2], id: parts[parts.length - 1] };
-  };
+  // const getID = (url: string) => {
+  //   const parts = url.split('/').filter(Boolean);
+  //   return { resource: parts[parts.length - 2], id: parts[parts.length - 1] };
+  // };
 
   return (
     <>
@@ -60,39 +66,33 @@ export default function VehiclesDetail() {
                   <p>Crew: {vehicles.crew}</p>
                   <p>Passengers: {vehicles.passengers}</p>
                   <p>Cargo Capacity: {vehicles.cargo_capacity}</p>
-                  <p>Consumables: {vehicles.consumables}</p>
                   <p>Vehicle Class: {vehicles.vehicle_class}</p>
+                  <p>Armor: {vehicles.armor}</p>
                   <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                    {vehicles.pilots && (
+                    {vehicles.affiliation && (
                       <div>
-                        <h3 className="mb-2 text-xl font-bold">Pilots:</h3>
+                        <h3 className="mb-2 text-xl font-bold">Affiliation:</h3>
                         <ul>
-                          {vehicles.pilots.map((pilotId) => (
-                            <li key={pilotId}>
-                              <Link
-                                to={`/${parseURL(pilotId).resource}/${parseURL(pilotId).id}`}
-                                className="text-blue-500 hover:underline"
-                              >
-                                {pilotId}
-                              </Link>
+                          {vehicles.affiliation.map((affiliation, index) => (
+                            <li key={index}>
+                              <LinkResolved
+                                value={affiliation}
+                                resource="organizations"
+                                matchKey="name"
+                                idKey="id"
+                                collection={allDataAffiliation.data || []}
+                              />
                             </li>
                           ))}
                         </ul>
                       </div>
                     )}
-                    {vehicles.films && (
+                    {vehicles.armament && (
                       <div>
-                        <h3 className="mb-2 text-xl font-bold">Films:</h3>
+                        <h3 className="mb-2 text-xl font-bold">Armament:</h3>
                         <ul>
-                          {vehicles.films.map((filmId) => (
-                            <li key={filmId}>
-                              <Link
-                                to={`/${parseURL(filmId).resource}/${parseURL(filmId).id}`}
-                                className="text-blue-500 hover:underline"
-                              >
-                                {filmId}
-                              </Link>
-                            </li>
+                          {vehicles.armament.map((weapon, index) => (
+                            <li key={index}>{weapon}</li>
                           ))}
                         </ul>
                       </div>

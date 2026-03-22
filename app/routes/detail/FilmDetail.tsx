@@ -4,6 +4,7 @@ import { useParams } from 'react-router';
 import Errors from '~/components/Errors';
 import Loading from '~/components/Loading';
 import parseURL from '~/utils/parseURL';
+import LinkResolved from '~/utils/link-resolved';
 
 type Film = {
   title: string;
@@ -12,11 +13,29 @@ type Film = {
   director: string;
   producer: string;
   release_date: string;
+  timeline_date: string;
+  characters: string[];
+  planets: string[];
+  species: string[];
+  organizations: string[];
   vehicles: string[];
   starships: string[];
+  canon: boolean;
 };
 export default function FilmDetail() {
   const { id } = useParams();
+  const allDataPlanets = useDetails<Film[]>({
+    resource: 'planets',
+  });
+  const allDataCharacters = useDetails<Film[]>({
+    resource: 'characters',
+  });
+  const allDataSpecies = useDetails<Film[]>({
+    resource: 'species',
+  });
+  const allDataOrganizations = useDetails<Film[]>({
+    resource: 'organizations',
+  });
   const {
     data: film,
     loading,
@@ -37,47 +56,108 @@ export default function FilmDetail() {
               <h2 className="mb-4 text-center text-2xl font-bold">
                 Episode {film.episode_id}
               </h2>
-              <div className="mb-4 flex justify-center gap-4">
-                <p className="mb-4 text-gray-700">Director: {film.director}</p>
-                <p className="mb-4 text-gray-700">Producer: {film.producer}</p>
-                <p className="mb-4 text-gray-700">
-                  Release Date: {film.release_date}
-                </p>
+              <div className="mb-4 flex flex-col gap-4 rounded-lg border border-gray-300 p-4 shadow-md">
+                <div className="mb-4 flex items-center justify-center gap-4 text-gray-700">
+                  <p className="mb-4 text-gray-700">
+                    Director: {film.director}
+                  </p>
+                  <p className="mb-4 text-gray-700">
+                    Producer: {film.producer}
+                  </p>
+                  <p className="mb-4 text-gray-700">
+                    Release Date: {film.release_date}
+                  </p>
+                </div>
+                <div className="mb-4 flex flex-col items-center justify-center gap-4 text-gray-700">
+                  <p className="mb-4 text-gray-700">
+                    Timeline Date: {film.timeline_date}
+                  </p>
+                  <p className="mb-4 text-gray-700">{film.opening_crawl}</p>
+                </div>
               </div>
-              <p className="mb-4 text-gray-700">{film.opening_crawl}</p>
+
               <section className="mb-4 grid grid-cols-2 gap-4 md:grid-cols-2">
                 <article>
-                  {film.vehicles && (
+                  {film.characters && (
                     <div>
-                      <h3 className="mb-2 text-xl font-bold">Vehicles:</h3>
+                      <h3 className="mb-2 text-xl font-bold">Characters:</h3>
                       <ul>
-                        {film.vehicles.map((vehicle: string) => (
-                          <li key={vehicle}>
-                            <a
-                              href={`/${parseURL(vehicle).resource}/${parseURL(vehicle).id}`}
-                              className="cursor-pointer text-blue-500 hover:underline"
-                            >
-                              {vehicle}
-                            </a>
+                        {film.characters.map((character: string) => (
+                          <li key={character}>
+                            <LinkResolved
+                              key={character}
+                              value={character}
+                              resource="characters"
+                              idKey="id"
+                              matchKey="id"
+                              collection={allDataCharacters.data || []}
+                            />
                           </li>
                         ))}
                       </ul>
                     </div>
                   )}
                 </article>
+
                 <article>
-                  {film.starships && (
+                  {film.planets && (
                     <div>
-                      <h3 className="mb-2 text-xl font-bold">Starships:</h3>
+                      <h3 className="mb-2 text-xl font-bold">Planets:</h3>
                       <ul>
-                        {film.starships.map((starship: string) => (
-                          <li key={starship}>
-                            <a
-                              href={`/${parseURL(starship).resource}/${parseURL(starship).id}`}
-                              className="cursor-pointer text-blue-500 hover:underline"
-                            >
-                              {starship}
-                            </a>
+                        {film.planets.map((planet: string) => (
+                          <li key={planet}>
+                            <LinkResolved
+                              key={planet}
+                              value={planet}
+                              resource="planets"
+                              idKey="id"
+                              matchKey="id"
+                              collection={allDataPlanets.data || []}
+                            />
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </article>
+
+                <article>
+                  {film.species && (
+                    <div>
+                      <h3 className="mb-2 text-xl font-bold">Species:</h3>
+                      <ul>
+                        {film.species.map((specie: string) => (
+                          <li key={specie}>
+                            <LinkResolved
+                              key={specie}
+                              value={specie}
+                              resource="species"
+                              idKey="id"
+                              matchKey="id"
+                              collection={allDataSpecies.data || []}
+                            />
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </article>
+
+                <article>
+                  {film.organizations && (
+                    <div>
+                      <h3 className="mb-2 text-xl font-bold">Organizations:</h3>
+                      <ul>
+                        {film.organizations.map((org: string) => (
+                          <li key={org}>
+                            <LinkResolved
+                              key={org}
+                              value={org}
+                              resource="organizations"
+                              idKey="id"
+                              matchKey="id"
+                              collection={allDataOrganizations.data || []}
+                            />
                           </li>
                         ))}
                       </ul>

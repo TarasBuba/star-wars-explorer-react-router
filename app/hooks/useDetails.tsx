@@ -20,15 +20,16 @@ const useDetails: <T>(props: Props) => {
       setError(null);
       try {
         const response = await fetch(
-          `https://swapi.dev/api/${resource}/${id ?? ''}/`
+          // `https://swapi.dev/api/${resource}/${id ?? ''}/`
+          `https://star-wars-api-bi5l.onrender.com/${resource}/${id ?? ''}`
         );
         if (!response.ok) {
           throw new Error('Failed to fetch data');
         }
         const data = await response.json();
-        console.log(data);
+        // console.log(data);
 
-        setData(data.results || data);
+        setData(data.data || data);
         setLoading(false);
       } catch (error) {
         setError(

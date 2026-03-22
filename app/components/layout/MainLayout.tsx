@@ -10,7 +10,7 @@ const MainLayout = () => {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/people">People</Link>
+              <Link to="/characters">Characters</Link>
             </li>
             <li>
               <Link to="/films">Films</Link>
@@ -26,6 +26,18 @@ const MainLayout = () => {
             </li>
             <li>
               <Link to="/vehicles">Vehicles</Link>
+            </li>
+            <li>
+              <Link to="/organizations">Organizations</Link>
+            </li>
+            <li>
+              <Link to="/events">Events</Link>
+            </li>
+            <li>
+              <Link to="/weapons">Weapons</Link>
+            </li>
+            <li>
+              <Link to="/quotes">Quotes</Link>
             </li>
           </ul>
         </nav>

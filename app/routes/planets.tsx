@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router';
 import Card from '~/components/Card';
-// import MainLayout from "~/components/layout/MainLayout";
 import useDetails from '~/hooks/useDetails';
 import parseURL from '~/utils/parseURL';
 import Loading from '~/components/Loading';

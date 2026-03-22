@@ -8,10 +8,8 @@ import {
 export default [
   index('routes/home.tsx'),
   layout('components/layout/MainLayout.tsx', [
-    // index('routes/home.tsx'),
-
-    route('people', 'routes/people.tsx'),
-    route('people/:id', 'routes/detail/PeopleDetail.tsx'),
+    route('characters', 'routes/characters.tsx'),
+    route('characters/:id', 'routes/detail/CharactersDetail.tsx'),
 
     route('films', 'routes/films.tsx'),
     route('films/:id', 'routes/detail/FilmDetail.tsx'),
@@ -27,5 +25,17 @@ export default [
 
     route('vehicles', 'routes/vehicles.tsx'),
     route('vehicles/:id', 'routes/detail/VehiclesDetail.tsx'),
+
+    route('organizations', 'routes/organizations.tsx'),
+    route('organizations/:id', 'routes/detail/OrganizationsDetail.tsx'),
+
+    route('events', 'routes/events.tsx'),
+    route('events/:id', 'routes/detail/EventsDetail.tsx'),
+
+    route('quotes', 'routes/quotes.tsx'),
+    route('quotes/:id', 'routes/detail/QuotesDetail.tsx'),
+
+    route('weapons', 'routes/weapons.tsx'),
+    route('weapons/:id', 'routes/detail/WeaponsDetail.tsx'),
   ]),
 ] satisfies RouteConfig;

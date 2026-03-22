@@ -24,8 +24,8 @@ export default function Home() {
         <Link to="/planets" className="hover:underline">
           Planets
         </Link>
-        <Link to="/people" className="hover:underline">
-          People
+        <Link to="/characters" className="hover:underline">
+          Characters
         </Link>
         <Link to="/species" className="hover:underline">
           Species
