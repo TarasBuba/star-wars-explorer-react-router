@@ -6,6 +6,8 @@ import useDetails from '~/hooks/useDetails';
 import parseURL from '~/utils/parseURL';
 import Loading from '~/components/Loading';
 import Errors from '~/components/Errors';
+import usePagination from '~/hooks/usePagination';
+import Pagination from '~/components/Pagination';
 
 interface Films {
   title: string;
@@ -19,6 +21,12 @@ const Films = () => {
     loading,
     error,
   } = useDetails<Films[]>({ resource: 'films' });
+  const { currentPageItems, currentPage, totalPages, goToPage } = usePagination(
+    {
+      items: films || [],
+      itemsPerPage: 10,
+    }
+  );
 
   return (
     <>
@@ -30,7 +38,7 @@ const Films = () => {
         <div className="bg-films min-h-screen p-4 text-amber-500">
           <h2 className="mb-4 text-center text-2xl font-bold">Films</h2>
 
-          {films?.map((film: Films) => (
+          {currentPageItems?.map((film: Films) => (
             <Link
               to={`/${parseURL(film.url).resource}/${parseURL(film.url).id}`}
               key={film.episode_id}
@@ -41,6 +49,11 @@ const Films = () => {
               />
             </Link>
           ))}
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            goToPage={goToPage}
+          />
         </div>
       )}
     </>

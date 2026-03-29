@@ -4,6 +4,8 @@ import Loading from '~/components/Loading';
 import Errors from '~/components/Errors';
 import useDetails from '~/hooks/useDetails';
 import parseURL from '~/utils/parseURL';
+import usePagination from '~/hooks/usePagination';
+import Pagination from '~/components/Pagination';
 
 interface Quotes {
   content: string;
@@ -18,6 +20,12 @@ const Quotes = () => {
     loading,
     error,
   } = useDetails<Quotes[]>({ resource: 'quotes' });
+  const { currentPageItems, currentPage, totalPages, goToPage } = usePagination(
+    {
+      items: quotes || [],
+      itemsPerPage: 10,
+    }
+  );
 
   return (
     <>
@@ -31,7 +39,7 @@ const Quotes = () => {
             Quotes
           </h2>
           <section className="grid grid-cols-1 gap-4 p-4 sm:grid-cols-3 md:grid-cols-2">
-            {quotes?.map((quote: Quotes) => (
+            {currentPageItems?.map((quote: Quotes) => (
               <Link
                 to={`/${parseURL(quote.url).resource}/${parseURL(quote.url).id}`}
                 key={quote.content}
@@ -44,6 +52,11 @@ const Quotes = () => {
               </Link>
             ))}
           </section>
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            goToPage={goToPage}
+          />
         </div>
       )}
     </>

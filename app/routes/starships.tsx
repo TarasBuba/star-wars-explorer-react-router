@@ -4,6 +4,8 @@ import Loading from '~/components/Loading';
 import Errors from '~/components/Errors';
 import useDetails from '~/hooks/useDetails';
 import parseURL from '~/utils/parseURL';
+import usePagination from '~/hooks/usePagination';
+import Pagination from '~/components/Pagination';
 
 const Starships = () => {
   const {
@@ -15,6 +17,12 @@ const Starships = () => {
     loading: boolean;
     error: string | null;
   };
+  const { currentPageItems, currentPage, totalPages, goToPage } = usePagination(
+    {
+      items: starships || [],
+      itemsPerPage: 10,
+    }
+  );
 
   return (
     <>
@@ -28,7 +36,7 @@ const Starships = () => {
             Starships
           </h2>
           <section className="grid grid-cols-1 gap-4 p-4 sm:grid-cols-3 md:grid-cols-2">
-            {starships.map((starship: any) => (
+            {currentPageItems?.map((starship: any) => (
               <Link
                 to={`/${parseURL(starship.url).resource}/${parseURL(starship.url).id}`}
                 key={starship.name}
@@ -40,6 +48,11 @@ const Starships = () => {
               </Link>
             ))}
           </section>
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            goToPage={goToPage}
+          />
         </div>
       )}
     </>

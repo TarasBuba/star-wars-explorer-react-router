@@ -4,6 +4,8 @@ import Loading from '~/components/Loading';
 import Errors from '~/components/Errors';
 import useDetails from '~/hooks/useDetails';
 import parseURL from '~/utils/parseURL';
+import usePagination from '~/hooks/usePagination';
+import Pagination from '~/components/Pagination';
 
 interface Events {
   name: string;
@@ -19,6 +21,12 @@ const Events = () => {
     error,
   } = useDetails<Events[]>({ resource: 'events' });
 
+  const { currentPageItems, currentPage, totalPages, goToPage } = usePagination({
+    items: events || [],
+    itemsPerPage: 10,
+  });
+
+
   return (
     <>
       {loading ? (
@@ -31,7 +39,7 @@ const Events = () => {
             Events
           </h2>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {events?.map((event) => (
+            {currentPageItems?.map((event) => (
               <Link
                 to={`/${parseURL(event.url).resource}/${parseURL(event.url).id}`}
                 key={event.url}
@@ -43,6 +51,11 @@ const Events = () => {
               </Link>
             ))}
           </div>
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            goToPage={goToPage}
+          />
         </div>
       )}
     </>
