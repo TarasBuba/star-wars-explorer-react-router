@@ -3,31 +3,46 @@ import { useState, useEffect } from 'react';
 interface Props {
   resource: string;
   id?: string;
+  limit?: number;
+  page?: number;
 }
 
 const useDetails: <T>(props: Props) => {
   data: T | null;
   loading: boolean;
   error: string | null;
-} = <T,>({ resource, id }: Props) => {
+  total: number | null;
+} = <T,>({ resource, id, limit, page }: Props) => {
   const [data, setData] = useState<T | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const [total, setTotal] = useState<number | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       setError(null);
       try {
+        if (limit !== undefined && page !== undefined) {
+          const response = await fetch(
+            `https://star-wars-api-bi5l.onrender.com/${resource}?limit=${limit}&page=${page}`
+          );
+          if (!response.ok) {
+            throw new Error('Failed to fetch data');
+          }
+          const data = await response.json();
+          setTotal(data.meta.total || null);
+          setData(data.data || data);
+          setLoading(false);
+          return;
+        }
         const response = await fetch(
-          // `https://swapi.dev/api/${resource}/${id ?? ''}/`
           `https://star-wars-api-bi5l.onrender.com/${resource}/${id ?? ''}`
         );
         if (!response.ok) {
           throw new Error('Failed to fetch data');
         }
         const data = await response.json();
-        // console.log(data);
 
         setData(data.data || data);
         setLoading(false);
@@ -40,9 +55,9 @@ const useDetails: <T>(props: Props) => {
       }
     };
     fetchData();
-  }, [resource, id]);
+  }, [resource, id, page, limit]);
 
-  return { data, loading, error };
+  return { data, loading, error, total };
 };
 
 export default useDetails;
