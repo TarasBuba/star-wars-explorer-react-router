@@ -11,7 +11,7 @@ interface Organizations {
   force_alignment: string;
   status: string;
   url: string;
-};
+}
 
 const Organization = () => {
   const {
