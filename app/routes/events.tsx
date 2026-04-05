@@ -24,7 +24,7 @@ const Events = () => {
       {loading ? (
         <Loading />
       ) : error ? (
-        <Errors />
+        <Errors message={error} />
       ) : (
         <div className="bg-events min-h-screen p-4">
           <h2 className="mb-4 text-center text-2xl font-bold text-amber-400">
