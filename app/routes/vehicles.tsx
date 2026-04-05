@@ -4,6 +4,8 @@ import Loading from '~/components/Loading';
 import Errors from '~/components/Errors';
 import useDetails from '~/hooks/useDetails';
 import parseURL from '~/utils/parseURL';
+import usePagination from '~/hooks/usePagination';
+import Pagination from '~/components/Pagination';
 
 const Vehicles = () => {
   const {
@@ -15,6 +17,12 @@ const Vehicles = () => {
     loading: boolean;
     error: string | null;
   };
+  const { currentPageItems, currentPage, totalPages, goToPage } = usePagination(
+    {
+      items: vehicles || [],
+      itemsPerPage: 10,
+    }
+  );
 
   return (
     <>
@@ -28,7 +36,7 @@ const Vehicles = () => {
             Vehicles
           </h2>
           <section className="grid grid-cols-1 gap-4 p-4 sm:grid-cols-3 md:grid-cols-2">
-            {vehicles.map((vehicle: any) => (
+            {currentPageItems?.map((vehicle: any) => (
               <Link
                 to={`/${parseURL(vehicle.url).resource}/${parseURL(vehicle.url).id}`}
                 key={vehicle.name}
@@ -40,6 +48,11 @@ const Vehicles = () => {
               </Link>
             ))}
           </section>
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            goToPage={goToPage}
+          />
         </div>
       )}
     </>

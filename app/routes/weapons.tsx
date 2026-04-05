@@ -4,7 +4,8 @@ import Loading from '~/components/Loading';
 import Errors from '~/components/Errors';
 import useDetails from '~/hooks/useDetails';
 import parseURL from '~/utils/parseURL';
-// import { p } from 'node_modules/@react-router/dev/dist/routes-CZR-bKRt';
+import usePagination from '~/hooks/usePagination';
+import Pagination from '~/components/Pagination';
 
 interface Weapons {
   name: string;
@@ -20,6 +21,12 @@ const Weapons = () => {
     loading,
     error,
   } = useDetails<Weapons[]>({ resource: 'weapons' });
+  const { currentPageItems, currentPage, totalPages, goToPage } = usePagination(
+    {
+      items: weapons || [],
+      itemsPerPage: 10,
+    }
+  );
 
   return (
     <>
@@ -33,7 +40,7 @@ const Weapons = () => {
             Weapons
           </h2>
           <section className="grid grid-cols-1 gap-4 p-4 sm:grid-cols-3 md:grid-cols-2">
-            {weapons?.map((weapon: Weapons) => (
+            {currentPageItems?.map((weapon: Weapons) => (
               <Link
                 to={`/${parseURL(weapon.url).resource}/${parseURL(weapon.url).id}`}
                 key={weapon.url}
@@ -45,6 +52,11 @@ const Weapons = () => {
               </Link>
             ))}
           </section>
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            goToPage={goToPage}
+          />
         </div>
       )}
     </>

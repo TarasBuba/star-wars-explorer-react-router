@@ -6,6 +6,8 @@ import Loading from '~/components/Loading';
 import Errors from '~/components/Errors';
 import useDetails from '~/hooks/useDetails';
 // import parseURL from '~/utils/parseURL';
+import usePagination from '~/hooks/usePagination';
+import Pagination from '~/components/Pagination';
 
 interface Characters {
   name: string;
@@ -22,6 +24,13 @@ const Characters = () => {
     error,
   } = useDetails<Characters[]>({ resource: 'characters' });
 
+  const { currentPageItems, currentPage, totalPages, goToPage } = usePagination(
+    {
+      items: characters || [],
+      itemsPerPage: 10,
+    }
+  );
+
   return (
     <>
       {loading ? (
@@ -34,7 +43,7 @@ const Characters = () => {
             People
           </h2>
           <section className="grid grid-cols-1 gap-4 p-4 sm:grid-cols-3 md:grid-cols-2">
-            {characters?.map((character: Characters) => (
+            {currentPageItems?.map((character: Characters) => (
               <Link to={`/characters/${character.id}`} key={character.name}>
                 <div
                   key={character.name}
@@ -48,6 +57,11 @@ const Characters = () => {
               </Link>
             ))}
           </section>
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            goToPage={goToPage}
+          />
         </div>
       )}
     </>

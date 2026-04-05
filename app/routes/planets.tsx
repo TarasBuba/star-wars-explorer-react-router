@@ -5,6 +5,8 @@ import useDetails from '~/hooks/useDetails';
 import parseURL from '~/utils/parseURL';
 import Loading from '~/components/Loading';
 import Errors from '~/components/Errors';
+import usePagination from '~/hooks/usePagination';
+import Pagination from '~/components/Pagination';
 
 interface Planets {
   name: string;
@@ -20,6 +22,12 @@ const Planets = () => {
     loading,
     error,
   } = useDetails<Planets[]>({ resource: 'planets' });
+  const { currentPageItems, currentPage, totalPages, goToPage } = usePagination(
+    {
+      items: planets || [],
+      itemsPerPage: 10,
+    }
+  );
 
   return (
     <>
@@ -33,7 +41,7 @@ const Planets = () => {
             Planets
           </h2>
           <section className="grid grid-cols-1 gap-4 p-4 sm:grid-cols-3 md:grid-cols-2">
-            {planets?.map((planet: Planets) => (
+            {currentPageItems?.map((planet: Planets) => (
               <Link
                 to={`/${parseURL(planet.url).resource}/${parseURL(planet.url).id}`}
                 key={planet.name}
@@ -45,6 +53,11 @@ const Planets = () => {
               </Link>
             ))}
           </section>
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            goToPage={goToPage}
+          />
         </div>
       )}
     </>
