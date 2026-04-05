@@ -16,7 +16,7 @@ export default tseslint.config(
       'coverage/**',
       '*.min.js',
       'public/**',
-      ".react-router/**", 
+      '.react-router/**',
     ],
   },
 
