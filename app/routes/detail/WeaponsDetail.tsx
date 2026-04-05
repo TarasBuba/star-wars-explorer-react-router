@@ -1,4 +1,4 @@
-import { Link, useParams } from 'react-router';
+import { useParams } from 'react-router';
 import Loading from '~/components/Loading';
 import Errors from '~/components/Errors';
 import useDetails from '~/hooks/useDetails';

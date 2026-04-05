@@ -21,11 +21,12 @@ const Events = () => {
     error,
   } = useDetails<Events[]>({ resource: 'events' });
 
-  const { currentPageItems, currentPage, totalPages, goToPage } = usePagination({
-    items: events || [],
-    itemsPerPage: 10,
-  });
-
+  const { currentPageItems, currentPage, totalPages, goToPage } = usePagination(
+    {
+      items: events || [],
+      itemsPerPage: 10,
+    }
+  );
 
   return (
     <>
