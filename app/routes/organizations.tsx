@@ -4,6 +4,8 @@ import useDetails from '~/hooks/useDetails';
 import parseURL from '~/utils/parseURL';
 import Loading from '~/components/Loading';
 import Errors from '~/components/Errors';
+import usePagination from '~/hooks/usePagination';
+import Pagination from '~/components/Pagination';
 
 interface Organizations {
   name: string;
@@ -24,6 +26,13 @@ const Organization = () => {
     error: string | null;
   };
 
+  const { currentPageItems, currentPage, totalPages, goToPage } = usePagination(
+    {
+      items: organizations || [],
+      itemsPerPage: 10,
+    }
+  );
+
   return (
     <>
       {loading ? (
@@ -36,7 +45,7 @@ const Organization = () => {
             Organizations
           </h2>
           <section className="grid grid-cols-1 gap-4 p-4 sm:grid-cols-3 md:grid-cols-2">
-            {organizations?.map((organization: Organizations) => (
+            {currentPageItems?.map((organization: Organizations) => (
               <Link
                 to={`/${parseURL(organization.url).resource}/${parseURL(organization.url).id}`}
                 key={organization.name}
@@ -48,6 +57,11 @@ const Organization = () => {
               </Link>
             ))}
           </section>
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            goToPage={goToPage}
+          />
         </div>
       )}
     </>

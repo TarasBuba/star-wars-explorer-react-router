@@ -1,7 +1,7 @@
 import type { Route } from './+types/home';
 import { Link } from 'react-router';
 
-export function meta({}: Route.MetaArgs) {
+export function meta(_: Route.MetaArgs) {
   return [
     { title: 'Star Wars Universe' },
     {

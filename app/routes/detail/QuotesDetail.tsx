@@ -40,12 +40,12 @@ const QuotesDetail = () => {
       ) : (
         <div className="bg-quotes min-h-screen p-4">
           <h2 className="mb-4 text-center text-2xl font-bold text-amber-400">
-            {quote.text}
+            {quote?.text}
           </h2>
           <p>
             Character:
             <LinkResolved
-              key={quote.id}
+              key={quote?.id}
               idKey="id"
               matchKey="id"
               collection={allDataCharacter.data || []}
@@ -56,17 +56,17 @@ const QuotesDetail = () => {
           <p>
             Film:
             <LinkResolved
-              key={quote.id}
+              key={quote?.id}
               idKey="id"
               matchKey="id"
               collection={allDataFilm.data || []}
               resource="films"
-              value={quote.film_id}
+              value={quote?.film_id}
             />
           </p>
-          <p>Context: {quote.context}</p>
-          <p>Is Iconic: {quote.is_icononic ? 'Yes' : 'No'}</p>
-          <p>Canon: {quote.canon ? 'Yes' : 'No'}</p>
+          <p>Context: {quote?.context}</p>
+          <p>Is Iconic: {quote?.is_icononic ? 'Yes' : 'No'}</p>
+          <p>Canon: {quote?.canon ? 'Yes' : 'No'}</p>
         </div>
       )}
     </>

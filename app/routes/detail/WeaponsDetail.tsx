@@ -55,11 +55,11 @@ const WeaponsDetail = () => {
         <Errors message={error} />
       ) : (
         <div className="bg-weapons flex min-h-screen flex-col items-center justify-center gap-2 p-4">
-          <h1 className="text-2xl">{weapon.name}</h1>
-          <p>Type: {weapon.type}</p>
-          <p>Manufacturer: {weapon.manufacturer}</p>
-          <p>Model: {weapon.model}</p>
-          <p>Range: {weapon.range}</p>
+          <h1 className="text-2xl">{weapon?.name}</h1>
+          <p>Type: {weapon?.type}</p>
+          <p>Manufacturer: {weapon?.manufacturer}</p>
+          <p>Model: {weapon?.model}</p>
+          <p>Range: {weapon?.range}</p>
           <p>
             Owner:
             <LinkResolved
@@ -95,12 +95,12 @@ const WeaponsDetail = () => {
               value={weapon?.crystal_origin_id}
             />
           </p>
-          <p>Hilt Material: {weapon.hilt_material}</p>
-          <p>Blade Length: {weapon.blade_length}</p>
-          <p>Special Features: {weapon.special_features.join(', ')}</p>
+          <p>Hilt Material: {weapon?.hilt_material}</p>
+          <p>Blade Length: {weapon?.blade_length}</p>
+          <p>Special Features: {weapon?.special_features.join(', ')}</p>
           <p>
             Affiliations:{' '}
-            {weapon?.affiliation?.map((affiliation: string, index: number) => (
+            {weapon?.affiliations?.map((affiliation: string, index: number) => (
               <p key={index}>
                 <LinkResolved
                   key={affiliation}
@@ -124,7 +124,7 @@ const WeaponsDetail = () => {
               value={weapon?.first_appearance_film_id}
             />
           </p>
-          <p>Canonicity: {weapon.canon ? 'Canon' : 'Non-Canon'}</p>
+          <p>Canonicity: {weapon?.canon ? 'Canon' : 'Non-Canon'}</p>
         </div>
       )}
     </>
