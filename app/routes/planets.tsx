@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import { Link } from 'react-router';
 import Card from '~/components/Card';
 import useDetails from '~/hooks/useDetails';
@@ -7,14 +6,7 @@ import Loading from '~/components/Loading';
 import Errors from '~/components/Errors';
 import usePagination from '~/hooks/usePagination';
 import Pagination from '~/components/Pagination';
-
-interface Planets {
-  name: string;
-  population: string;
-  climate: string;
-  terrain: string;
-  url: string;
-}
+import type { Planets } from '~/types/types';
 
 const Planets = () => {
   const {

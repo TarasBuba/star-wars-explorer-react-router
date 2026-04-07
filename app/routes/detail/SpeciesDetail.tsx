@@ -1,37 +1,21 @@
-import MainLayout from '~/components/layout/MainLayout';
 import useDetails from '~/hooks/useDetails';
-import { Link, useParams } from 'react-router';
+import { useParams } from 'react-router';
 import Errors from '~/components/Errors';
 import Loading from '~/components/Loading';
-import parseURL from '~/utils/parseURL';
 import LinkResolved from '~/utils/link-resolved';
-
-type Species = {
-  name: string;
-  classification: string;
-  designation: string;
-  average_lifespan: string;
-  average_height: string;
-  skin_colors: string[];
-  hair_colors: string[];
-  eye_colors: string[];
-  language: string;
-  homeworld_id: string;
-  force_sensitive: string;
-  canon: boolean;
-};
+import type { SpeciesDetails, Planets } from '~/types/types';
 
 export default function SpeciesDetail() {
   const { id } = useParams();
-  const allDataHomeworld = useDetails<Species[]>({
+  const allDataHomeworld = useDetails<Planets[]>({
     resource: 'planets',
   });
-  // console.log(id);
+
   const {
     data: species,
     loading,
     error,
-  } = useDetails<Species>({ resource: 'species', id: id });
+  } = useDetails<SpeciesDetails>({ resource: 'species', id: id });
 
   return (
     <>

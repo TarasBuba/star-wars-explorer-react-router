@@ -6,15 +6,7 @@ import useDetails from '~/hooks/useDetails';
 import parseURL from '~/utils/parseURL';
 import usePagination from '~/hooks/usePagination';
 import Pagination from '~/components/Pagination';
-
-interface Species {
-  name: string;
-  classification: string;
-  designation: string;
-  average_height: string;
-  average_lifespan: string;
-  url: string;
-}
+import type { Species } from '~/types/types';
 
 const Species = () => {
   const {

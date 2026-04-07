@@ -6,13 +6,7 @@ import useDetails from '~/hooks/useDetails';
 import parseURL from '~/utils/parseURL';
 import usePagination from '~/hooks/usePagination';
 import Pagination from '~/components/Pagination';
-
-interface Quotes {
-  content: string;
-  character_id: string;
-  film_id: string;
-  url: string;
-}
+import type { Quotes } from '~/types/types';
 
 const Quotes = () => {
   const {
@@ -20,6 +14,7 @@ const Quotes = () => {
     loading,
     error,
   } = useDetails<Quotes[]>({ resource: 'quotes' });
+
   const { currentPageItems, currentPage, totalPages, goToPage } = usePagination(
     {
       items: quotes || [],

@@ -1,42 +1,18 @@
-import MainLayout from '~/components/layout/MainLayout';
 import useDetails from '~/hooks/useDetails';
-import { Link, useParams } from 'react-router';
+import { useParams } from 'react-router';
 import Errors from '~/components/Errors';
 import Loading from '~/components/Loading';
-import parseURL from '~/utils/parseURL';
 import LinkResolved from '~/utils/link-resolved';
-
-type Planets = {
-  name: string;
-  diameter: string;
-  climate: string;
-  terrain: string;
-  population: string;
-  gravity: string;
-  surface_water: string;
-  orbital_period: string;
-  rotation_period: string;
-  region: string;
-  sector: string;
-  system: string;
-  suns: string;
-  moons: string;
-  affiliation: string[];
-  notable_locations: string[];
-  native_species: string[];
-  canon: boolean;
-};
+import type { PlanetsDetails, Organizations, Species } from '~/types/types';
 
 export default function PlanetsDetail() {
   const { id } = useParams();
   // console.log(id);
-  const allDataAffiliated = useDetails<Planets[]>({
+  const allDataAffiliated = useDetails<Organizations[]>({
     resource: 'organizations',
   });
-  // const allDataLocations = useDetails<Planets[]>({
-  //   resource: 'planets',
-  // });
-  const allDataSpecies = useDetails<Planets[]>({
+
+  const allDataSpecies = useDetails<Species[]>({
     resource: 'species',
   });
 
@@ -44,7 +20,7 @@ export default function PlanetsDetail() {
     data: planet,
     loading,
     error,
-  } = useDetails<Planets>({ resource: 'planets', id: id });
+  } = useDetails<PlanetsDetails>({ resource: 'planets', id: id });
 
   return (
     <>

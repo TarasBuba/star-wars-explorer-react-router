@@ -1,39 +1,21 @@
-import { Link, useParams } from 'react-router';
-import Card from '~/components/Card';
+import { useParams } from 'react-router';
 import Loading from '~/components/Loading';
 import Errors from '~/components/Errors';
 import useDetails from '~/hooks/useDetails';
 import LinkResolved from '~/utils/link-resolved';
-
-interface Events {
-  name: string;
-  date: string;
-  type: string;
-  location_id: string;
-  description: string;
-  participants: string[];
-  organizations_involved: string[];
-  casualties: string;
-  outcome: string;
-  significance: string;
-  film_id: number;
-  canon: boolean;
-  url: string;
-}
+import type { EventsDetails, Planets } from '~/types/types';
 
 const EventsDetail = () => {
   const { id } = useParams();
-  const allDataLocation = useDetails<{ name: string; url: string }[]>({
+  const allDataLocation = useDetails<Planets[]>({
     resource: 'planets',
   });
-  const allDataFilm = useDetails<{ title: string; url: string }[]>({
-    resource: 'films',
-  });
+
   const {
     data: event,
     loading,
     error,
-  } = useDetails<Events>({
+  } = useDetails<EventsDetails>({
     resource: 'events',
     id: id,
   });

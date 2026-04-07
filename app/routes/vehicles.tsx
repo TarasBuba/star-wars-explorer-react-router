@@ -6,17 +6,14 @@ import useDetails from '~/hooks/useDetails';
 import parseURL from '~/utils/parseURL';
 import usePagination from '~/hooks/usePagination';
 import Pagination from '~/components/Pagination';
+import type { Vehicles } from '~/types/types';
 
 const Vehicles = () => {
   const {
     data: vehicles,
     loading,
     error,
-  } = useDetails({ resource: 'vehicles' }) as {
-    data: any[];
-    loading: boolean;
-    error: string | null;
-  };
+  } = useDetails<Vehicles[]>({ resource: 'vehicles' });
   const { currentPageItems, currentPage, totalPages, goToPage } = usePagination(
     {
       items: vehicles || [],
@@ -36,7 +33,7 @@ const Vehicles = () => {
             Vehicles
           </h2>
           <section className="grid grid-cols-1 gap-4 p-4 sm:grid-cols-3 md:grid-cols-2">
-            {currentPageItems?.map((vehicle: any) => (
+            {currentPageItems?.map((vehicle: Vehicles) => (
               <Link
                 to={`/${parseURL(vehicle.url).resource}/${parseURL(vehicle.url).id}`}
                 key={vehicle.name}

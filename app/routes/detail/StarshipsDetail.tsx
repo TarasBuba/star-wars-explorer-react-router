@@ -1,38 +1,20 @@
-import MainLayout from '~/components/layout/MainLayout';
 import useDetails from '~/hooks/useDetails';
-import { Link, useParams } from 'react-router';
+import { useParams } from 'react-router';
 import Errors from '~/components/Errors';
 import Loading from '~/components/Loading';
-import parseURL from '~/utils/parseURL';
 import LinkResolved from '~/utils/link-resolved';
-
-type Starships = {
-  name: string;
-  model: string;
-  manufacturer: string;
-  class: string;
-  cost_in_credits: string;
-  length: string;
-  max_atmosphering_speed: string;
-  crew: string;
-  passengers: string;
-  cargo_capacity: string;
-  consumables: string;
-  hyperdrive_rating: string;
-  MGLT: string;
-  starship_class: string;
-  armament: string[];
-  affiliations: string[];
-  pilots?: string[];
-  canon: boolean;
-};
+import type {
+  StarshipsDetails,
+  Characters,
+  Organizations,
+} from '~/types/types';
 
 export default function StarshipsDetail() {
   const { id } = useParams();
-  const allDataAffiliations = useDetails<Starships[]>({
+  const allDataAffiliations = useDetails<Organizations[]>({
     resource: 'organizations',
   });
-  const allDataPilots = useDetails<Starships[]>({
+  const allDataPilots = useDetails<Characters[]>({
     resource: 'characters',
   });
   // console.log(id);
@@ -40,7 +22,7 @@ export default function StarshipsDetail() {
     data: starships,
     loading,
     error,
-  } = useDetails<Starships>({ resource: 'starships', id: id });
+  } = useDetails<StarshipsDetails>({ resource: 'starships', id: id });
 
   return (
     <>

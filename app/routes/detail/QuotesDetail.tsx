@@ -3,30 +3,21 @@ import Loading from '~/components/Loading';
 import Errors from '~/components/Errors';
 import useDetails from '~/hooks/useDetails';
 import LinkResolved from '~/utils/link-resolved';
-
-interface Quotes {
-  id: number;
-  text: string;
-  character_id: number;
-  film_id: number;
-  context: string;
-  is_icononic: boolean;
-  canon: boolean;
-}
+import type { QuotesDetails, Characters, Films } from '~/types/types';
 
 const QuotesDetail = () => {
   const { id } = useParams();
-  const allDataCharacter = useDetails<{ name: string; url: string }[]>({
+  const allDataCharacter = useDetails<Characters[]>({
     resource: 'characters',
   });
-  const allDataFilm = useDetails<{ name: string; url: string }[]>({
+  const allDataFilm = useDetails<Films[]>({
     resource: 'films',
   });
   const {
     data: quote,
     loading,
     error,
-  } = useDetails<Quotes>({
+  } = useDetails<QuotesDetails>({
     resource: 'quotes',
     id: id,
   });

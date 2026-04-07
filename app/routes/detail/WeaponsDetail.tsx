@@ -3,41 +3,29 @@ import Loading from '~/components/Loading';
 import Errors from '~/components/Errors';
 import useDetails from '~/hooks/useDetails';
 import LinkResolved from '~/utils/link-resolved';
-
-interface Weapons {
-  name: string;
-  type: string;
-  manufacturer: string;
-  model: string;
-  range: string;
-  owner_id: number;
-  current_owner_id: number;
-  color: string;
-  crystal_type: string;
-  crystal_origin_id: number;
-  hilt_material: string;
-  blade_length: string;
-  special_features: string[];
-  affiliations: string[];
-  first_appearance_film_id: number;
-  canon: boolean;
-}
+import type {
+  WeaponsDetails,
+  Characters,
+  Organizations,
+  Planets,
+  Films,
+} from '~/types/types';
 
 const WeaponsDetail = () => {
   const { id } = useParams();
-  const allDataOwner = useDetails<{ name: string; url: string }[]>({
+  const allDataOwner = useDetails<Characters[]>({
     resource: 'characters',
   });
-  const allDataCurrentOwner = useDetails<{ name: string; url: string }[]>({
+  const allDataCurrentOwner = useDetails<Characters[]>({
     resource: 'characters',
   });
-  const allDataCrystalOrigin = useDetails<{ name: string; url: string }[]>({
+  const allDataCrystalOrigin = useDetails<Planets[]>({
     resource: 'planets',
   });
-  const allDataFirstAppearance = useDetails<{ name: string; url: string }[]>({
+  const allDataFirstAppearance = useDetails<Films[]>({
     resource: 'films',
   });
-  const allDataAffiliations = useDetails<{ name: string; url: string }[]>({
+  const allDataAffiliations = useDetails<Organizations[]>({
     resource: 'organizations',
   });
 
@@ -45,7 +33,7 @@ const WeaponsDetail = () => {
     data: weapon,
     loading,
     error,
-  } = useDetails<Weapons>({ resource: 'weapons', id: id });
+  } = useDetails<WeaponsDetails>({ resource: 'weapons', id: id });
 
   return (
     <>

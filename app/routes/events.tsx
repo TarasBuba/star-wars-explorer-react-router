@@ -6,13 +6,7 @@ import useDetails from '~/hooks/useDetails';
 import parseURL from '~/utils/parseURL';
 import usePagination from '~/hooks/usePagination';
 import Pagination from '~/components/Pagination';
-
-interface Events {
-  name: string;
-  date: string;
-  description: string;
-  url: string;
-}
+import type { Events } from '~/types/types';
 
 const Events = () => {
   const {

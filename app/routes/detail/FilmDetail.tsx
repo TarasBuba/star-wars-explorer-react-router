@@ -1,46 +1,35 @@
-import MainLayout from '~/components/layout/MainLayout';
 import useDetails from '~/hooks/useDetails';
 import { useParams } from 'react-router';
 import Errors from '~/components/Errors';
 import Loading from '~/components/Loading';
-import parseURL from '~/utils/parseURL';
 import LinkResolved from '~/utils/link-resolved';
+import type {
+  FilmDetails,
+  Planets,
+  Characters,
+  Species,
+  Organizations,
+} from '~/types/types';
 
-type Film = {
-  title: string;
-  episode_id: number;
-  opening_crawl: string;
-  director: string;
-  producer: string;
-  release_date: string;
-  timeline_date: string;
-  characters: string[];
-  planets: string[];
-  species: string[];
-  organizations: string[];
-  vehicles: string[];
-  starships: string[];
-  canon: boolean;
-};
 export default function FilmDetail() {
   const { id } = useParams();
-  const allDataPlanets = useDetails<Film[]>({
+  const allDataPlanets = useDetails<Planets[]>({
     resource: 'planets',
   });
-  const allDataCharacters = useDetails<Film[]>({
+  const allDataCharacters = useDetails<Characters[]>({
     resource: 'characters',
   });
-  const allDataSpecies = useDetails<Film[]>({
+  const allDataSpecies = useDetails<Species[]>({
     resource: 'species',
   });
-  const allDataOrganizations = useDetails<Film[]>({
+  const allDataOrganizations = useDetails<Organizations[]>({
     resource: 'organizations',
   });
   const {
     data: film,
     loading,
     error,
-  } = useDetails<Film>({ resource: 'films', id });
+  } = useDetails<FilmDetails>({ resource: 'films', id });
 
   return (
     <>

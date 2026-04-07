@@ -1,45 +1,21 @@
-import MainLayout from '~/components/layout/MainLayout';
 import useDetails from '~/hooks/useDetails';
-import { Link, useParams } from 'react-router';
+import { useParams } from 'react-router';
 import Errors from '~/components/Errors';
 import Loading from '~/components/Loading';
-import parseURL from '~/utils/parseURL';
 import LinkResolved from '~/utils/link-resolved';
-
-type Vehicles = {
-  name: string;
-  model: string;
-  manufacturer: string;
-  class: string;
-  cost_in_credits: string;
-  length: string;
-  max_atmosphering_speed: string;
-  crew: string;
-  passengers: string;
-  cargo_capacity: string;
-  armor: string;
-  vehicle_class: string;
-  armament: string[];
-  affiliation: string[];
-  canon: boolean;
-};
+import type { VehiclesDetails, Organizations } from '~/types/types';
 
 export default function VehiclesDetail() {
   const { id } = useParams();
-  const allDataAffiliation = useDetails<{ name: string; url: string }[]>({
+  const allDataAffiliation = useDetails<Organizations[]>({
     resource: 'organizations',
   });
-  // console.log(id);
+
   const {
     data: vehicles,
     loading,
     error,
-  } = useDetails<Vehicles>({ resource: 'vehicles', id: id });
-
-  // const getID = (url: string) => {
-  //   const parts = url.split('/').filter(Boolean);
-  //   return { resource: parts[parts.length - 2], id: parts[parts.length - 1] };
-  // };
+  } = useDetails<VehiclesDetails>({ resource: 'vehicles', id: id });
 
   return (
     <>

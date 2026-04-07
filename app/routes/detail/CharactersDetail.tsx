@@ -1,49 +1,20 @@
-// import { get } from "http";
-// import MainLayout from '~/components/layout/MainLayout';
 import useDetails from '~/hooks/useDetails';
-import { data, Link, useParams } from 'react-router';
-import { useState, useEffect } from 'react';
+import { useParams } from 'react-router';
 import Errors from '~/components/Errors';
 import Loading from '~/components/Loading';
-import parseURL from '~/utils/parseURL';
 import LinkResolved from '~/utils/link-resolved';
+import type { CharactersDetails, Characters } from '~/types/types';
 
-type Characters = {
-  id: number;
-  name: string;
-  rank: string;
-  force_side: string;
-  lightsaber_colors: string[];
-  birth_year: string;
-  death_year: string;
-  status: string;
-  eye_color: string;
-  gender: string;
-  hair_color: string;
-  height: string;
-  homeworld_id: string;
-  mass: string;
-  skin_color: string;
-  films: string[];
-  spacies_id?: string;
-  affiliations?: string[];
-  apprearances?: string[];
-  apprentices?: string[];
-  masters?: string[];
-  era?: string[];
-  canon: boolean;
-};
-export default function PlanetsDetail() {
+export default function CharactersDetail() {
   const { id } = useParams();
   const allcharacters = useDetails<Characters[]>({
     resource: 'characters',
   });
-  // console.log(allcharacters);
   const {
     data: characters,
     loading,
     error,
-  } = useDetails<Characters>({ resource: 'characters', id: id });
+  } = useDetails<CharactersDetails>({ resource: 'characters', id: id });
 
   return (
     <>
@@ -64,13 +35,13 @@ export default function PlanetsDetail() {
                     Biographical Information
                   </h3>
                   <p>
-                    <strong>Birth Year:</strong> {characters.birth_year}
+                    <strong>Birth Year:</strong> {characters?.birth_year}
                   </p>
                   <p>
-                    <strong>Status:</strong> {characters.status}
+                    <strong>Status:</strong> {characters?.status}
                   </p>
                   <p>
-                    <strong>Rank:</strong> {characters.rank}
+                    <strong>Rank:</strong> {characters?.rank}
                   </p>
                   <p>
                     <strong>Force Side:</strong> {characters.force_side}

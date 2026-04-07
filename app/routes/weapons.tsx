@@ -6,14 +6,7 @@ import useDetails from '~/hooks/useDetails';
 import parseURL from '~/utils/parseURL';
 import usePagination from '~/hooks/usePagination';
 import Pagination from '~/components/Pagination';
-
-interface Weapons {
-  name: string;
-  type: string;
-  model: string;
-  color: string;
-  url: string;
-}
+import type { Weapons } from '~/types/types';
 
 const Weapons = () => {
   const {

@@ -1,19 +1,12 @@
-import { useState, useEffect } from 'react';
 import { Link } from 'react-router';
 import Card from '~/components/Card';
-// import MainLayout from "~/components/layout/MainLayout";
 import useDetails from '~/hooks/useDetails';
 import parseURL from '~/utils/parseURL';
 import Loading from '~/components/Loading';
 import Errors from '~/components/Errors';
 import usePagination from '~/hooks/usePagination';
 import Pagination from '~/components/Pagination';
-
-interface Films {
-  title: string;
-  episode_id: number;
-  url: string;
-}
+import type { Films } from '~/types/types';
 
 const Films = () => {
   const {

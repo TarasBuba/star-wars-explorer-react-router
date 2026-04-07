@@ -3,36 +3,21 @@ import { useParams } from 'react-router';
 import Errors from '~/components/Errors';
 import Loading from '~/components/Loading';
 import LinkResolved from '~/utils/link-resolved';
-
-type Organizations = {
-  name: string;
-  type: string;
-  founding_date: string;
-  dissolution_date: string;
-  refounded_date: string;
-  ideology: string;
-  force_alignment: string;
-  headquarters_id: number;
-  leader_id: number;
-  notable_members: string[];
-  era: string[];
-  status: string;
-  canon: boolean;
-};
+import type { OrganizationsDetails, Planets, Characters } from '~/types/types';
 
 const OrganizationDetail = () => {
   const { id } = useParams();
-  const allDataHeadquarters = useDetails<{ name: string; url: string }[]>({
+  const allDataHeadquarters = useDetails<Planets[]>({
     resource: 'planets',
   });
-  const allDataLeader = useDetails<{ name: string; url: string }[]>({
+  const allDataLeader = useDetails<Characters[]>({
     resource: 'characters',
   });
   const {
     data: organization,
     loading,
     error,
-  } = useDetails<Organizations>({
+  } = useDetails<OrganizationsDetails>({
     resource: 'organizations',
     id: id,
   });

@@ -6,14 +6,7 @@ import Loading from '~/components/Loading';
 import Errors from '~/components/Errors';
 import usePagination from '~/hooks/usePagination';
 import Pagination from '~/components/Pagination';
-
-interface Organizations {
-  name: string;
-  type: string;
-  force_alignment: string;
-  status: string;
-  url: string;
-}
+import type { Organizations } from '~/types/types';
 
 const Organization = () => {
   const {
