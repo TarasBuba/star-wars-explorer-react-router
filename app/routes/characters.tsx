@@ -1,6 +1,6 @@
 import { Link } from 'react-router';
 import Card from '~/components/Card';
-import useDetails from '~/hooks/useDetails';
+import useList from '~/hooks/useList';
 import usePagination from '~/hooks/usePagination';
 import Pagination from '~/components/Pagination';
 import type { Characters } from '~/types/types';
@@ -11,7 +11,7 @@ const Characters = () => {
     data: characters,
     loading,
     error,
-  } = useDetails<Characters[]>({ resource: 'characters' });
+  } = useList<Characters[]>({ resource: 'characters' });
 
   const { currentPageItems, currentPage, totalPages, goToPage } = usePagination(
     {

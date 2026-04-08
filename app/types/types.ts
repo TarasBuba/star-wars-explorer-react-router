@@ -1,3 +1,17 @@
+export type Pagination<T> = {
+  items: T[];
+  itemsPerPage: number;
+};
+
+export type DetailsProps = {
+  resource: string;
+  id: string | undefined;
+};
+
+export type ListProps = {
+  resource: string;
+};
+
 export type CharactersDetails = {
   id: number;
   name: string;
