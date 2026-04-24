@@ -34,7 +34,11 @@ const Species = () => {
             >
               <Card
                 heading={person.name}
-                description={`Classification: ${person.classification}, Designation: ${person.designation}, Average Height: ${person.average_height}, Average Lifespan: ${person.average_lifespan}`}
+                fields={[
+                  { label: 'Classification', value: person.classification },
+                  { label: 'Average Height', value: person.average_height },
+                  { label: 'Average Lifespan', value: person.average_lifespan },
+                ]}
               />
             </Link>
           ))}

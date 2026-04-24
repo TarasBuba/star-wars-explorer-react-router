@@ -1,12 +1,15 @@
 import { useParams } from 'react-router';
-import useDetails from '~/hooks/useDetails';
+import useDetails from '~/hooks/useAsync';
 import useList from '~/hooks/useList';
 import LinkResolved from '~/utils/link-resolved';
 import type { QuotesDetails, Characters, Films } from '~/types/types';
 import DataWrapper from '~/components/DataWrapper';
+import StarWarsDetailsAPI from '~/api/StarWarsDetailsAPI';
+import StarWarsListAPI from '~/api/StarWarsListAPI';
 
 const QuotesDetail = () => {
   const { id } = useParams();
+
   const allDataCharacter = useList<Characters[]>({
     resource: 'characters',
   });
@@ -50,9 +53,27 @@ const QuotesDetail = () => {
             value={quote?.film_id}
           />
         </p>
-        <p>Context: {quote?.context}</p>
-        <p>Is Iconic: {quote?.is_icononic ? 'Yes' : 'No'}</p>
-        <p>Canon: {quote?.canon ? 'Yes' : 'No'}</p>
+        <p>
+          Context: <span className="italic">{quote?.context}</span>
+        </p>
+        <p>
+          Is Iconic:
+          <span className="p-1">
+            {quote?.is_iconic ? (
+              <span className="text-green-400">Yes</span>
+            ) : (
+              <span className="text-red-400">No</span>
+            )}
+          </span>
+        </p>
+        <p>
+          Canon:{' '}
+          {quote?.canon ? (
+            <span className="text-green-400">Yes</span>
+          ) : (
+            <span className="text-red-400">No</span>
+          )}
+        </p>
       </div>
     </DataWrapper>
   );

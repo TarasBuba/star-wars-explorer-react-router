@@ -114,7 +114,7 @@ export type QuotesDetails = {
   character_id: number;
   film_id: number;
   context: string;
-  is_icononic: boolean;
+  is_iconic: boolean;
   canon: boolean;
 };
 
@@ -206,8 +206,11 @@ export type Events = {
 };
 
 export type Films = {
-  title: string;
-  episode_id: number;
+  name: string;
+  director: string;
+  producer: string;
+  release_date: string;
+  canon: boolean;
   url: string;
 };
 
@@ -228,9 +231,8 @@ export type Planets = {
 };
 
 export type Quotes = {
-  content: string;
-  character_id: string;
-  film_id: string;
+  text: string;
+  is_iconic: boolean;
   url: string;
 };
 

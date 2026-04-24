@@ -39,7 +39,17 @@ const Organization = () => {
             >
               <Card
                 heading={organization.name}
-                description={`Type: ${organization.type}, Force Alignment: ${organization.force_alignment}, Status: ${organization.status}`}
+                fields={[
+                  {
+                    label: 'Force Alignment',
+                    value: organization.force_alignment,
+                  },
+                  { label: 'Type', value: organization.type },
+                  {
+                    label: 'Status',
+                    value: organization.status,
+                  },
+                ]}
               />
             </Link>
           ))}

@@ -1,18 +1,19 @@
 import { Link } from 'react-router';
 import Card from '~/components/Card';
-import useList from '~/hooks/useList';
+import useAsync from '~/hooks/useAsync';
 import parseURL from '~/utils/parseURL';
 import usePagination from '~/hooks/usePagination';
 import Pagination from '~/components/Pagination';
 import type { Events } from '~/types/types';
 import DataWrapper from '~/components/DataWrapper';
+import StarWarsListAPI from '~/api/StarWarsListAPI';
 
 const Events = () => {
   const {
     data: events,
     loading,
     error,
-  } = useList<Events[]>({ resource: 'events' });
+  } = useAsync<Events[]>(() => StarWarsListAPI('events'));
 
   const { currentPageItems, currentPage, totalPages, goToPage } = usePagination(
     {
@@ -35,7 +36,10 @@ const Events = () => {
             >
               <Card
                 heading={event.name}
-                description={`Description: ${event.description} Date: ${event.date}`}
+                fields={[
+                  { label: 'Date', value: event.date },
+                  { label: 'Description', value: event.description },
+                ]}
               />
             </Link>
           ))}

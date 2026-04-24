@@ -1,24 +1,25 @@
 import { useParams } from 'react-router';
-import useDetails from '~/hooks/useDetails';
-import useList from '~/hooks/useList';
 import LinkResolved from '~/utils/link-resolved';
 import type { EventsDetails, Planets } from '~/types/types';
 import DataWrapper from '~/components/DataWrapper';
+import StarWarsDetailsAPI from '~/api/StarWarsDetailsAPI';
+import StarWarsListAPI from '~/api/StarWarsListAPI';
+import { useCallback } from 'react';
+import useAsync from '~/hooks/useAsync';
 
 const EventsDetail = () => {
   const { id } = useParams();
-  const allDataLocation = useList<Planets[]>({
-    resource: 'planets',
-  });
 
-  const {
-    data: event,
-    loading,
-    error,
-  } = useDetails<EventsDetails>({
-    resource: 'events',
-    id: id,
-  });
+  const fetchEvent = useCallback(() => {
+    return StarWarsDetailsAPI('events', id || '');
+  }, [id]);
+
+  const fetchAllLocations = useCallback(() => {
+    return StarWarsListAPI('planets');
+  }, []);
+  const { data: allDataLocation } = useAsync<Planets[]>(fetchAllLocations);
+
+  const { data: event, loading, error } = useAsync<EventsDetails>(fetchEvent);
 
   return (
     <DataWrapper loading={loading} error={error}>
@@ -32,10 +33,9 @@ const EventsDetail = () => {
           <p>
             Location:
             <LinkResolved
-              key={event?.url}
               idKey="url"
               matchKey="url"
-              collection={allDataLocation.data || []}
+              collection={allDataLocation || []}
               resource="planets"
               value={event?.location_id}
             />

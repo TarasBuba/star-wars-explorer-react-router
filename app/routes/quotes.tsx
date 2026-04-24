@@ -31,12 +31,13 @@ const Quotes = () => {
           {currentPageItems?.map((quote: Quotes) => (
             <Link
               to={`/${parseURL(quote.url).resource}/${parseURL(quote.url).id}`}
-              key={quote.content}
+              key={quote.text}
             >
               <Card
-                key={quote.content}
-                heading={quote.content}
-                description={`Character ID: ${quote.character_id}, Film ID: ${quote.film_id}`}
+                heading={quote.text}
+                fields={[
+                  { label: 'Iconic', value: quote.is_iconic ? 'Yes' : 'No' },
+                ]}
               />
             </Link>
           ))}

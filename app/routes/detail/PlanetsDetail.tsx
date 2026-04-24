@@ -1,26 +1,34 @@
-import useDetails from '~/hooks/useDetails';
-import useList from '~/hooks/useList';
 import { useParams } from 'react-router';
 import LinkResolved from '~/utils/link-resolved';
 import type { PlanetsDetails, Organizations, Species } from '~/types/types';
 import DataWrapper from '~/components/DataWrapper';
+import StarWarsDetailsAPI from '~/api/StarWarsDetailsAPI';
+import StarWarsListAPI from '~/api/StarWarsListAPI';
+import useAsync from '~/hooks/useAsync';
+import { useCallback } from 'react';
 
 export default function PlanetsDetail() {
   const { id } = useParams();
-  // console.log(id);
-  const allDataAffiliated = useList<Organizations[]>({
-    resource: 'organizations',
-  });
 
-  const allDataSpecies = useList<Species[]>({
-    resource: 'species',
-  });
+  const fetchOrganisations = useCallback(() => {
+    return StarWarsListAPI('organizations');
+  }, []);
+  const { data: allDataAffiliated } =
+    useAsync<Organizations[]>(fetchOrganisations);
 
+  const fetchSpecies = useCallback(() => {
+    return StarWarsListAPI('species');
+  }, []);
+  const { data: allDataSpecies } = useAsync<Species[]>(fetchSpecies);
+
+  const fetchPlanetDetails = useCallback(() => {
+    return StarWarsDetailsAPI('planets', id || '');
+  }, [id]);
   const {
     data: planet,
     loading,
     error,
-  } = useDetails<PlanetsDetails>({ resource: 'planets', id: id });
+  } = useAsync<PlanetsDetails>(fetchPlanetDetails);
 
   return (
     <DataWrapper loading={loading} error={error}>
@@ -29,24 +37,24 @@ export default function PlanetsDetail() {
           {planet && (
             <article className="grid cursor-pointer grid-cols-1 gap-4 rounded-lg border border-gray-300 p-4 shadow-md transition-shadow duration-300 ease-in-out hover:shadow-lg">
               <h1 className="text-center text-4xl font-bold">{planet.name}</h1>
-              <h2 className="mb-4 text-center text-2xl font-bold">
+              <p className="mb-4 text-center text-2xl font-bold">
                 Diameter: {planet.diameter}
-              </h2>
-              <h2 className="mb-4 text-center text-2xl font-bold">
+              </p>
+              <p className="mb-4 text-center text-2xl font-bold">
                 Climate: {planet.climate}
-              </h2>
-              <h2 className="mb-4 text-center text-2xl font-bold">
+              </p>
+              <p className="mb-4 text-center text-2xl font-bold">
                 Population: {planet.population}
-              </h2>
-              <h2 className="mb-4 text-center text-2xl font-bold">
+              </p>
+              <p className="mb-4 text-center text-2xl font-bold">
                 Terrain: {planet.terrain}
-              </h2>
-              <h2 className="mb-4 text-center text-2xl font-bold">
+              </p>
+              <p className="mb-4 text-center text-2xl font-bold">
                 Rotation Period: {planet.rotation_period}
-              </h2>
-              <h2 className="mb-4 text-center text-2xl font-bold">
+              </p>
+              <p className="mb-4 text-center text-2xl font-bold">
                 Orbital Period: {planet.orbital_period}
-              </h2>
+              </p>
               <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                 <div>
                   {planet.affiliation && (
@@ -59,12 +67,11 @@ export default function PlanetsDetail() {
                             className="cursor-pointer text-blue-500 hover:underline"
                           >
                             <LinkResolved
-                              key={affiliation}
                               value={affiliation}
                               resource="organizations"
                               idKey="id"
                               matchKey="name"
-                              collection={allDataAffiliated.data || []}
+                              collection={allDataAffiliated || []}
                             />
                           </li>
                         ))}
@@ -104,12 +111,11 @@ export default function PlanetsDetail() {
                             className="cursor-pointer text-blue-500 hover:underline"
                           >
                             <LinkResolved
-                              key={species}
                               value={species}
                               resource="species"
                               idKey="id"
                               matchKey="id"
-                              collection={allDataSpecies.data || []}
+                              collection={allDataSpecies || []}
                             />
                           </li>
                         ))}

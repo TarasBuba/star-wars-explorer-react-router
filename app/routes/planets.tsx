@@ -34,7 +34,11 @@ const Planets = () => {
             >
               <Card
                 heading={planet.name}
-                description={`Population: ${planet.population}, Climate: ${planet.climate}, Terrain: ${planet.terrain}`}
+                fields={[
+                  { label: 'Climate', value: planet.climate },
+                  { label: 'Terrain', value: planet.terrain },
+                  { label: 'Population', value: planet.population },
+                ]}
               />
             </Link>
           ))}

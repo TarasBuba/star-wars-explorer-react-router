@@ -1,5 +1,4 @@
-import useDetails from '~/hooks/useDetails';
-import useList from '~/hooks/useList';
+import useDetails from '~/hooks/useAsync';
 import { useParams } from 'react-router';
 import LinkResolved from '~/utils/link-resolved';
 import DataWrapper from '~/components/DataWrapper';
@@ -10,26 +9,41 @@ import type {
   Species,
   Organizations,
 } from '~/types/types';
+import useAsync from '~/hooks/useAsync';
+import { useCallback } from 'react';
+import StarWarsDetailsAPI from '~/api/StarWarsDetailsAPI';
+import StarWarsListAPI from '~/api/StarWarsListAPI';
 
 export default function FilmDetail() {
   const { id } = useParams();
-  const allDataPlanets = useList<Planets[]>({
-    resource: 'planets',
-  });
-  const allDataCharacters = useList<Characters[]>({
-    resource: 'characters',
-  });
-  const allDataSpecies = useList<Species[]>({
-    resource: 'species',
-  });
-  const allDataOrganizations = useList<Organizations[]>({
-    resource: 'organizations',
-  });
+
+  const fetchPlanets = useCallback(() => {
+    return StarWarsListAPI('planets');
+  }, []);
+  const fetchCharacters = useCallback(() => {
+    return StarWarsListAPI('characters');
+  }, []);
+  const fetchSpecies = useCallback(() => {
+    return StarWarsListAPI('species');
+  }, []);
+  const fetchOrganizations = useCallback(() => {
+    return StarWarsListAPI('organizations');
+  }, []);
+  const { data: allDataPlanets } = useAsync<Planets[]>(fetchPlanets);
+  const { data: allDataCharacters } = useAsync<Characters[]>(fetchCharacters);
+  const { data: allDataSpecies } = useAsync<Species[]>(fetchSpecies);
+  const { data: allDataOrganizations } =
+    useAsync<Organizations[]>(fetchOrganizations);
+
+  const fetchFilmsDetails = useCallback(() => {
+    return StarWarsDetailsAPI('films', id || '');
+  }, [id]);
+
   const {
     data: film,
     loading,
     error,
-  } = useDetails<FilmDetails>({ resource: 'films', id: id });
+  } = useDetails<FilmDetails>(fetchFilmsDetails);
 
   return (
     <DataWrapper loading={loading} error={error}>
@@ -70,7 +84,7 @@ export default function FilmDetail() {
                             resource="characters"
                             idKey="id"
                             matchKey="id"
-                            collection={allDataCharacters.data || []}
+                            collection={allDataCharacters || []}
                           />
                         </li>
                       ))}
@@ -92,7 +106,7 @@ export default function FilmDetail() {
                             resource="planets"
                             idKey="id"
                             matchKey="id"
-                            collection={allDataPlanets.data || []}
+                            collection={allDataPlanets || []}
                           />
                         </li>
                       ))}
@@ -114,7 +128,7 @@ export default function FilmDetail() {
                             resource="species"
                             idKey="id"
                             matchKey="id"
-                            collection={allDataSpecies.data || []}
+                            collection={allDataSpecies || []}
                           />
                         </li>
                       ))}
@@ -136,7 +150,7 @@ export default function FilmDetail() {
                             resource="organizations"
                             idKey="id"
                             matchKey="id"
-                            collection={allDataOrganizations.data || []}
+                            collection={allDataOrganizations || []}
                           />
                         </li>
                       ))}

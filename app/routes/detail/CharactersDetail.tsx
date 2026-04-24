@@ -1,20 +1,27 @@
-import useDetails from '~/hooks/useDetails';
-import useList from '~/hooks/useList';
+import useAsync from '~/hooks/useAsync';
 import { useParams } from 'react-router';
 import LinkResolved from '~/utils/link-resolved';
 import type { CharactersDetails, Characters } from '~/types/types';
 import DataWrapper from '~/components/DataWrapper';
+import StarWarsDetailsAPI from '~/api/StarWarsDetailsAPI';
+import StarWarsListAPI from '~/api/StarWarsListAPI';
+import { useCallback } from 'react';
 
-export default function CharactersDetail() {
+const CharactersDetail = () => {
   const { id } = useParams();
-  const allcharacters = useList<Characters[]>({
-    resource: 'characters',
-  });
+  const fetchCharacter = useCallback(() => {
+    return StarWarsDetailsAPI('characters', id || '');
+  }, [id]);
+
+  const fetchAllCharacters = useCallback(() => {
+    return StarWarsListAPI('characters');
+  }, []);
+  const { data: allcharacters } = useAsync<Characters[]>(fetchAllCharacters);
   const {
     data: characters,
     loading,
     error,
-  } = useDetails<CharactersDetails>({ resource: 'characters', id: id });
+  } = useAsync<CharactersDetails>(fetchCharacter);
 
   return (
     <DataWrapper loading={loading} error={error}>
@@ -75,14 +82,16 @@ export default function CharactersDetail() {
               <p>
                 <strong className="font-bold">Apprentices:</strong>{' '}
                 {characters.apprentices?.map((apprentice) => (
-                  <span className="text-blue-600 hover:text-blue-950">
+                  <span
+                    key={apprentice}
+                    className="text-blue-600 hover:text-blue-950"
+                  >
                     <LinkResolved
-                      key={apprentice}
                       value={apprentice}
                       matchKey="name"
                       resource="characters"
                       idKey="id"
-                      collection={allcharacters.data || []}
+                      collection={allcharacters || []}
                     />
                     {' | '}
                   </span>
@@ -93,12 +102,11 @@ export default function CharactersDetail() {
                 {characters.masters?.map((master) => (
                   <span key={master}>
                     <LinkResolved
-                      key={master}
                       value={master}
                       matchKey="name"
                       resource="characters"
                       idKey="id"
-                      collection={allcharacters.data || []}
+                      collection={allcharacters || []}
                     />
                     {' | '}
                   </span>
@@ -117,4 +125,4 @@ export default function CharactersDetail() {
       </div>
     </DataWrapper>
   );
-}
+};

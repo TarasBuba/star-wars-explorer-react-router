@@ -34,7 +34,11 @@ const Starships = () => {
             >
               <Card
                 heading={starship.name}
-                description={`Model: ${starship.model}, Manufacturer: ${starship.manufacturer}, Cost in Credits: ${starship.cost_in_credits}`}
+                fields={[
+                  { label: 'Model', value: starship.model },
+                  { label: 'Manufacturer', value: starship.manufacturer },
+                  { label: 'Cost in Credits', value: starship.cost_in_credits },
+                ]}
               />
             </Link>
           ))}

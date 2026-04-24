@@ -1,26 +1,33 @@
-import useDetails from '~/hooks/useDetails';
-import useList from '~/hooks/useList';
 import { useParams } from 'react-router';
 import LinkResolved from '~/utils/link-resolved';
 import type { OrganizationsDetails, Planets, Characters } from '~/types/types';
 import DataWrapper from '~/components/DataWrapper';
+import useAsync from '~/hooks/useAsync';
+import { useCallback } from 'react';
+import StarWarsDetailsAPI from '~/api/StarWarsDetailsAPI';
+import StarWarsListAPI from '~/api/StarWarsListAPI';
 
 const OrganizationDetail = () => {
   const { id } = useParams();
-  const allDataHeadquarters = useList<Planets[]>({
-    resource: 'planets',
-  });
-  const allDataLeader = useList<Characters[]>({
-    resource: 'characters',
-  });
+
+  const fetchOrganizationDetails = useCallback(() => {
+    return StarWarsDetailsAPI('organizations', id || '');
+  }, [id]);
+
+  const fetchHeadquarters = useCallback(() => {
+    return StarWarsListAPI('planets');
+  }, []);
+  const fetchLeader = useCallback(() => {
+    return StarWarsListAPI('characters');
+  }, []);
+  const { data: allDataHeadquarters } = useAsync<Planets[]>(fetchHeadquarters);
+  const { data: allDataLeader } = useAsync<Characters[]>(fetchLeader);
+
   const {
     data: organization,
     loading,
     error,
-  } = useDetails<OrganizationsDetails>({
-    resource: 'organizations',
-    id: id,
-  });
+  } = useAsync<OrganizationsDetails>(fetchOrganizationDetails);
 
   return (
     <DataWrapper loading={loading} error={error}>
@@ -45,7 +52,7 @@ const OrganizationDetail = () => {
               resource="planets"
               idKey="id"
               matchKey="id"
-              collection={allDataHeadquarters.data || []}
+              collection={allDataHeadquarters || []}
             />
             )
           </p>
@@ -53,29 +60,30 @@ const OrganizationDetail = () => {
             Leader:
             <span>
               <LinkResolved
-                key={organization?.leader_id}
                 value={organization?.leader_id}
                 resource="characters"
                 idKey="id"
                 matchKey="id"
-                collection={allDataLeader.data || []}
+                collection={allDataLeader || []}
               />
             </span>
           </p>
-          <ul>
+          <div>
             <p>Notable Members:</p>
-            {organization?.notable_members.map((member, index) => (
-              <li key={index}>
-                <LinkResolved
-                  value={member}
-                  resource="characters"
-                  idKey="id"
-                  matchKey="id"
-                  collection={allDataLeader.data || []}
-                />
-              </li>
-            ))}
-          </ul>
+            <ul>
+              {organization?.notable_members.map((member, index) => (
+                <li key={index}>
+                  <LinkResolved
+                    value={member}
+                    resource="characters"
+                    idKey="id"
+                    matchKey="id"
+                    collection={allDataLeader || []}
+                  />
+                </li>
+              ))}
+            </ul>
+          </div>
           <p>Era: {organization?.era.join(', ')}</p>
         </div>
         <p>Status: {organization?.status}</p>

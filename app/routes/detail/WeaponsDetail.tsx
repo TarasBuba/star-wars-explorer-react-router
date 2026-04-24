@@ -1,5 +1,5 @@
 import { useParams } from 'react-router';
-import useDetails from '~/hooks/useDetails';
+import useDetails from '~/hooks/useAsync';
 import useList from '~/hooks/useList';
 import LinkResolved from '~/utils/link-resolved';
 import DataWrapper from '~/components/DataWrapper';

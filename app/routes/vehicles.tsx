@@ -34,7 +34,10 @@ const Vehicles = () => {
             >
               <Card
                 heading={vehicle.name}
-                description={`Model: ${vehicle.model}, Manufacturer: ${vehicle.manufacturer}`}
+                fields={[
+                  { label: 'Model', value: vehicle.model },
+                  { label: 'Manufacturer', value: vehicle.manufacturer },
+                ]}
               />
             </Link>
           ))}

@@ -28,11 +28,15 @@ const Films = () => {
         {currentPageItems?.map((film: Films) => (
           <Link
             to={`/${parseURL(film.url).resource}/${parseURL(film.url).id}`}
-            key={film.episode_id}
+            key={film.name}
           >
             <Card
-              heading={film.title}
-              description={`Episode ${film.episode_id} `}
+              heading={film.name}
+              fields={[
+                { label: 'Director', value: film.director },
+                { label: 'Producer', value: film.producer },
+                { label: 'Release Date', value: film.release_date },
+              ]}
             />
           </Link>
         ))}
