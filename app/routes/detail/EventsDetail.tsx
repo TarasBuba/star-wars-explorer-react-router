@@ -1,80 +1,54 @@
-import { Link, useParams } from 'react-router';
-import Card from '~/components/Card';
-import Loading from '~/components/Loading';
-import Errors from '~/components/Errors';
-import useDetails from '~/hooks/useDetails';
+import { useParams } from 'react-router';
 import LinkResolved from '~/utils/link-resolved';
-
-interface Events {
-  name: string;
-  date: string;
-  type: string;
-  location_id: string;
-  description: string;
-  participants: string[];
-  organizations_involved: string[];
-  casualties: string;
-  outcome: string;
-  significance: string;
-  film_id: number;
-  canon: boolean;
-  url: string;
-}
+import type { EventsDetails, Planets } from '~/types/types';
+import DataWrapper from '~/components/DataWrapper';
+import StarWarsDetailsAPI from '~/api/StarWarsDetailsAPI';
+import StarWarsListAPI from '~/api/StarWarsListAPI';
+import { useCallback } from 'react';
+import useAsync from '~/hooks/useAsync';
 
 const EventsDetail = () => {
   const { id } = useParams();
-  const allDataLocation = useDetails<{ name: string; url: string }[]>({
-    resource: 'planets',
-  });
-  const allDataFilm = useDetails<{ title: string; url: string }[]>({
-    resource: 'films',
-  });
-  const {
-    data: event,
-    loading,
-    error,
-  } = useDetails<Events>({
-    resource: 'events',
-    id: id,
-  });
+
+  const fetchEvent = useCallback(() => {
+    return StarWarsDetailsAPI('events', id || '');
+  }, [id]);
+
+  const fetchAllLocations = useCallback(() => {
+    return StarWarsListAPI('planets');
+  }, []);
+  const { data: allDataLocation } = useAsync<Planets[]>(fetchAllLocations);
+
+  const { data: event, loading, error } = useAsync<EventsDetails>(fetchEvent);
 
   return (
-    <>
-      {loading ? (
-        <Loading />
-      ) : error ? (
-        <Errors message={error} />
-      ) : event ? (
-        <div className="bg-events min-h-screen p-4">
-          <h2 className="mb-4 text-center text-2xl font-bold text-amber-400">
-            {event.name}
-          </h2>
-          <div>
-            <p>Date: {event.date}</p>
-            <p>Type: {event.type}</p>
-            <p>
-              Location:
-              <LinkResolved
-                key={event.url}
-                idKey="url"
-                matchKey="url"
-                collection={allDataLocation.data || []}
-                resource="planets"
-                value={event.location_id}
-              />
-            </p>
-            <p>Description: {event.description}</p>
-            <p>Participants: {event.participants.join(', ')}</p>
-            <p>
-              Organizations Involved: {event.organizations_involved.join(', ')}
-            </p>
-            <p>Casualties: {event.casualties}</p>
-          </div>
+    <DataWrapper loading={loading} error={error}>
+      <div className="bg-events min-h-screen p-4">
+        <h2 className="mb-4 text-center text-2xl font-bold text-amber-400">
+          {event?.name}
+        </h2>
+        <div>
+          <p>Date: {event?.date}</p>
+          <p>Type: {event?.type}</p>
+          <p>
+            Location:
+            <LinkResolved
+              idKey="url"
+              matchKey="url"
+              collection={allDataLocation || []}
+              resource="planets"
+              value={event?.location_id}
+            />
+          </p>
+          <p>Description: {event?.description}</p>
+          <p>Participants: {event?.participants?.join(', ')}</p>
+          <p>
+            Organizations Involved: {event?.organizations_involved?.join(', ')}
+          </p>
+          <p>Casualties: {event?.casualties}</p>
         </div>
-      ) : (
-        <p>Event not found.</p>
-      )}
-    </>
+      </div>
+    </DataWrapper>
   );
 };
 

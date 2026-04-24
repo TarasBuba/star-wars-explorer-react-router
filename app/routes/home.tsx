@@ -36,6 +36,18 @@ export default function Home() {
         <Link to="/vehicles" className="hover:underline">
           Vehicles
         </Link>
+        <Link to="/organizations" className="hover:underline">
+          Organizations
+        </Link>
+        <Link to="events" className="hover:underline">
+          Events
+        </Link>
+        <Link to="/weapons" className="hover:underline">
+          Weapons
+        </Link>
+        <Link to="/quotes" className="hover:underline">
+          Quotes
+        </Link>
       </div>
     </div>
   );

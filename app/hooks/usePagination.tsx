@@ -1,16 +1,12 @@
 import { useState } from 'react';
+import type { Pagination } from '~/types/types';
 
-interface Props<T> {
-  items: T[];
-  itemsPerPage: number;
-}
-
-const usePagination: <T>(props: Props<T>) => {
+const usePagination: <T>(props: Pagination<T>) => {
   currentPageItems: T[];
   currentPage: number;
   totalPages: number;
   goToPage: (page: number) => void;
-} = <T,>({ items, itemsPerPage }: Props<T>) => {
+} = <T,>({ items, itemsPerPage }: Pagination<T>) => {
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = Math.ceil(items.length / itemsPerPage);
   const goToPage = (page: number) => {

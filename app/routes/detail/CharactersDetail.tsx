@@ -1,155 +1,128 @@
-// import { get } from "http";
-// import MainLayout from '~/components/layout/MainLayout';
-import useDetails from '~/hooks/useDetails';
-import { data, Link, useParams } from 'react-router';
-import { useState, useEffect } from 'react';
-import Errors from '~/components/Errors';
-import Loading from '~/components/Loading';
-import parseURL from '~/utils/parseURL';
+import useAsync from '~/hooks/useAsync';
+import { useParams } from 'react-router';
 import LinkResolved from '~/utils/link-resolved';
+import type { CharactersDetails, Characters } from '~/types/types';
+import DataWrapper from '~/components/DataWrapper';
+import StarWarsDetailsAPI from '~/api/StarWarsDetailsAPI';
+import StarWarsListAPI from '~/api/StarWarsListAPI';
+import { useCallback } from 'react';
 
-type Characters = {
-  id: number;
-  name: string;
-  rank: string;
-  force_side: string;
-  lightsaber_colors: string[];
-  birth_year: string;
-  death_year: string;
-  status: string;
-  eye_color: string;
-  gender: string;
-  hair_color: string;
-  height: string;
-  homeworld_id: string;
-  mass: string;
-  skin_color: string;
-  films: string[];
-  spacies_id?: string;
-  affiliations?: string[];
-  apprearances?: string[];
-  apprentices?: string[];
-  masters?: string[];
-  era?: string[];
-  canon: boolean;
-};
-export default function PlanetsDetail() {
+const CharactersDetail = () => {
   const { id } = useParams();
-  const allcharacters = useDetails<Characters[]>({
-    resource: 'characters',
-  });
-  // console.log(allcharacters);
+  const fetchCharacter = useCallback(() => {
+    return StarWarsDetailsAPI('characters', id || '');
+  }, [id]);
+
+  const fetchAllCharacters = useCallback(() => {
+    return StarWarsListAPI('characters');
+  }, []);
+  const { data: allcharacters } = useAsync<Characters[]>(fetchAllCharacters);
   const {
     data: characters,
     loading,
     error,
-  } = useDetails<Characters>({ resource: 'characters', id: id });
+  } = useAsync<CharactersDetails>(fetchCharacter);
 
   return (
-    <>
-      {loading ? (
-        <Loading />
-      ) : error ? (
-        <Errors message={error} />
-      ) : (
-        <div>
-          {characters && (
-            <section className="p-4">
-              <article className="grid cursor-pointer grid-cols-1 gap-4 rounded-lg border border-gray-300 p-4 shadow-md transition-shadow duration-300 ease-in-out hover:shadow-lg">
-                <h2 className="text-4xl font-bold text-amber-500">
-                  {characters.name}
-                </h2>
-                <div>
-                  <h3 className="text-bold text-2xl lowercase">
-                    Biographical Information
-                  </h3>
-                  <p>
-                    <strong>Birth Year:</strong> {characters.birth_year}
-                  </p>
-                  <p>
-                    <strong>Status:</strong> {characters.status}
-                  </p>
-                  <p>
-                    <strong>Rank:</strong> {characters.rank}
-                  </p>
-                  <p>
-                    <strong>Force Side:</strong> {characters.force_side}
-                  </p>
-                  <p>
-                    <strong>Light Saber Color:</strong>{' '}
-                    {characters.lightsaber_colors.join(', ')}
-                  </p>
-                </div>
-                <div>
-                  <h3 className="text-bold text-2xl lowercase">
-                    Physical Attributes
-                  </h3>
-                  <p>
-                    <strong>Gender:</strong> {characters.gender}
-                  </p>
-                  <p>
-                    <strong>Height:</strong> {characters.height} cm
-                  </p>
-                  <p>
-                    <strong>Mass:</strong> {characters.mass} kg
-                  </p>
-                  <p>
-                    <strong>Eye Color:</strong> {characters.eye_color}
-                  </p>
-                  <p>
-                    <strong>Hair Color:</strong> {characters.hair_color}
-                  </p>
-                  <p>
-                    <strong>Skin Color:</strong> {characters.skin_color}
-                  </p>
-                </div>
+    <DataWrapper loading={loading} error={error}>
+      <div>
+        {characters && (
+          <section className="p-4">
+            <article className="grid cursor-pointer grid-cols-1 gap-4 rounded-lg border border-gray-300 p-4 shadow-md transition-shadow duration-300 ease-in-out hover:shadow-lg">
+              <h2 className="text-4xl font-bold text-amber-500">
+                {characters.name}
+              </h2>
+              <div>
+                <h3 className="text-bold text-2xl lowercase">
+                  Biographical Information
+                </h3>
                 <p>
-                  <strong>Homeworld:</strong> {characters.homeworld_id}
+                  <strong>Birth Year:</strong> {characters?.birth_year}
                 </p>
                 <p>
-                  <strong className="font-bold">Apprentices:</strong>{' '}
-                  {characters.apprentices?.map((apprentice) => (
-                    <span className="text-blue-600 hover:text-blue-950">
-                      <LinkResolved
-                        key={apprentice}
-                        value={apprentice}
-                        matchKey="name"
-                        resource="characters"
-                        idKey="id"
-                        collection={allcharacters.data || []}
-                      />
-                      {' | '}
-                    </span>
-                  ))}
+                  <strong>Status:</strong> {characters?.status}
                 </p>
                 <p>
-                  <strong>Masters:</strong>{' '}
-                  {characters.masters?.map((master) => (
-                    <span key={master}>
-                      <LinkResolved
-                        key={master}
-                        value={master}
-                        matchKey="name"
-                        resource="characters"
-                        idKey="id"
-                        collection={allcharacters.data || []}
-                      />
-                      {' | '}
-                    </span>
-                  ))}
+                  <strong>Rank:</strong> {characters?.rank}
                 </p>
                 <p>
-                  <strong>Era:</strong>{' '}
-                  {characters.era?.map((era) => era).join(', ')}
+                  <strong>Force Side:</strong> {characters.force_side}
                 </p>
                 <p>
-                  <strong>Canon:</strong> {characters.canon ? 'Yes' : 'No'}
+                  <strong>Light Saber Color:</strong>{' '}
+                  {characters.lightsaber_colors.join(', ')}
                 </p>
-              </article>
-            </section>
-          )}
-        </div>
-      )}
-    </>
+              </div>
+              <div>
+                <h3 className="text-bold text-2xl lowercase">
+                  Physical Attributes
+                </h3>
+                <p>
+                  <strong>Gender:</strong> {characters.gender}
+                </p>
+                <p>
+                  <strong>Height:</strong> {characters.height} cm
+                </p>
+                <p>
+                  <strong>Mass:</strong> {characters.mass} kg
+                </p>
+                <p>
+                  <strong>Eye Color:</strong> {characters.eye_color}
+                </p>
+                <p>
+                  <strong>Hair Color:</strong> {characters.hair_color}
+                </p>
+                <p>
+                  <strong>Skin Color:</strong> {characters.skin_color}
+                </p>
+              </div>
+              <p>
+                <strong>Homeworld:</strong> {characters.homeworld_id}
+              </p>
+              <p>
+                <strong className="font-bold">Apprentices:</strong>{' '}
+                {characters.apprentices?.map((apprentice) => (
+                  <span
+                    key={apprentice}
+                    className="text-blue-600 hover:text-blue-950"
+                  >
+                    <LinkResolved
+                      value={apprentice}
+                      matchKey="name"
+                      resource="characters"
+                      idKey="id"
+                      collection={allcharacters || []}
+                    />
+                    {' | '}
+                  </span>
+                ))}
+              </p>
+              <p>
+                <strong>Masters:</strong>{' '}
+                {characters.masters?.map((master) => (
+                  <span key={master}>
+                    <LinkResolved
+                      value={master}
+                      matchKey="name"
+                      resource="characters"
+                      idKey="id"
+                      collection={allcharacters || []}
+                    />
+                    {' | '}
+                  </span>
+                ))}
+              </p>
+              <p>
+                <strong>Era:</strong>{' '}
+                {characters.era?.map((era) => era).join(', ')}
+              </p>
+              <p>
+                <strong>Canon:</strong> {characters.canon ? 'Yes' : 'No'}
+              </p>
+            </article>
+          </section>
+        )}
+      </div>
+    </DataWrapper>
   );
-}
+};
