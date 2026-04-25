@@ -3,20 +3,18 @@ import { useParams } from 'react-router';
 import LinkResolved from '~/utils/link-resolved';
 import type { CharactersDetails, Characters } from '~/types/types';
 import DataWrapper from '~/components/DataWrapper';
-import StarWarsDetailsAPI from '~/api/StarWarsDetailsAPI';
-import StarWarsListAPI from '~/api/StarWarsListAPI';
 import { useCallback } from 'react';
+import { getAllCharacters } from '~/api/StarWarsAPI';
+import { getResourceById } from '~/api/StarWarsAPI';
 
 const CharactersDetail = () => {
   const { id } = useParams();
+
   const fetchCharacter = useCallback(() => {
-    return StarWarsDetailsAPI('characters', id || '');
+    return getResourceById('characters', id || '');
   }, [id]);
 
-  const fetchAllCharacters = useCallback(() => {
-    return StarWarsListAPI('characters');
-  }, []);
-  const { data: allcharacters } = useAsync<Characters[]>(fetchAllCharacters);
+  const { data: allcharacters } = useAsync<Characters[]>(getAllCharacters);
   const {
     data: characters,
     loading,
