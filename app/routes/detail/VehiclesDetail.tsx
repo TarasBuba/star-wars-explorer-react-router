@@ -1,21 +1,29 @@
-import useDetails from '~/hooks/useAsync';
-import useList from '~/hooks/useList';
+import StarWarsDetailsAPI from '~/api/StarWarsDetailsAPI';
 import { useParams } from 'react-router';
 import LinkResolved from '~/utils/link-resolved';
 import type { VehiclesDetails, Organizations } from '~/types/types';
 import DataWrapper from '~/components/DataWrapper';
+import { useCallback } from 'react';
+import StarWarsListAPI from '~/api/StarWarsListAPI';
+import useAsync from '~/hooks/useAsync';
 
 export default function VehiclesDetail() {
   const { id } = useParams();
-  const allDataAffiliation = useList<Organizations[]>({
-    resource: 'organizations',
-  });
+
+  const fetchVehicleDetails = useCallback(() => {
+    return StarWarsDetailsAPI('vehicles', id || '');
+  }, [id]);
+
+  const fetchAllAffiliations = useCallback(() => {
+    return StarWarsListAPI('organizations');
+  }, []);
+  const allDataAffiliation = useAsync<Organizations[]>(fetchAllAffiliations);
 
   const {
     data: vehicles,
     loading,
     error,
-  } = useDetails<VehiclesDetails>({ resource: 'vehicles', id: id });
+  } = useAsync<VehiclesDetails>(fetchVehicleDetails);
 
   return (
     <DataWrapper loading={loading} error={error}>

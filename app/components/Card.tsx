@@ -1,6 +1,8 @@
+import type React from 'react';
+
 type CardProps = {
-  heading: string;
-  fields: { label: string; value: string }[];
+  heading: string | undefined;
+  fields: { label: string; value: string | React.ReactNode }[];
 };
 
 const Card = ({ heading, fields }: CardProps) => {

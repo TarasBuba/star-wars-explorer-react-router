@@ -1,29 +1,33 @@
 import { useParams } from 'react-router';
-import useDetails from '~/hooks/useAsync';
-import useList from '~/hooks/useList';
 import LinkResolved from '~/utils/link-resolved';
 import type { QuotesDetails, Characters, Films } from '~/types/types';
 import DataWrapper from '~/components/DataWrapper';
 import StarWarsDetailsAPI from '~/api/StarWarsDetailsAPI';
 import StarWarsListAPI from '~/api/StarWarsListAPI';
+import useAsync from '~/hooks/useAsync';
+import { useCallback } from 'react';
 
 const QuotesDetail = () => {
   const { id } = useParams();
 
-  const allDataCharacter = useList<Characters[]>({
-    resource: 'characters',
-  });
-  const allDataFilm = useList<Films[]>({
-    resource: 'films',
-  });
+  const fetchQuoteDetails = useCallback(() => {
+    return StarWarsDetailsAPI('quotes', id || '');
+  }, [id]);
+
+  const fetchAllCharacters = useCallback(() => {
+    return StarWarsListAPI('characters');
+  }, []);
+
+  const fetchAllFilms = useCallback(() => {
+    return StarWarsListAPI('films');
+  }, []);
+  const { data: allDataCharacter } = useAsync<Characters[]>(fetchAllCharacters);
+  const { data: allDataFilm } = useAsync<Films[]>(fetchAllFilms);
   const {
     data: quote,
     loading,
     error,
-  } = useDetails<QuotesDetails>({
-    resource: 'quotes',
-    id: id,
-  });
+  } = useAsync<QuotesDetails>(fetchQuoteDetails);
 
   return (
     <DataWrapper loading={loading} error={error}>
@@ -37,7 +41,7 @@ const QuotesDetail = () => {
             key={quote?.id}
             idKey="id"
             matchKey="id"
-            collection={allDataCharacter.data || []}
+            collection={allDataCharacter || []}
             resource="characters"
             value={quote?.character_id}
           />
@@ -48,7 +52,7 @@ const QuotesDetail = () => {
             key={quote?.id}
             idKey="id"
             matchKey="id"
-            collection={allDataFilm.data || []}
+            collection={allDataFilm || []}
             resource="films"
             value={quote?.film_id}
           />

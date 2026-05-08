@@ -1,21 +1,35 @@
-import useDetails from '~/hooks/useAsync';
-import useList from '~/hooks/useList';
 import { useParams } from 'react-router';
 import LinkResolved from '~/utils/link-resolved';
 import type { SpeciesDetails, Planets } from '~/types/types';
 import DataWrapper from '~/components/DataWrapper';
+import {
+  getAllPlanets,
+  getAllSpecies,
+  getResourceById,
+} from '~/api/StarWarsAPI';
+import useAsync from '~/hooks/useAsync';
+import { useCallback } from 'react';
+import StarWarsDetailsAPI from '~/api/StarWarsDetailsAPI';
 
 export default function SpeciesDetail() {
   const { id } = useParams();
-  const allDataHomeworld = useList<Planets[]>({
-    resource: 'planets',
-  });
+
+  const fetchSpeciesDetails = useCallback(() => {
+    return StarWarsDetailsAPI('species', id || '');
+  }, [id]);
+
+  // const { data: allspecies } = useAsync<SpeciesDetails[]>(fetchSpeciesDetails);
+
+  const fetchAllHomeworld = useCallback(() => {
+    return getAllPlanets();
+  }, []);
+  const allDataHomeworld = useAsync<Planets[]>(fetchAllHomeworld);
 
   const {
     data: species,
     loading,
     error,
-  } = useDetails<SpeciesDetails>({ resource: 'species', id: id });
+  } = useAsync<SpeciesDetails>(fetchSpeciesDetails);
 
   return (
     <DataWrapper loading={loading} error={error}>

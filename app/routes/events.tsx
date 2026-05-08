@@ -7,13 +7,14 @@ import Pagination from '~/components/Pagination';
 import type { Events } from '~/types/types';
 import DataWrapper from '~/components/DataWrapper';
 import StarWarsListAPI from '~/api/StarWarsListAPI';
+import { useCallback } from 'react';
 
 const Events = () => {
-  const {
-    data: events,
-    loading,
-    error,
-  } = useAsync<Events[]>(() => StarWarsListAPI('events'));
+  const fetchEvents = useCallback(() => {
+    return StarWarsListAPI('events');
+  }, []);
+
+  const { data: events, loading, error } = useAsync<Events[]>(fetchEvents);
 
   const { currentPageItems, currentPage, totalPages, goToPage } = usePagination(
     {

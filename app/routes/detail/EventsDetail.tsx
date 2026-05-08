@@ -6,6 +6,7 @@ import StarWarsDetailsAPI from '~/api/StarWarsDetailsAPI';
 import StarWarsListAPI from '~/api/StarWarsListAPI';
 import { useCallback } from 'react';
 import useAsync from '~/hooks/useAsync';
+import Card from '~/components/Card';
 
 const EventsDetail = () => {
   const { id } = useParams();
@@ -23,31 +24,32 @@ const EventsDetail = () => {
 
   return (
     <DataWrapper loading={loading} error={error}>
-      <div className="bg-events min-h-screen p-4">
-        <h2 className="mb-4 text-center text-2xl font-bold text-amber-400">
-          {event?.name}
-        </h2>
-        <div>
-          <p>Date: {event?.date}</p>
-          <p>Type: {event?.type}</p>
-          <p>
-            Location:
-            <LinkResolved
-              idKey="url"
-              matchKey="url"
-              collection={allDataLocation || []}
-              resource="planets"
-              value={event?.location_id}
-            />
-          </p>
-          <p>Description: {event?.description}</p>
-          <p>Participants: {event?.participants?.join(', ')}</p>
-          <p>
-            Organizations Involved: {event?.organizations_involved?.join(', ')}
-          </p>
-          <p>Casualties: {event?.casualties}</p>
-        </div>
-      </div>
+      <Card
+        heading={event?.name}
+        fields={[
+          { label: 'Date', value: event?.date },
+          { label: 'Type', value: event?.type },
+          {
+            label: 'Location',
+            value: (
+              <LinkResolved
+                idKey="url"
+                matchKey="url"
+                collection={allDataLocation || []}
+                resource="planets"
+                value={event?.location_id}
+              />
+            ),
+          },
+          { label: 'Description', value: event?.description },
+          { label: 'Participants', value: event?.participants?.join(', ') },
+          {
+            label: 'Organizations Involved',
+            value: event?.organizations_involved?.join(', '),
+          },
+          { label: 'Casualties', value: event?.casualties },
+        ]}
+      />
     </DataWrapper>
   );
 };

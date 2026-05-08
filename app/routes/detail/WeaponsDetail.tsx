@@ -1,6 +1,4 @@
 import { useParams } from 'react-router';
-import useDetails from '~/hooks/useAsync';
-import useList from '~/hooks/useList';
 import LinkResolved from '~/utils/link-resolved';
 import DataWrapper from '~/components/DataWrapper';
 import type {
@@ -10,30 +8,43 @@ import type {
   Planets,
   Films,
 } from '~/types/types';
+import StarWarsListAPI from '~/api/StarWarsListAPI';
+import { useCallback } from 'react';
+import useAsync from '~/hooks/useAsync';
+import StarWarsDetailsAPI from '~/api/StarWarsDetailsAPI';
 
 const WeaponsDetail = () => {
   const { id } = useParams();
-  const allDataOwner = useList<Characters[]>({
-    resource: 'characters',
-  });
-  const allDataCurrentOwner = useList<Characters[]>({
-    resource: 'characters',
-  });
-  const allDataCrystalOrigin = useList<Planets[]>({
-    resource: 'planets',
-  });
-  const allDataFirstAppearance = useList<Films[]>({
-    resource: 'films',
-  });
-  const allDataAffiliations = useList<Organizations[]>({
-    resource: 'organizations',
-  });
+
+  const fetchWeaponDetails = useCallback(() => {
+    return StarWarsDetailsAPI('weapons', id || '');
+  }, [id]);
+  const fetchAllOwner = useCallback(() => {
+    return StarWarsListAPI('characters');
+  }, []);
+  const fetchAllCurrentOwner = useCallback(() => {
+    return StarWarsListAPI('characters');
+  }, []);
+  const fetchAllCrystalOrigin = useCallback(() => {
+    return StarWarsListAPI('planets');
+  }, []);
+  const fetchAllFirstAppearance = useCallback(() => {
+    return StarWarsListAPI('films');
+  }, []);
+  const fetchAllAffiliations = useCallback(() => {
+    return StarWarsListAPI('organizations');
+  }, []);
+  const allDataOwner = useAsync<Characters[]>(fetchAllOwner);
+  const allDataCurrentOwner = useAsync<Characters[]>(fetchAllCurrentOwner);
+  const allDataCrystalOrigin = useAsync<Planets[]>(fetchAllCrystalOrigin);
+  const allDataFirstAppearance = useAsync<Films[]>(fetchAllFirstAppearance);
+  const allDataAffiliations = useAsync<Organizations[]>(fetchAllAffiliations);
 
   const {
     data: weapon,
     loading,
     error,
-  } = useDetails<WeaponsDetails>({ resource: 'weapons', id: id });
+  } = useAsync<WeaponsDetails>(fetchWeaponDetails);
 
   return (
     <DataWrapper loading={loading} error={error}>

@@ -8,21 +8,33 @@ import type {
   Characters,
   Organizations,
 } from '~/types/types';
+import { useCallback } from 'react';
+import StarWarsDetailsAPI from '~/api/StarWarsDetailsAPI';
+import StarWarsListAPI from '~/api/StarWarsListAPI';
+import useAsync from '~/hooks/useAsync';
 
 export default function StarshipsDetail() {
   const { id } = useParams();
-  const allDataAffiliations = useList<Organizations[]>({
-    resource: 'organizations',
-  });
-  const allDataPilots = useList<Characters[]>({
-    resource: 'characters',
-  });
+
+  const fetchStarshipDetails = useCallback(() => {
+    return StarWarsDetailsAPI('starships', id || '');
+  }, [id]);
+
+  const fetchAllPilots = useCallback(() => {
+    return StarWarsListAPI('starships');
+  }, []);
+
+  const fetchAllAffiliations = useCallback(() => {
+    return StarWarsListAPI('organizations');
+  }, []);
+  const allDataAffiliations = useAsync<Organizations[]>(fetchAllAffiliations);
+  const allDataPilots = useAsync<Characters[]>(fetchAllPilots);
 
   const {
     data: starships,
     loading,
     error,
-  } = useDetails<StarshipsDetails>({ resource: 'starships', id: id });
+  } = useDetails<StarshipsDetails>(fetchStarshipDetails);
 
   return (
     <DataWrapper loading={loading} error={error}>

@@ -7,8 +7,8 @@ const StarWarsDetailsAPI = async (resource: string, id: string) => {
       `Failed to fetch ${resource} with id ${id}: ${response.statusText}`
     );
   }
-  const data = await response.json();
-  return data.results;
+  const results = await response.json();
+  return results;
 };
 
 export default StarWarsDetailsAPI;

@@ -5,8 +5,8 @@ const StarWarsListAPI = async (resource: string) => {
   if (!response.ok) {
     throw new Error(`Failed to fetch ${resource}: ${response.statusText}`);
   }
-  const data = await response.json();
-  return data.results;
+  const results = await response.json();
+  return results.data;
 };
 
 export default StarWarsListAPI;
