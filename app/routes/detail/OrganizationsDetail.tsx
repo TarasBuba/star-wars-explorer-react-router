@@ -6,6 +6,7 @@ import useAsync from '~/hooks/useAsync';
 import { useCallback } from 'react';
 import StarWarsDetailsAPI from '~/api/StarWarsDetailsAPI';
 import { getAllPlanets, getAllCharacters } from '~/api/StarWarsAPI';
+import Card from '~/components/Card';
 
 const OrganizationDetail = () => {
   const { id } = useParams();
@@ -25,34 +26,32 @@ const OrganizationDetail = () => {
 
   return (
     <DataWrapper loading={loading} error={error}>
-      <div className="bg-organizations min-h-screen p-4">
-        <h2 className="mb-4 text-center text-2xl font-bold text-amber-400">
-          {organization?.name}
-        </h2>
-        <div>
-          <p>Type: {organization?.type}</p>
-          <p>Founding Date: {organization?.founding_date}</p>
-          <p>Dissolution Date: {organization?.dissolution_date}</p>
-          <p>Refounded Date: {organization?.refounded_date}</p>
-          <p>Ideology: {organization?.ideology}</p>
-          <p>Force Alignment: {organization?.force_alignment}</p>
-        </div>
-        <div>
-          <p>
-            Headquarters: (
-            <LinkResolved
-              key={organization?.headquarters_id}
-              value={organization?.headquarters_id}
-              resource="planets"
-              idKey="id"
-              matchKey="id"
-              collection={allDataHeadquarters || []}
-            />
-            )
-          </p>
-          <p>
-            Leader:
-            <span>
+      <Card
+        heading={organization?.name}
+        fields={[
+          { label: 'Status', value: organization?.status },
+          { label: 'Type', value: organization?.type },
+          { label: 'Founding Date', value: organization?.founding_date },
+          { label: 'Dissolution Date', value: organization?.dissolution_date },
+          { label: 'Refounded Date', value: organization?.refounded_date },
+          { label: 'Ideology', value: organization?.ideology },
+          { label: 'Force Alignment', value: organization?.force_alignment },
+          {
+            label: 'Headquarters',
+            value: (
+              <LinkResolved
+                key={organization?.headquarters_id}
+                value={organization?.headquarters_id}
+                resource="planets"
+                idKey="id"
+                matchKey="id"
+                collection={allDataHeadquarters || []}
+              />
+            ),
+          },
+          {
+            label: 'Leader',
+            value: (
               <LinkResolved
                 value={organization?.leader_id}
                 resource="characters"
@@ -60,29 +59,25 @@ const OrganizationDetail = () => {
                 matchKey="id"
                 collection={allDataLeader || []}
               />
-            </span>
-          </p>
-          <div>
-            <p>Notable Members:</p>
-            <ul>
-              {organization?.notable_members.map((member, index) => (
-                <li key={index}>
-                  <LinkResolved
-                    value={member}
-                    resource="characters"
-                    idKey="id"
-                    matchKey="id"
-                    collection={allDataLeader || []}
-                  />
-                </li>
-              ))}
-            </ul>
-          </div>
-          <p>Era: {organization?.era.join(', ')}</p>
-        </div>
-        <p>Status: {organization?.status}</p>
-        <p>Canon: {organization?.canon ? 'Yes' : 'No'}</p>
-      </div>
+            ),
+          },
+          {
+            label: 'Notable Members',
+            value: organization?.notable_members.map((member, index) => (
+              <LinkResolved
+                key={index}
+                value={member}
+                resource="characters"
+                idKey="id"
+                matchKey="id"
+                collection={allDataLeader || []}
+              />
+            )),
+          },
+          { label: 'Era', value: organization?.era.join(', ') },
+          { label: 'Canon', value: organization?.canon ? 'Yes' : 'No' },
+        ]}
+      />
     </DataWrapper>
   );
 };

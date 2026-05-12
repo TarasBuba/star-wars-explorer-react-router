@@ -50,64 +50,73 @@ export default function FilmDetail() {
           { label: 'Release Date', value: film?.release_date },
           { label: 'Opening Crawl', value: film?.opening_crawl },
           { label: 'Timeline Date', value: film?.timeline_date },
+          { label: 'Canon', value: film?.canon ? 'Yes' : 'No' },
+          {
+            label: 'Characters',
+            value: film?.characters.map((char) => (
+              <span>
+                <LinkResolved
+                  key={char}
+                  value={char}
+                  resource="characters"
+                  idKey="id"
+                  matchKey="id"
+                  collection={allDataCharacters || []}
+                />
+                {' | '}
+              </span>
+            )),
+          },
+          {
+            label: 'Planets',
+            value: film?.planets.map((planet) => (
+              <span>
+                <LinkResolved
+                  key={planet}
+                  value={planet}
+                  resource="planets"
+                  idKey="id"
+                  matchKey="id"
+                  collection={allDataPlanets || []}
+                />
+                {' | '}
+              </span>
+            )),
+          },
+          {
+            label: 'Species',
+            value: film?.species.map((specie) => (
+              <span>
+                <LinkResolved
+                  key={specie}
+                  value={specie}
+                  resource="species"
+                  idKey="id"
+                  matchKey="id"
+                  collection={allDataSpecies || []}
+                />
+                {' | '}
+              </span>
+            )),
+          },
+          {
+            label: 'Organizations',
+            value: film?.organizations.map((org) => (
+              <span>
+                <LinkResolved
+                  key={org}
+                  value={org}
+                  resource="organizations"
+                  idKey="id"
+                  matchKey="id"
+                  collection={allDataOrganizations || []}
+                />
+                {' | '}
+              </span>
+            )),
+          },
         ]}
       />
-      <ul>
-        {film?.characters.map((character: string) => (
-          <li key={character}>
-            <LinkResolved
-              key={character}
-              value={character}
-              resource="characters"
-              idKey="id"
-              matchKey="id"
-              collection={allDataCharacters || []}
-            />
-          </li>
-        ))}
-      </ul>
-      <ul>
-        {film?.planets.map((planet: string) => (
-          <li key={planet}>
-            <LinkResolved
-              key={planet}
-              value={planet}
-              resource="planets"
-              idKey="id"
-              matchKey="id"
-              collection={allDataPlanets || []}
-            />
-          </li>
-        ))}
-      </ul>
-      <ul>
-        {film?.species.map((specie: string) => (
-          <li key={specie}>
-            <LinkResolved
-              key={specie}
-              value={specie}
-              resource="species"
-              idKey="id"
-              matchKey="id"
-              collection={allDataSpecies || []}
-            />
-          </li>
-        ))}
-      </ul>
-      <ul>
-        {film?.organizations.map((org: string) => (
-          <li key={org}>
-            <LinkResolved
-              key={org}
-              value={org}
-              resource="organizations"
-              idKey="id"
-              matchKey="id"
-              collection={allDataOrganizations || []}
-            />
-          </li>
-        ))}
-      </ul>
     </DataWrapper>
   );
 }

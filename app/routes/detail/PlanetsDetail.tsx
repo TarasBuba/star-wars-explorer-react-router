@@ -6,6 +6,7 @@ import StarWarsDetailsAPI from '~/api/StarWarsDetailsAPI';
 import useAsync from '~/hooks/useAsync';
 import { useCallback } from 'react';
 import { getAllSpecies, getAllOrganizations } from '~/api/StarWarsAPI';
+import Card from '~/components/Card';
 
 export default function PlanetsDetail() {
   const { id } = useParams();
@@ -26,7 +27,7 @@ export default function PlanetsDetail() {
 
   return (
     <DataWrapper loading={loading} error={error}>
-      <div>
+      {/* <div>
         <section className="p-4">
           {planet && (
             <article className="grid cursor-pointer grid-cols-1 gap-4 rounded-lg border border-gray-300 p-4 shadow-md transition-shadow duration-300 ease-in-out hover:shadow-lg">
@@ -121,7 +122,59 @@ export default function PlanetsDetail() {
             </article>
           )}
         </section>
-      </div>
+      </div> */}
+      <Card
+        heading={planet?.name}
+        fields={[
+          { label: 'Diameter', value: planet?.diameter },
+          { label: 'Climate', value: planet?.climate },
+          { label: 'Population', value: planet?.population },
+          { label: 'Terrain', value: planet?.terrain },
+          { label: 'Rotation Period', value: planet?.rotation_period },
+          { label: 'Orbital Period', value: planet?.orbital_period },
+          {
+            label: 'Affiliations',
+            value: planet?.affiliation.map((affiliation) => (
+              <span>
+                <LinkResolved
+                  key={affiliation}
+                  value={affiliation}
+                  resource="organizations"
+                  idKey="id"
+                  matchKey="name"
+                  collection={allDataAffiliated || []}
+                />
+                {' | '}
+              </span>
+            )),
+          },
+          {
+            label: 'Notable Locations',
+            value: planet?.notable_locations.map((location) => (
+              <span>
+                {location}
+                {' | '}
+              </span>
+            )),
+          },
+          {
+            label: 'Native Species',
+            value: planet?.native_species.map((species) => (
+              <span>
+                <LinkResolved
+                  key={species}
+                  value={species}
+                  resource="species"
+                  idKey="id"
+                  matchKey="id"
+                  collection={allDataSpecies || []}
+                />
+                {' | '}
+              </span>
+            )),
+          },
+        ]}
+      />
     </DataWrapper>
   );
 }

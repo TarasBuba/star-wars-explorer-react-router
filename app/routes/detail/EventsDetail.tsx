@@ -42,7 +42,19 @@ const EventsDetail = () => {
           { label: 'Participants', value: event?.participants?.join(', ') },
           {
             label: 'Organizations Involved',
-            value: event?.organizations_involved?.join(', '),
+            value: event?.organizations_involved?.map((org) => (
+              <span>
+                <LinkResolved
+                  key={org}
+                  value={org}
+                  resource="organizations"
+                  idKey="id"
+                  matchKey="id"
+                  collection={allDataLocation || []}
+                />
+                {' | '}
+              </span>
+            )),
           },
           { label: 'Casualties', value: event?.casualties },
         ]}

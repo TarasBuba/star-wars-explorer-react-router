@@ -6,6 +6,7 @@ import StarWarsDetailsAPI from '~/api/StarWarsDetailsAPI';
 import useAsync from '~/hooks/useAsync';
 import { useCallback } from 'react';
 import { getAllCharacters, getAllFilms } from '~/api/StarWarsAPI';
+import Card from '~/components/Card';
 
 const QuotesDetail = () => {
   const { id } = useParams();
@@ -24,54 +25,39 @@ const QuotesDetail = () => {
 
   return (
     <DataWrapper loading={loading} error={error}>
-      <div className="bg-quotes min-h-screen p-4">
-        <h2 className="mb-4 text-center text-2xl font-bold text-amber-400">
-          {quote?.text}
-        </h2>
-        <p>
-          Character:
-          <LinkResolved
-            key={quote?.id}
-            idKey="id"
-            matchKey="id"
-            collection={allDataCharacter || []}
-            resource="characters"
-            value={quote?.character_id}
-          />
-        </p>
-        <p>
-          Film:
-          <LinkResolved
-            key={quote?.id}
-            idKey="id"
-            matchKey="id"
-            collection={allDataFilm || []}
-            resource="films"
-            value={quote?.film_id}
-          />
-        </p>
-        <p>
-          Context: <span className="italic">{quote?.context}</span>
-        </p>
-        <p>
-          Is Iconic:
-          <span className="p-1">
-            {quote?.is_iconic ? (
-              <span className="text-green-400">Yes</span>
-            ) : (
-              <span className="text-red-400">No</span>
-            )}
-          </span>
-        </p>
-        <p>
-          Canon:{' '}
-          {quote?.canon ? (
-            <span className="text-green-400">Yes</span>
-          ) : (
-            <span className="text-red-400">No</span>
-          )}
-        </p>
-      </div>
+      <Card
+        heading={quote?.text}
+        fields={[
+          {
+            label: 'Character',
+            value: (
+              <LinkResolved
+                key={quote?.character_id}
+                value={quote?.character_id}
+                resource="characters"
+                idKey="id"
+                matchKey="id"
+                collection={allDataCharacter || []}
+              />
+            ),
+          },
+          {
+            label: 'Film',
+            value: (
+              <LinkResolved
+                key={quote?.film_id}
+                value={quote?.film_id}
+                resource="films"
+                idKey="id"
+                matchKey="id"
+                collection={allDataFilm || []}
+              />
+            ),
+          },
+          { label: 'Context', value: quote?.context },
+          { label: 'Canon', value: quote?.canon ? 'Yes' : 'No' },
+        ]}
+      />
     </DataWrapper>
   );
 };

@@ -43,34 +43,40 @@ const CharactersDetail = () => {
           { label: 'Homeworld', value: characters?.homeworld_id },
           { label: 'Era', value: characters?.era?.join(', ') },
           { label: 'Canon', value: characters?.canon ? 'Yes' : 'No' },
+          {
+            label: 'Masters',
+            value: characters?.masters?.map((master) => (
+              <span>
+                <LinkResolved
+                  key={master}
+                  value={master}
+                  resource="characters"
+                  idKey="id"
+                  matchKey="id"
+                  collection={allcharacters || []}
+                />
+                {' | '}
+              </span>
+            )),
+          },
+          {
+            label: 'Apprentices',
+            value: characters?.apprentices?.map((apprentice) => (
+              <span>
+                <LinkResolved
+                  key={apprentice}
+                  value={apprentice}
+                  resource="characters"
+                  idKey="id"
+                  matchKey="id"
+                  collection={allcharacters || []}
+                />
+                {' | '}
+              </span>
+            )),
+          },
         ]}
       />
-      <ul>
-        {characters?.apprentices?.map((apprentice) => (
-          <li key={apprentice}>
-            <LinkResolved
-              value={apprentice}
-              matchKey="name"
-              resource="characters"
-              idKey="id"
-              collection={allcharacters || []}
-            />
-          </li>
-        ))}
-      </ul>
-      <ul>
-        {characters?.masters?.map((master) => (
-          <li key={master}>
-            <LinkResolved
-              value={master}
-              matchKey="name"
-              resource="characters"
-              idKey="id"
-              collection={allcharacters || []}
-            />
-          </li>
-        ))}
-      </ul>
     </DataWrapper>
   );
 };

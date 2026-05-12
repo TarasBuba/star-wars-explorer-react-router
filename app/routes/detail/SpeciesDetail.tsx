@@ -6,6 +6,7 @@ import { getAllPlanets } from '~/api/StarWarsAPI';
 import useAsync from '~/hooks/useAsync';
 import { useCallback } from 'react';
 import StarWarsDetailsAPI from '~/api/StarWarsDetailsAPI';
+import Card from '~/components/Card';
 
 export default function SpeciesDetail() {
   const { id } = useParams();
@@ -24,7 +25,7 @@ export default function SpeciesDetail() {
 
   return (
     <DataWrapper loading={loading} error={error}>
-      <div>
+      {/* <div>
         <section className="flex flex-col items-center justify-center gap-4 p-4">
           <h2 className="mb-4 text-2xl font-bold">{species?.name}</h2>
           <div className="grid grid-cols-1 gap-4">
@@ -70,7 +71,50 @@ export default function SpeciesDetail() {
             )}
           </div>
         </section>
-      </div>
+      </div> */}
+      <Card
+        heading={species?.name}
+        fields={[
+          { label: 'Classification', value: species?.classification },
+          { label: 'Average Lifespan', value: species?.average_lifespan },
+          { label: 'Designation', value: species?.designation },
+          { label: 'Average Height', value: species?.average_height },
+          {
+            label: 'Skin Colors',
+            value: species?.skin_colors.map((color) => (
+              <span key={color}>{color}, </span>
+            )),
+          },
+          {
+            label: 'Hair Colors',
+            value: species?.hair_colors.map((color) => (
+              <span key={color}>{color}, </span>
+            )),
+          },
+          {
+            label: 'Eye Colors',
+            value: species?.eye_colors.map((color) => (
+              <span key={color}>{color}, </span>
+            )),
+          },
+          { label: 'Language', value: species?.language },
+          {
+            label: 'Homeworld',
+            value: (
+              <span>
+                <LinkResolved
+                  key={species?.homeworld_id}
+                  value={species?.homeworld_id}
+                  resource="planets"
+                  matchKey="id"
+                  idKey="id"
+                  collection={allDataHomeworld || []}
+                />
+              </span>
+            ),
+          },
+        ]}
+      />
     </DataWrapper>
   );
 }
