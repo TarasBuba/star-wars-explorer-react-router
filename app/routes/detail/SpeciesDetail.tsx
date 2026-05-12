@@ -14,7 +14,7 @@ export default function SpeciesDetail() {
     return StarWarsDetailsAPI('species', id || '');
   }, [id]);
 
-  const allDataHomeworld = useAsync<Planets[]>(getAllPlanets);
+  const { data: allDataHomeworld } = useAsync<Planets[]>(getAllPlanets);
 
   const {
     data: species,
@@ -63,7 +63,7 @@ export default function SpeciesDetail() {
                     resource="planets"
                     matchKey="id"
                     idKey="id"
-                    collection={allDataHomeworld.data || []}
+                    collection={allDataHomeworld || []}
                   />
                 </p>
               </article>

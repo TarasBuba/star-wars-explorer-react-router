@@ -19,8 +19,9 @@ export default function StarshipsDetail() {
     return StarWarsDetailsAPI('starships', id || '');
   }, [id]);
 
-  const allDataAffiliations = useAsync<Organizations[]>(getAllOrganizations);
-  const allDataPilots = useAsync<Characters[]>(getAllCharacters);
+  const { data: allDataAffiliations } =
+    useAsync<Organizations[]>(getAllOrganizations);
+  const { data: allDataPilots } = useAsync<Characters[]>(getAllCharacters);
 
   const {
     data: starships,
@@ -69,7 +70,7 @@ export default function StarshipsDetail() {
                                 resource="characters"
                                 matchKey="id"
                                 idKey="id"
-                                collection={allDataPilots.data || []}
+                                collection={allDataPilots || []}
                               />
                             </li>
                           ))}
@@ -95,7 +96,7 @@ export default function StarshipsDetail() {
                                 resource="organizations"
                                 matchKey="name"
                                 idKey="id"
-                                collection={allDataAffiliations.data || []}
+                                collection={allDataAffiliations || []}
                               />
                             </li>
                           ))}

@@ -25,11 +25,12 @@ const WeaponsDetail = () => {
     return StarWarsDetailsAPI('weapons', id || '');
   }, [id]);
 
-  const allDataOwner = useAsync<Characters[]>(getAllCharacters);
-  const allDataCurrentOwner = useAsync<Characters[]>(getAllCharacters);
-  const allDataCrystalOrigin = useAsync<Planets[]>(getAllPlanets);
-  const allDataFirstAppearance = useAsync<Films[]>(getAllFilms);
-  const allDataAffiliations = useAsync<Organizations[]>(getAllOrganizations);
+  const { data: allDataOwner } = useAsync<Characters[]>(getAllCharacters);
+  // const allDataCurrentOwner = useAsync<Characters[]>(getAllCharacters);
+  const { data: allDataCrystalOrigin } = useAsync<Planets[]>(getAllPlanets);
+  const { data: allDataFirstAppearance } = useAsync<Films[]>(getAllFilms);
+  const { data: allDataAffiliations } =
+    useAsync<Organizations[]>(getAllOrganizations);
 
   const {
     data: weapon,
@@ -51,7 +52,7 @@ const WeaponsDetail = () => {
             key={weapon?.owner_id}
             idKey="id"
             matchKey="id"
-            collection={allDataOwner?.data || []}
+            collection={allDataOwner || []}
             resource="characters"
             value={weapon?.owner_id}
           />
@@ -62,7 +63,7 @@ const WeaponsDetail = () => {
             key={weapon?.current_owner_id}
             idKey="id"
             matchKey="id"
-            collection={allDataCurrentOwner?.data || []}
+            collection={allDataOwner || []}
             resource="characters"
             value={weapon?.current_owner_id}
           />
@@ -75,7 +76,7 @@ const WeaponsDetail = () => {
             key={weapon?.crystal_origin_id}
             idKey="id"
             matchKey="id"
-            collection={allDataCrystalOrigin?.data || []}
+            collection={allDataCrystalOrigin || []}
             resource="planets"
             value={weapon?.crystal_origin_id}
           />
@@ -91,7 +92,7 @@ const WeaponsDetail = () => {
                 key={affiliation}
                 idKey="id"
                 matchKey="name"
-                collection={allDataAffiliations?.data || []}
+                collection={allDataAffiliations || []}
                 resource="organizations"
                 value={affiliation}
               />
@@ -104,7 +105,7 @@ const WeaponsDetail = () => {
             key={weapon?.first_appearance_film_id}
             idKey="id"
             matchKey="id"
-            collection={allDataFirstAppearance?.data || []}
+            collection={allDataFirstAppearance || []}
             resource="films"
             value={weapon?.first_appearance_film_id}
           />
