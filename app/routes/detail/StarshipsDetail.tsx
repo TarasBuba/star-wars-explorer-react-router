@@ -1,4 +1,3 @@
-import useDetails from '~/hooks/useAsync';
 import { useParams } from 'react-router';
 import LinkResolved from '~/utils/link-resolved';
 import DataWrapper from '~/components/DataWrapper';
@@ -27,7 +26,7 @@ export default function StarshipsDetail() {
     data: starships,
     loading,
     error,
-  } = useDetails<StarshipsDetails>(fetchStarshipDetails);
+  } = useAsync<StarshipsDetails>(fetchStarshipDetails);
 
   return (
     <DataWrapper loading={loading} error={error}>

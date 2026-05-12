@@ -14,7 +14,8 @@ export default function VehiclesDetail() {
     return StarWarsDetailsAPI('vehicles', id || '');
   }, [id]);
 
-  const allDataAffiliation = useAsync<Organizations[]>(getAllOrganizations);
+  const { data: allDataOrganizations } =
+    useAsync<Organizations[]>(getAllOrganizations);
 
   const {
     data: vehicles,
@@ -54,7 +55,7 @@ export default function VehiclesDetail() {
                               resource="organizations"
                               matchKey="name"
                               idKey="id"
-                              collection={allDataAffiliation.data || []}
+                              collection={allDataOrganizations || []}
                             />
                           </li>
                         ))}
