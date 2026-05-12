@@ -5,7 +5,7 @@ import DataWrapper from '~/components/DataWrapper';
 import useAsync from '~/hooks/useAsync';
 import { useCallback } from 'react';
 import StarWarsDetailsAPI from '~/api/StarWarsDetailsAPI';
-import StarWarsListAPI from '~/api/StarWarsListAPI';
+import { getAllPlanets, getAllCharacters } from '~/api/StarWarsAPI';
 
 const OrganizationDetail = () => {
   const { id } = useParams();
@@ -14,14 +14,8 @@ const OrganizationDetail = () => {
     return StarWarsDetailsAPI('organizations', id || '');
   }, [id]);
 
-  const fetchHeadquarters = useCallback(() => {
-    return StarWarsListAPI('planets');
-  }, []);
-  const fetchLeader = useCallback(() => {
-    return StarWarsListAPI('characters');
-  }, []);
-  const { data: allDataHeadquarters } = useAsync<Planets[]>(fetchHeadquarters);
-  const { data: allDataLeader } = useAsync<Characters[]>(fetchLeader);
+  const { data: allDataHeadquarters } = useAsync<Planets[]>(getAllPlanets);
+  const { data: allDataLeader } = useAsync<Characters[]>(getAllCharacters);
 
   const {
     data: organization,

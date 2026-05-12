@@ -8,10 +8,15 @@ import type {
   Planets,
   Films,
 } from '~/types/types';
-import StarWarsListAPI from '~/api/StarWarsListAPI';
 import { useCallback } from 'react';
 import useAsync from '~/hooks/useAsync';
 import StarWarsDetailsAPI from '~/api/StarWarsDetailsAPI';
+import {
+  getAllCharacters,
+  getAllOrganizations,
+  getAllPlanets,
+  getAllFilms,
+} from '~/api/StarWarsAPI';
 
 const WeaponsDetail = () => {
   const { id } = useParams();
@@ -19,26 +24,12 @@ const WeaponsDetail = () => {
   const fetchWeaponDetails = useCallback(() => {
     return StarWarsDetailsAPI('weapons', id || '');
   }, [id]);
-  const fetchAllOwner = useCallback(() => {
-    return StarWarsListAPI('characters');
-  }, []);
-  const fetchAllCurrentOwner = useCallback(() => {
-    return StarWarsListAPI('characters');
-  }, []);
-  const fetchAllCrystalOrigin = useCallback(() => {
-    return StarWarsListAPI('planets');
-  }, []);
-  const fetchAllFirstAppearance = useCallback(() => {
-    return StarWarsListAPI('films');
-  }, []);
-  const fetchAllAffiliations = useCallback(() => {
-    return StarWarsListAPI('organizations');
-  }, []);
-  const allDataOwner = useAsync<Characters[]>(fetchAllOwner);
-  const allDataCurrentOwner = useAsync<Characters[]>(fetchAllCurrentOwner);
-  const allDataCrystalOrigin = useAsync<Planets[]>(fetchAllCrystalOrigin);
-  const allDataFirstAppearance = useAsync<Films[]>(fetchAllFirstAppearance);
-  const allDataAffiliations = useAsync<Organizations[]>(fetchAllAffiliations);
+
+  const allDataOwner = useAsync<Characters[]>(getAllCharacters);
+  const allDataCurrentOwner = useAsync<Characters[]>(getAllCharacters);
+  const allDataCrystalOrigin = useAsync<Planets[]>(getAllPlanets);
+  const allDataFirstAppearance = useAsync<Films[]>(getAllFilms);
+  const allDataAffiliations = useAsync<Organizations[]>(getAllOrganizations);
 
   const {
     data: weapon,

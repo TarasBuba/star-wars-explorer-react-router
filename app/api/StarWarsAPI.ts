@@ -8,13 +8,9 @@ export const getAllPlanets = () => StarWarsListAPI('planets');
 export const getAllSpecies = () => StarWarsListAPI('species');
 export const getAllOrganizations = () => StarWarsListAPI('organizations');
 
-export const getAllStarships = () => {
-  StarWarsListAPI('starships');
-};
+export const getAllStarships = () => StarWarsListAPI('starships');
 
-export const getAllVehicles = () => {
-  return StarWarsListAPI('vehicles');
-};
+export const getAllVehicles = () => StarWarsListAPI('vehicles');
 
 export const getAllQuotes = () => StarWarsListAPI('quotes');
 

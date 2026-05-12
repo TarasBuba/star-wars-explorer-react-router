@@ -1,5 +1,4 @@
 import useDetails from '~/hooks/useAsync';
-import useList from '~/hooks/useList';
 import { useParams } from 'react-router';
 import LinkResolved from '~/utils/link-resolved';
 import DataWrapper from '~/components/DataWrapper';
@@ -10,8 +9,8 @@ import type {
 } from '~/types/types';
 import { useCallback } from 'react';
 import StarWarsDetailsAPI from '~/api/StarWarsDetailsAPI';
-import StarWarsListAPI from '~/api/StarWarsListAPI';
 import useAsync from '~/hooks/useAsync';
+import { getAllCharacters, getAllOrganizations } from '~/api/StarWarsAPI';
 
 export default function StarshipsDetail() {
   const { id } = useParams();
@@ -20,15 +19,8 @@ export default function StarshipsDetail() {
     return StarWarsDetailsAPI('starships', id || '');
   }, [id]);
 
-  const fetchAllPilots = useCallback(() => {
-    return StarWarsListAPI('starships');
-  }, []);
-
-  const fetchAllAffiliations = useCallback(() => {
-    return StarWarsListAPI('organizations');
-  }, []);
-  const allDataAffiliations = useAsync<Organizations[]>(fetchAllAffiliations);
-  const allDataPilots = useAsync<Characters[]>(fetchAllPilots);
+  const allDataAffiliations = useAsync<Organizations[]>(getAllOrganizations);
+  const allDataPilots = useAsync<Characters[]>(getAllCharacters);
 
   const {
     data: starships,

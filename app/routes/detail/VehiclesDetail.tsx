@@ -4,8 +4,8 @@ import LinkResolved from '~/utils/link-resolved';
 import type { VehiclesDetails, Organizations } from '~/types/types';
 import DataWrapper from '~/components/DataWrapper';
 import { useCallback } from 'react';
-import StarWarsListAPI from '~/api/StarWarsListAPI';
 import useAsync from '~/hooks/useAsync';
+import { getAllOrganizations } from '~/api/StarWarsAPI';
 
 export default function VehiclesDetail() {
   const { id } = useParams();
@@ -14,10 +14,7 @@ export default function VehiclesDetail() {
     return StarWarsDetailsAPI('vehicles', id || '');
   }, [id]);
 
-  const fetchAllAffiliations = useCallback(() => {
-    return StarWarsListAPI('organizations');
-  }, []);
-  const allDataAffiliation = useAsync<Organizations[]>(fetchAllAffiliations);
+  const allDataAffiliation = useAsync<Organizations[]>(getAllOrganizations);
 
   const {
     data: vehicles,

@@ -3,9 +3,9 @@ import LinkResolved from '~/utils/link-resolved';
 import type { QuotesDetails, Characters, Films } from '~/types/types';
 import DataWrapper from '~/components/DataWrapper';
 import StarWarsDetailsAPI from '~/api/StarWarsDetailsAPI';
-import StarWarsListAPI from '~/api/StarWarsListAPI';
 import useAsync from '~/hooks/useAsync';
 import { useCallback } from 'react';
+import { getAllCharacters, getAllFilms } from '~/api/StarWarsAPI';
 
 const QuotesDetail = () => {
   const { id } = useParams();
@@ -14,15 +14,8 @@ const QuotesDetail = () => {
     return StarWarsDetailsAPI('quotes', id || '');
   }, [id]);
 
-  const fetchAllCharacters = useCallback(() => {
-    return StarWarsListAPI('characters');
-  }, []);
-
-  const fetchAllFilms = useCallback(() => {
-    return StarWarsListAPI('films');
-  }, []);
-  const { data: allDataCharacter } = useAsync<Characters[]>(fetchAllCharacters);
-  const { data: allDataFilm } = useAsync<Films[]>(fetchAllFilms);
+  const { data: allDataCharacter } = useAsync<Characters[]>(getAllCharacters);
+  const { data: allDataFilm } = useAsync<Films[]>(getAllFilms);
   const {
     data: quote,
     loading,

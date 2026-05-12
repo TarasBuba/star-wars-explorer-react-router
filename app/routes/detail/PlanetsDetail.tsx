@@ -3,23 +3,17 @@ import LinkResolved from '~/utils/link-resolved';
 import type { PlanetsDetails, Organizations, Species } from '~/types/types';
 import DataWrapper from '~/components/DataWrapper';
 import StarWarsDetailsAPI from '~/api/StarWarsDetailsAPI';
-import StarWarsListAPI from '~/api/StarWarsListAPI';
 import useAsync from '~/hooks/useAsync';
 import { useCallback } from 'react';
+import { getAllSpecies, getAllOrganizations } from '~/api/StarWarsAPI';
 
 export default function PlanetsDetail() {
   const { id } = useParams();
 
-  const fetchOrganisations = useCallback(() => {
-    return StarWarsListAPI('organizations');
-  }, []);
   const { data: allDataAffiliated } =
-    useAsync<Organizations[]>(fetchOrganisations);
+    useAsync<Organizations[]>(getAllOrganizations);
 
-  const fetchSpecies = useCallback(() => {
-    return StarWarsListAPI('species');
-  }, []);
-  const { data: allDataSpecies } = useAsync<Species[]>(fetchSpecies);
+  const { data: allDataSpecies } = useAsync<Species[]>(getAllSpecies);
 
   const fetchPlanetDetails = useCallback(() => {
     return StarWarsDetailsAPI('planets', id || '');

@@ -3,10 +3,10 @@ import LinkResolved from '~/utils/link-resolved';
 import type { EventsDetails, Planets } from '~/types/types';
 import DataWrapper from '~/components/DataWrapper';
 import StarWarsDetailsAPI from '~/api/StarWarsDetailsAPI';
-import StarWarsListAPI from '~/api/StarWarsListAPI';
 import { useCallback } from 'react';
 import useAsync from '~/hooks/useAsync';
 import Card from '~/components/Card';
+import { getAllPlanets } from '~/api/StarWarsAPI';
 
 const EventsDetail = () => {
   const { id } = useParams();
@@ -15,10 +15,7 @@ const EventsDetail = () => {
     return StarWarsDetailsAPI('events', id || '');
   }, [id]);
 
-  const fetchAllLocations = useCallback(() => {
-    return StarWarsListAPI('planets');
-  }, []);
-  const { data: allDataLocation } = useAsync<Planets[]>(fetchAllLocations);
+  const { data: allDataLocation } = useAsync<Planets[]>(getAllPlanets);
 
   const { data: event, loading, error } = useAsync<EventsDetails>(fetchEvent);
 

@@ -12,29 +12,22 @@ import type {
 import useAsync from '~/hooks/useAsync';
 import { useCallback } from 'react';
 import StarWarsDetailsAPI from '~/api/StarWarsDetailsAPI';
-import StarWarsListAPI from '~/api/StarWarsListAPI';
 import Card from '~/components/Card';
+import {
+  getAllPlanets,
+  getAllCharacters,
+  getAllSpecies,
+  getAllOrganizations,
+} from '~/api/StarWarsAPI';
 
 export default function FilmDetail() {
   const { id } = useParams();
 
-  const fetchPlanets = useCallback(() => {
-    return StarWarsListAPI('planets');
-  }, []);
-  const fetchCharacters = useCallback(() => {
-    return StarWarsListAPI('characters');
-  }, []);
-  const fetchSpecies = useCallback(() => {
-    return StarWarsListAPI('species');
-  }, []);
-  const fetchOrganizations = useCallback(() => {
-    return StarWarsListAPI('organizations');
-  }, []);
-  const { data: allDataPlanets } = useAsync<Planets[]>(fetchPlanets);
-  const { data: allDataCharacters } = useAsync<Characters[]>(fetchCharacters);
-  const { data: allDataSpecies } = useAsync<Species[]>(fetchSpecies);
+  const { data: allDataPlanets } = useAsync<Planets[]>(getAllPlanets);
+  const { data: allDataCharacters } = useAsync<Characters[]>(getAllCharacters);
+  const { data: allDataSpecies } = useAsync<Species[]>(getAllSpecies);
   const { data: allDataOrganizations } =
-    useAsync<Organizations[]>(fetchOrganizations);
+    useAsync<Organizations[]>(getAllOrganizations);
 
   const fetchFilmsDetails = useCallback(() => {
     return StarWarsDetailsAPI('films', id || '');
