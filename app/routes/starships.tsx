@@ -34,6 +34,7 @@ const Starships = () => {
             >
               <Card
                 heading={starship.name}
+                image={starship.image}
                 fields={[
                   { label: 'Model', value: starship.model },
                   { label: 'Manufacturer', value: starship.manufacturer },

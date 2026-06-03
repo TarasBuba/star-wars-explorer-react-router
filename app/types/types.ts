@@ -36,6 +36,7 @@ export type CharactersDetails = {
   masters?: string[];
   era?: string[];
   canon: boolean;
+  image?: string;
 };
 
 export type EventsDetails = {
@@ -52,6 +53,7 @@ export type EventsDetails = {
   film_id: number;
   canon: boolean;
   url: string;
+  image?: string;
 };
 
 export type FilmDetails = {
@@ -69,6 +71,7 @@ export type FilmDetails = {
   vehicles: string[];
   starships: string[];
   canon: boolean;
+  image?: string;
 };
 
 export type OrganizationsDetails = {
@@ -85,6 +88,7 @@ export type OrganizationsDetails = {
   era: string[];
   status: string;
   canon: boolean;
+  image?: string;
 };
 
 export type PlanetsDetails = {
@@ -106,6 +110,7 @@ export type PlanetsDetails = {
   notable_locations: string[];
   native_species: string[];
   canon: boolean;
+  image?: string;
 };
 
 export type QuotesDetails = {
@@ -116,6 +121,7 @@ export type QuotesDetails = {
   context: string;
   is_iconic: boolean;
   canon: boolean;
+  image?: string;
 };
 
 export type SpeciesDetails = {
@@ -131,6 +137,7 @@ export type SpeciesDetails = {
   homeworld_id: string;
   force_sensitive: string;
   canon: boolean;
+  image?: string;
 };
 
 export type StarshipsDetails = {
@@ -152,6 +159,7 @@ export type StarshipsDetails = {
   affiliations: string[];
   pilots?: string[];
   canon: boolean;
+  image?: string;
 };
 
 export type VehiclesDetails = {
@@ -170,6 +178,7 @@ export type VehiclesDetails = {
   armament: string[];
   affiliation: string[];
   canon: boolean;
+  image?: string;
 };
 export type WeaponsDetails = {
   name: string;
@@ -188,6 +197,7 @@ export type WeaponsDetails = {
   affiliations: string[];
   first_appearance_film_id: number;
   canon: boolean;
+  image?: string;
 };
 
 export type Characters = {
@@ -196,6 +206,7 @@ export type Characters = {
   birth_year: string;
   gender: string;
   id: number;
+  image?: string;
 };
 
 export type Events = {
@@ -203,6 +214,7 @@ export type Events = {
   date: string;
   description: string;
   url: string;
+  image?: string;
 };
 
 export type Films = {
@@ -211,7 +223,7 @@ export type Films = {
   producer: string;
   release_date: string;
   canon: boolean;
-  url: string;
+  image?: string;
 };
 
 export type Organizations = {
@@ -220,6 +232,7 @@ export type Organizations = {
   force_alignment: string;
   status: string;
   url: string;
+  image?: string;
 };
 
 export type Planets = {
@@ -228,12 +241,14 @@ export type Planets = {
   climate: string;
   terrain: string;
   url: string;
+  image?: string;
 };
 
 export type Quotes = {
   text: string;
   is_iconic: boolean;
   url: string;
+  image?: string;
 };
 
 export type Species = {
@@ -243,6 +258,7 @@ export type Species = {
   average_height: string;
   average_lifespan: string;
   url: string;
+  image?: string;
 };
 
 export type Starships = {
@@ -251,6 +267,7 @@ export type Starships = {
   manufacturer: string;
   cost_in_credits: string;
   url: string;
+  image?: string;
 };
 
 export type Vehicles = {
@@ -258,6 +275,7 @@ export type Vehicles = {
   model: string;
   manufacturer: string;
   url: string;
+  image?: string;
 };
 
 export type Weapons = {
@@ -266,6 +284,21 @@ export type Weapons = {
   model: string;
   color: string;
   url: string;
+  image?: string;
+};
+
+export type Droids = {
+  id: number;
+  name: string;
+  description: string;
+  image?: string;
+};
+
+export type Creatures = {
+  id: number;
+  name: string;
+  description: string;
+  image?: string;
 };
 
 export type DataWrapperProps = {

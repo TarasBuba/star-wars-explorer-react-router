@@ -37,6 +37,7 @@ const Events = () => {
             >
               <Card
                 heading={event.name}
+                image={event.image}
                 fields={[
                   { label: 'Date', value: event.date },
                   { label: 'Description', value: event.description },

@@ -1,6 +1,6 @@
 const StarWarsDetailsAPI = async (resource: string, id: string) => {
   const response = await fetch(
-    `https://star-wars-api-bi5l.onrender.com/${resource}/${id}`
+    `https://star-wars-api-bi5l.onrender.com/api/v1/${resource}/${id}`
   );
   if (!response.ok) {
     throw new Error(

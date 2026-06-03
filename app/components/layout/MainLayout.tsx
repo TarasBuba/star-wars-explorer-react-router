@@ -39,6 +39,12 @@ const MainLayout = () => {
             <li>
               <Link to="/quotes">Quotes</Link>
             </li>
+            <li>
+              <Link to="/creatures">Creatures</Link>
+            </li>
+            <li>
+              <Link to="/droids">Droids</Link>
+            </li>
           </ul>
         </nav>
       </header>

@@ -27,6 +27,12 @@ export default function Home() {
         <Link to="/characters" className="hover:underline">
           Characters
         </Link>
+        <Link to="/droids" className="hover:underline">
+          Droids
+        </Link>
+        <Link to="/creatures" className="hover:underline">
+          Creatures
+        </Link>
         <Link to="/species" className="hover:underline">
           Species
         </Link>

@@ -34,6 +34,7 @@ const Species = () => {
             >
               <Card
                 heading={person.name}
+                image={person.image}
                 fields={[
                   { label: 'Classification', value: person.classification },
                   { label: 'Average Height', value: person.average_height },

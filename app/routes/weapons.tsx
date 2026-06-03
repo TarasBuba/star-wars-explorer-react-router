@@ -34,6 +34,7 @@ const Weapons = () => {
             >
               <Card
                 heading={weapon.name}
+                image={weapon.image}
                 fields={[
                   { label: 'Type', value: weapon.type },
                   { label: 'Model', value: weapon.model },

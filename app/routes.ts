@@ -9,7 +9,10 @@ export default [
   index('routes/home.tsx'),
   layout('components/layout/MainLayout.tsx', [
     route('characters', 'routes/characters.tsx'),
-    route('characters/:id', 'routes/detail/CharactersDetail.tsx'),
+    route(
+      'characters/:id',
+      'routes/detail/CharactersDetails/CharactersDetail.tsx'
+    ),
 
     route('films', 'routes/films.tsx'),
     route('films/:id', 'routes/detail/FilmDetail.tsx'),
@@ -37,5 +40,11 @@ export default [
 
     route('weapons', 'routes/weapons.tsx'),
     route('weapons/:id', 'routes/detail/WeaponsDetail.tsx'),
+
+    route('droids', 'routes/droids.tsx'),
+    route('droids/:id', 'routes/detail/DroidsDetails.tsx'),
+
+    route('creatures', 'routes/creatures.tsx'),
+    route('creatures/:id', 'routes/detail/CreaturesDetail.tsx'),
   ]),
 ] satisfies RouteConfig;

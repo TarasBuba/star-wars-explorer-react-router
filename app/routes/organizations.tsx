@@ -39,6 +39,7 @@ const Organization = () => {
             >
               <Card
                 heading={organization.name}
+                image={organization.image}
                 fields={[
                   {
                     label: 'Force Alignment',

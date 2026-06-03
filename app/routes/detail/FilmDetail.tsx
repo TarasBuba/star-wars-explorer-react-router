@@ -1,4 +1,3 @@
-import useDetails from '~/hooks/useAsync';
 import { useParams } from 'react-router';
 import LinkResolved from '~/utils/link-resolved';
 import DataWrapper from '~/components/DataWrapper';
@@ -37,11 +36,12 @@ export default function FilmDetail() {
     data: film,
     loading,
     error,
-  } = useDetails<FilmDetails>(fetchFilmsDetails);
+  } = useAsync<FilmDetails>(fetchFilmsDetails);
 
   return (
     <DataWrapper loading={loading} error={error}>
       <Card
+        image={film?.image}
         heading={film?.title}
         fields={[
           { label: 'Episode', value: film?.episode_id },

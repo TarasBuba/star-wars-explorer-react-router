@@ -14,17 +14,18 @@ const CharactersDetail = () => {
     return getResourceById('characters', id || '');
   }, [id]);
 
-  const { data: allcharacters } = useAsync<Characters[]>(getAllCharacters);
+  const { data: allcharacters } = useAsync<Characters[]>(getAllCharacters, []);
   const {
     data: characters,
     loading,
     error,
-  } = useAsync<CharactersDetails>(fetchCharacter);
+  } = useAsync<CharactersDetails>(fetchCharacter, id);
 
   return (
     <DataWrapper loading={loading} error={error}>
       <Card
         heading={characters?.name}
+        image={characters?.image}
         fields={[
           { label: 'Birth Year', value: characters?.birth_year },
           { label: 'Status', value: characters?.status },
@@ -43,10 +44,11 @@ const CharactersDetail = () => {
           { label: 'Homeworld', value: characters?.homeworld_id },
           { label: 'Era', value: characters?.era?.join(', ') },
           { label: 'Canon', value: characters?.canon ? 'Yes' : 'No' },
+
           {
             label: 'Masters',
             value: characters?.masters?.map((master) => (
-              <span>
+              <span key={master}>
                 <LinkResolved
                   key={master}
                   value={master}
@@ -62,7 +64,7 @@ const CharactersDetail = () => {
           {
             label: 'Apprentices',
             value: characters?.apprentices?.map((apprentice) => (
-              <span>
+              <span key={apprentice}>
                 <LinkResolved
                   key={apprentice}
                   value={apprentice}

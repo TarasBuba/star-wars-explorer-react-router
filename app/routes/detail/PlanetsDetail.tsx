@@ -125,6 +125,7 @@ export default function PlanetsDetail() {
       </div> */}
       <Card
         heading={planet?.name}
+        image={planet?.image}
         fields={[
           { label: 'Diameter', value: planet?.diameter },
           { label: 'Climate', value: planet?.climate },

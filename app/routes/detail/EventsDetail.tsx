@@ -23,6 +23,7 @@ const EventsDetail = () => {
     <DataWrapper loading={loading} error={error}>
       <Card
         heading={event?.name}
+        image={event.image}
         fields={[
           { label: 'Date', value: event?.date },
           { label: 'Type', value: event?.type },

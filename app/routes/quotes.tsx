@@ -35,6 +35,7 @@ const Quotes = () => {
             >
               <Card
                 heading={quote.text}
+                image={quote.image}
                 fields={[
                   { label: 'Iconic', value: quote.is_iconic ? 'Yes' : 'No' },
                 ]}

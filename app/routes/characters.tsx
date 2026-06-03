@@ -36,6 +36,7 @@ const CharactersList = () => {
             <Link to={`/characters/${character.id}`} key={character.id}>
               <Card
                 heading={character.name}
+                image={character.image}
                 fields={[
                   { label: 'Birth Year', value: character.birth_year },
                   { label: 'Height', value: character.height },

@@ -34,6 +34,7 @@ const Vehicles = () => {
             >
               <Card
                 heading={vehicle.name}
+                image={vehicle.image}
                 fields={[
                   { label: 'Model', value: vehicle.model },
                   { label: 'Manufacturer', value: vehicle.manufacturer },

@@ -28,6 +28,7 @@ const OrganizationDetail = () => {
     <DataWrapper loading={loading} error={error}>
       <Card
         heading={organization?.name}
+        image={organization?.image}
         fields={[
           { label: 'Status', value: organization?.status },
           { label: 'Type', value: organization?.type },

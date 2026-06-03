@@ -32,6 +32,7 @@ const Films = () => {
           >
             <Card
               heading={film.name}
+              image={film.image}
               fields={[
                 { label: 'Director', value: film.director },
                 { label: 'Producer', value: film.producer },

@@ -42,6 +42,7 @@ const WeaponsDetail = () => {
     <DataWrapper loading={loading} error={error}>
       <Card
         heading={weapon?.name}
+        image={weapon?.image}
         fields={[
           { label: 'Type', value: weapon?.type },
           { label: 'Manufacturer', value: weapon?.manufacturer },

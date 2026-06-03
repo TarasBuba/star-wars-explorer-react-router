@@ -27,6 +27,7 @@ const QuotesDetail = () => {
     <DataWrapper loading={loading} error={error}>
       <Card
         heading={quote?.text}
+        image={quote?.image}
         fields={[
           {
             label: 'Character',

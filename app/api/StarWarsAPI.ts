@@ -18,6 +18,10 @@ export const getAllWeapons = () => StarWarsListAPI('weapons');
 export const getAllFilms = () => StarWarsListAPI('films');
 export const getAllEvents = () => StarWarsListAPI('events');
 
+export const getAllDroids = () => StarWarsListAPI('droids');
+
+export const getAllCreatures = () => StarWarsListAPI('creatures');
+
 export function getResourceById(resource: string, id: string) {
   return StarWarsDetailsAPI(resource, id || '');
 }
