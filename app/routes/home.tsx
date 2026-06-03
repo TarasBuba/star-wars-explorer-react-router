@@ -27,6 +27,12 @@ export default function Home() {
         <Link to="/characters" className="hover:underline">
           Characters
         </Link>
+        <Link to="/droids" className="hover:underline">
+          Droids
+        </Link>
+        <Link to="/creatures" className="hover:underline">
+          Creatures
+        </Link>
         <Link to="/species" className="hover:underline">
           Species
         </Link>
@@ -35,6 +41,18 @@ export default function Home() {
         </Link>
         <Link to="/vehicles" className="hover:underline">
           Vehicles
+        </Link>
+        <Link to="/organizations" className="hover:underline">
+          Organizations
+        </Link>
+        <Link to="events" className="hover:underline">
+          Events
+        </Link>
+        <Link to="/weapons" className="hover:underline">
+          Weapons
+        </Link>
+        <Link to="/quotes" className="hover:underline">
+          Quotes
         </Link>
       </div>
     </div>
