@@ -17,7 +17,7 @@ export default function useCharacterDetail() {
   return {
     loading,
     error,
-    character: data,
+    characters: data,
     allcharacters,
   };
 }
