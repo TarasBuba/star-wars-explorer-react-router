@@ -20,8 +20,11 @@ const Card = ({ heading, fields, image }: CardProps) => {
           </p>
         ))}
       </div>
-      <div className="ml-4 basis-1/2">
-        {image && <img src={image} alt={heading} className="" />}
+      <div className="ml-4 aspect-video overflow-hidden rounded-lg">
+        {image && <img src={image} alt={heading} className="h-60 w-96" />}
+        {!image && (
+          <img src="/noname.jpg" alt="Placeholder" className="h-72 w-96" />
+        )}
       </div>
     </div>
   );

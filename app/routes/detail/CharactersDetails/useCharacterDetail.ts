@@ -5,7 +5,7 @@ import { getAllCharacters, getResourceById } from '~/api/StarWarsAPI';
 
 export default function useCharacterDetail() {
   const { id } = useParams();
-  const fetchCharacter = () => getResourceById('characters', id);
+  const fetchCharacter = () => getResourceById('characters', id || '');
 
   const { loading, error, data } = useAsync<CharactersDetails>(
     fetchCharacter,
