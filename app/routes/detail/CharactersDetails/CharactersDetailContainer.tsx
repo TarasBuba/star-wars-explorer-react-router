@@ -1,13 +1,16 @@
 import useCharacterDetail from './useCharacterDetail';
 import DataWrapper from '~/components/DataWrapper';
-import CharactersDetail from './CharactersDetail';
+import CharactersDetailView from './CharactersDetailView';
 
 const CharactersDetailContainer = () => {
   const { loading, error, character, allcharacters } = useCharacterDetail();
 
   return (
     <DataWrapper loading={loading} error={error}>
-      <CharactersDetail character={character} allcharacters={allcharacters} />
+      <CharactersDetailView
+        character={character}
+        allcharacters={allcharacters}
+      />
     </DataWrapper>
   );
 };

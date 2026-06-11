@@ -1,18 +1,18 @@
 import { Link } from 'react-router';
 import Card from '~/components/Card';
-import useList from '~/hooks/useList';
 import parseURL from '~/utils/parseURL';
 import usePagination from '~/hooks/usePagination';
 import Pagination from '~/components/Pagination';
 import type { Films } from '~/types/types';
 import DataWrapper from '~/components/DataWrapper';
+import useAsync from '~/hooks/useAsync';
+import StarWarsListAPI from '~/api/StarWarsListAPI';
 
 const Films = () => {
-  const {
-    data: films,
-    loading,
-    error,
-  } = useList<Films[]>({ resource: 'films' });
+  const fetchFilms = () => {
+    return StarWarsListAPI('films');
+  };
+  const { data: films, loading, error } = useAsync<Films[]>(fetchFilms);
   const { currentPageItems, currentPage, totalPages, goToPage } = usePagination(
     {
       items: films || [],
