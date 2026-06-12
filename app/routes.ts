@@ -11,7 +11,7 @@ export default [
     route('characters', 'routes/characters.tsx'),
     route(
       'characters/:id',
-      'routes/detail/CharactersDetails/CharactersDetail.tsx'
+      'routes/detail/CharactersDetails/CharactersDetailContainer.tsx'
     ),
 
     route('films', 'routes/films.tsx'),
