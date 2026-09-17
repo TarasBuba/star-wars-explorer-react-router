@@ -1,3 +1,35 @@
+const ArrowLeft = () => (
+  <svg
+    viewBox="0 0 16 16"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    width="14"
+    height="14"
+    aria-hidden="true"
+  >
+    <polyline points="10 4 6 8 10 12" />
+  </svg>
+);
+
+const ArrowRight = () => (
+  <svg
+    viewBox="0 0 16 16"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    width="14"
+    height="14"
+    aria-hidden="true"
+  >
+    <polyline points="6 4 10 8 6 12" />
+  </svg>
+);
+
 const Pagination = ({
   currentPage,
   totalPages,
@@ -8,25 +40,40 @@ const Pagination = ({
   goToPage: (page: number) => void;
 }) => {
   return (
-    <div className="flex items-center justify-center space-x-4 p-4">
+    <nav
+      aria-label="Pagination"
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: '0.5rem',
+        padding: '1.5rem 1rem',
+      }}
+    >
       <button
         onClick={() => goToPage(currentPage - 1)}
         disabled={currentPage === 1}
-        className="rounded-md bg-amber-500 px-4 py-2 text-2xl text-white disabled:opacity-50"
+        className="sw-pagination-btn"
+        aria-label="Previous page"
       >
-        &larr;
+        <ArrowLeft />
       </button>
-      <span className="px-4 py-2 text-amber-500">
-        Page {currentPage} of {totalPages}
+
+      <span className="sw-pagination-info">
+        <span style={{ color: 'var(--color-sw-gold)' }}>{currentPage}</span>
+        {' / '}
+        {totalPages}
       </span>
+
       <button
         onClick={() => goToPage(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className="rounded-md bg-amber-500 px-4 py-2 text-2xl text-white disabled:opacity-50"
+        className="sw-pagination-btn"
+        aria-label="Next page"
       >
-        &rarr;
+        <ArrowRight />
       </button>
-    </div>
+    </nav>
   );
 };
 

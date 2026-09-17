@@ -8,6 +8,7 @@ type Props = {
 const DroidsDetails = ({ droids }: Props) => {
   return (
     <Card
+      variant="detail"
       heading={droids?.name}
       image={droids?.image}
       fields={[

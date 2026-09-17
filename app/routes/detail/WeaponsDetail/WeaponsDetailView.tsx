@@ -27,6 +27,7 @@ const WeaponsDetailView = ({
 }: Props) => {
   return (
     <Card
+      variant="detail"
       heading={weapon?.name}
       image={weapon?.image}
       fields={[

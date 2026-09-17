@@ -1,25 +1,29 @@
 import { Link } from 'react-router';
+
 const LinkResolved = ({
   value,
   resource,
   collection,
-  idKey,
-  matchKey,
 }: {
   value: any;
   resource: string;
-  idKey: string;
-  matchKey: string;
+  idKey?: string;
+  matchKey?: string;
   collection: any[];
 }) => {
-  const item = collection.find((item) => item[matchKey] === value);
+  if (!collection || !Array.isArray(collection)) {
+    return <span>{value}</span>;
+  }
+  const item = collection.find(
+    (c) => c.id == value || c.name === value || c.title === value
+  );
 
   return item ? (
     <Link
-      to={`/${resource}/${item[idKey]}`}
-      className="text-blue-500 hover:underline"
+      to={`/${resource}/${item.id}`}
+      className="font-semibold text-[#4fc3f7] transition-colors hover:text-white hover:underline"
     >
-      {item.name ?? value}
+      {item.name ?? item.title ?? value}
     </Link>
   ) : (
     <span>{value}</span>

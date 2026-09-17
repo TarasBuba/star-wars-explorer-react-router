@@ -7,10 +7,9 @@ export default function useCharacterDetail() {
   const { id } = useParams();
   const fetchCharacter = () => getResourceById('characters', id || '');
 
-  const { loading, error, data } = useAsync<CharactersDetails>(
-    fetchCharacter,
-    id
-  );
+  const { loading, error, data } = useAsync<CharactersDetails>(fetchCharacter, [
+    id,
+  ]);
   const fetchAllCharacters = () => getAllCharacters();
   const { data: allcharacters } = useAsync<Characters[]>(fetchAllCharacters);
 

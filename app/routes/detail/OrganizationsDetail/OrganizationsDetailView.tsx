@@ -4,8 +4,8 @@ import type { Characters, Planets, OrganizationsDetails } from '~/types/types';
 
 type Props = {
   organization: OrganizationsDetails | undefined;
-  allDataHeadquarters: Characters[] | undefined;
-  allDataLeader: Planets[] | undefined;
+  allDataHeadquarters: Planets[] | undefined;
+  allDataLeader: Characters[] | undefined;
 };
 const OrganizationDetailView = ({
   organization,
@@ -14,6 +14,7 @@ const OrganizationDetailView = ({
 }: Props) => {
   return (
     <Card
+      variant="detail"
       heading={organization?.name}
       image={organization?.image}
       fields={[

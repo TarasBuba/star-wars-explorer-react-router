@@ -10,6 +10,7 @@ type Props = {
 const SpeciesDetailView = ({ species, allDataHomeworld }: Props) => {
   return (
     <Card
+      variant="detail"
       heading={species?.name}
       image={species?.image}
       fields={[

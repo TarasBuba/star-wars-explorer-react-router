@@ -25,6 +25,7 @@ export default function useCreatureDetail({
 }: Props) {
   return (
     <Card
+      variant="detail"
       image={film?.image}
       heading={film?.title}
       fields={[

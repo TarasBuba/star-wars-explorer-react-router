@@ -9,9 +9,9 @@ const StarshipsDetailContainer = () => {
   return (
     <DataWrapper loading={loading} error={error}>
       <StarshipsDetailView
-        starships={starships ?? undefined}
-        allDataAffiliations={allDataAffiliations ?? undefined}
-        allDataPilots={allDataPilots ?? undefined}
+        starships={starships ?? null}
+        allDataAffiliations={allDataAffiliations ?? null}
+        allDataPilots={allDataPilots ?? null}
       />
     </DataWrapper>
   );

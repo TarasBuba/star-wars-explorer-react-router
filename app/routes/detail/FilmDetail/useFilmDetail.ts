@@ -26,7 +26,7 @@ export default function useCreatureDetail() {
 
   const fetchFilmsDetails = () => StarWarsDetailsAPI('films', id || '');
 
-  const { loading, error, data } = useAsync(fetchFilmsDetails, id);
+  const { loading, error, data } = useAsync(fetchFilmsDetails, [id]);
 
   return {
     loading,

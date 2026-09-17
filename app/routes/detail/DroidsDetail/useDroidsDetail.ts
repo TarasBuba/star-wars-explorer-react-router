@@ -7,7 +7,7 @@ export default function useDroidsDetail() {
   const { id } = useParams();
   const fetchDroid = () => getResourceById('droids', id || '');
 
-  const { loading, error, data } = useAsync<Droids>(fetchDroid, id);
+  const { loading, error, data } = useAsync(fetchDroid, [id]);
   const fetchAllDroids = () => getAllCreatures();
   const { data: allDroids } = useAsync<Droids[]>(fetchAllDroids);
 

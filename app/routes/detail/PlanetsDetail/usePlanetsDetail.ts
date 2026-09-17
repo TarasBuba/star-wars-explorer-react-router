@@ -15,11 +15,7 @@ export default function usePlanetsDetail() {
 
   const fetchPlanetDetails = () => StarWarsDetailsAPI('planets', id || '');
 
-  const {
-    data: planet,
-    loading,
-    error,
-  } = useAsync<PlanetsDetails>(fetchPlanetDetails, id);
+  const { data: planet, loading, error } = useAsync(fetchPlanetDetails, [id]);
 
   return {
     planet,

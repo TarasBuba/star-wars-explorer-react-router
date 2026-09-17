@@ -14,6 +14,7 @@ const PlanetsDetailView = ({
 }: Props) => {
   return (
     <Card
+      variant="detail"
       heading={planet?.name}
       image={planet?.image}
       fields={[

@@ -47,9 +47,6 @@ export default [
       'routes/detail/OrganizationsDetail/OrganizationsDetailContainer.tsx'
     ),
 
-    route('events', 'routes/events.tsx'),
-    route('events/:id', 'routes/detail/EventsDetail/EventsDetailContainer.tsx'),
-
     route('weapons', 'routes/weapons.tsx'),
     route(
       'weapons/:id',
@@ -57,12 +54,11 @@ export default [
     ),
 
     route('droids', 'routes/droids.tsx'),
-    route('droids/:id', 'routes/detail/DroidsDetail/DroidsDetailContainer.tsx'),
-
-    route('creatures', 'routes/creatures.tsx'),
     route(
-      'creatures/:id',
-      'routes/detail/CreaturesDetail/CreaturesDetailContainer.tsx'
+      'droids/:id',
+      'routes/detail/DroidsDetail/DroidsDetailsContainer.tsx'
     ),
+
+    route('quiz', 'routes/quiz.tsx'),
   ]),
 ] satisfies RouteConfig;

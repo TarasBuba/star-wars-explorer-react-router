@@ -1,17 +1,22 @@
 import DataWrapper from '~/components/DataWrapper';
 import OrganizationDetailView from './OrganizationsDetailView';
-import useOrganizationaDetail from './useOrganizationsDetail';
+import useOrganizationsDetail from './useOrganizationsDetail';
 
 const OrganizationDetailContainer = () => {
-  const { loading, error, organization, allDataHeadquarters, allDataLeader } =
-    useOrganizationsDetail();
+  const {
+    loading,
+    error,
+    data: organization,
+    allDataHeadquarters,
+    allDataLeader,
+  } = useOrganizationsDetail();
 
   return (
     <DataWrapper loading={loading} error={error}>
       <OrganizationDetailView
-        organization={organization}
-        allDataHeadquarters={allDataHeadquarters}
-        allDataLeader={allDataLeader}
+        organization={organization ?? undefined}
+        allDataHeadquarters={allDataHeadquarters ?? undefined}
+        allDataLeader={allDataLeader ?? undefined}
       />
     </DataWrapper>
   );
