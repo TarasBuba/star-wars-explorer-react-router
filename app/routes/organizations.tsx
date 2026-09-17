@@ -1,22 +1,19 @@
 import { Link } from 'react-router';
 import Card from '~/components/Card';
-import useList from '~/hooks/useList';
 import parseURL from '~/utils/parseURL';
 import usePagination from '~/hooks/usePagination';
 import Pagination from '~/components/Pagination';
 import type { Organizations } from '~/types/types';
 import DataWrapper from '~/components/DataWrapper';
+import useAsync from '~/hooks/useAsync';
+import StarWarsListAPI from '~/api/StarWarsListAPI';
 
 const Organization = () => {
   const {
     data: organizations,
     loading,
     error,
-  } = useList<Organizations[]>({ resource: 'organizations' }) as {
-    data: Organizations[];
-    loading: boolean;
-    error: string | null;
-  };
+  } = useAsync<Organizations[]>(() => StarWarsListAPI('organizations'));
 
   const { currentPageItems, currentPage, totalPages, goToPage } = usePagination(
     {

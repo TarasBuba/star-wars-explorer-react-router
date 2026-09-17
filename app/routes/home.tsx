@@ -1,5 +1,7 @@
 import type { Route } from './+types/home';
 import { Link } from 'react-router';
+import OpeningCrawl from '~/components/effect/OpeningCrawl';
+import CardQuiz from '~/components/effect/CardQuiz';
 
 export function meta(_: Route.MetaArgs) {
   return [
@@ -30,9 +32,6 @@ export default function Home() {
         <Link to="/droids" className="hover:underline">
           Droids
         </Link>
-        <Link to="/creatures" className="hover:underline">
-          Creatures
-        </Link>
         <Link to="/species" className="hover:underline">
           Species
         </Link>
@@ -45,15 +44,19 @@ export default function Home() {
         <Link to="/organizations" className="hover:underline">
           Organizations
         </Link>
-        <Link to="events" className="hover:underline">
-          Events
-        </Link>
         <Link to="/weapons" className="hover:underline">
           Weapons
         </Link>
-        <Link to="/quotes" className="hover:underline">
-          Quotes
+        <Link
+          to="/quiz"
+          className="border-[#4fc3f7] text-[#4fc3f7] hover:underline"
+        >
+          Jedi Trial (Quiz)
         </Link>
+      </div>
+
+      <div className="mt-16 w-full max-w-4xl px-4">
+        <CardQuiz />
       </div>
     </div>
   );

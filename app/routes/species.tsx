@@ -1,18 +1,19 @@
 import { Link } from 'react-router';
 import Card from '~/components/Card';
-import useList from '~/hooks/useList';
 import parseURL from '~/utils/parseURL';
 import usePagination from '~/hooks/usePagination';
 import Pagination from '~/components/Pagination';
 import type { Species } from '~/types/types';
 import DataWrapper from '~/components/DataWrapper';
+import useAsync from '~/hooks/useAsync';
+import StarWarsListAPI from '~/api/StarWarsListAPI';
 
 const Species = () => {
   const {
     data: species,
     loading,
     error,
-  } = useList<Species[]>({ resource: 'species' });
+  } = useAsync<Species[]>(() => StarWarsListAPI('species'));
   const { currentPageItems, currentPage, totalPages, goToPage } = usePagination(
     {
       items: species || [],

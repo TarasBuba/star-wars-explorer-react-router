@@ -19,7 +19,7 @@ export const links: Route.LinksFunction = () => [
   },
   {
     rel: 'stylesheet',
-    href: 'https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap',
+    href: 'https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300..600&display=swap',
   },
 ];
 
@@ -62,11 +62,32 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
   }
 
   return (
-    <main className="container mx-auto p-4 pt-16">
-      <h1>{message}</h1>
-      <p>{details}</p>
+    <main style={{ maxWidth: '960px', margin: '0 auto', padding: '4rem 1rem' }}>
+      <h1
+        className="font-display"
+        style={{
+          fontSize: 'var(--text-2xl)',
+          color: 'var(--color-sw-gold)',
+          marginBottom: '1rem',
+        }}
+      >
+        {message}
+      </h1>
+      <p style={{ color: 'var(--color-sw-text-muted)', marginBottom: '1rem' }}>
+        {details}
+      </p>
       {stack && (
-        <pre className="w-full overflow-x-auto p-4">
+        <pre
+          style={{
+            background: 'var(--color-sw-surface)',
+            border: '1px solid var(--color-sw-border)',
+            borderRadius: 'var(--radius-md)',
+            padding: '1rem',
+            overflowX: 'auto',
+            fontSize: 'var(--text-xs)',
+            color: 'var(--color-sw-text-muted)',
+          }}
+        >
           <code>{stack}</code>
         </pre>
       )}

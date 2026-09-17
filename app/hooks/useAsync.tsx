@@ -1,25 +1,23 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 
 const useAsync: <T>(
   fetchFn: () => Promise<T>,
-  key?: string
+  dependencies?: unknown[]
 ) => {
   data: T | null;
   loading: boolean;
   error: string | null;
-} = <T,>(fetchFn: () => Promise<T>, key?: string) => {
+} = <T,>(fetchFn: () => Promise<T>, dependencies?: unknown[]) => {
   const [data, setData] = useState<T | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
-  const fetchRef = useRef(fetchFn);
-  fetchRef.current = fetchFn;
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       setError(null);
       try {
-        const response = await fetchRef.current();
+        const response = await fetchFn();
 
         setData(response);
         setLoading(false);
@@ -32,7 +30,7 @@ const useAsync: <T>(
       }
     };
     fetchData();
-  }, [key]);
+  }, dependencies || []);
 
   return { data, loading, error };
 };

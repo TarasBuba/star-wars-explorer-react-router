@@ -1,0 +1,709 @@
+[
+  {
+    "question": "Your best weapon is...",
+    "answers": [
+      { "text": "Wisdom and negotiation — I always seek a peaceful solution", "side": "light" },
+      { "text": "A sword or blaster — strength decides everything", "side": "dark" }
+    ]
+  },
+  {
+    "question": "When a friend betrayed you, you...",
+    "answers": [
+      { "text": "Give them another chance and try to understand why", "side": "light" },
+      { "text": "Never forgive. Betrayal deserves no mercy", "side": "dark" }
+    ]
+  },
+  {
+    "question": "You were falsely accused. You...",
+    "answers": [
+      { "text": "Stay calm and prove your innocence through legitimate means", "side": "light" },
+      { "text": "Take justice into your own hands, regardless of consequences", "side": "dark" }
+    ]
+  },
+  {
+    "question": "What does power mean to you?",
+    "answers": [
+      { "text": "Responsibility toward those I protect", "side": "light" },
+      { "text": "A tool to achieve my goals at any cost", "side": "dark" }
+    ]
+  },
+  {
+    "question": "You found a treasure that belongs to others. You...",
+    "answers": [
+      { "text": "Return it to the owners — it's obviously the right thing", "side": "light" },
+      { "text": "Keep it — finders keepers", "side": "dark" }
+    ]
+  },
+  {
+    "question": "Your enemy is defeated and defenseless. You...",
+    "answers": [
+      { "text": "Let them live — killing a helpless enemy is not a victory", "side": "light" },
+      { "text": "Finish it — they wouldn't have spared me", "side": "dark" }
+    ]
+  },
+  {
+    "question": "When you feel anger, you...",
+    "answers": [
+      { "text": "Breathe deeply and let it go — anger clouds the mind", "side": "light" },
+      { "text": "Let the anger fuel me — it's my power source", "side": "dark" }
+    ]
+  },
+  {
+    "question": "The most important thing in life is...",
+    "answers": [
+      { "text": "Balance, harmony, and connection with loved ones", "side": "light" },
+      { "text": "Strength, ambition, and achieving your goals", "side": "dark" }
+    ]
+  },
+  {
+    "question": "You're offered unlimited power, but must betray a friend. You...",
+    "answers": [
+      { "text": "Refuse. No power is worth betrayal", "side": "light" },
+      { "text": "Accept. Emotions are weakness — power is everything", "side": "dark" }
+    ]
+  },
+  {
+    "question": "What do 'rules' mean to you?",
+    "answers": [
+      { "text": "The foundation of society — without them comes chaos", "side": "light" },
+      { "text": "Limitations for the weak — the strong make their own rules", "side": "dark" }
+    ]
+  },
+  {
+    "question": "The galaxy is in danger, but the mission is deadly. You...",
+    "answers": [
+      { "text": "Go anyway — some things matter more than survival", "side": "light" },
+      { "text": "Assess the odds and look for a safer path first", "side": "dark" }
+    ]
+  },
+  {
+    "question": "You've been captured by enemies. Your first thought?",
+    "answers": [
+      { "text": "Find a way to escape and warn my allies", "side": "light" },
+      { "text": "Figure out what they want — and use that", "side": "dark" }
+    ]
+  },
+  {
+    "question": "Your commander orders an attack on a civilian city. You...",
+    "answers": [
+      { "text": "Refuse the order and protect the civilians", "side": "light" },
+      { "text": "Follow orders — discipline above all in wartime", "side": "dark" }
+    ]
+  },
+  {
+    "question": "The only way to stop evil is to become it. You...",
+    "answers": [
+      { "text": "Find another way — the ends don't justify the means", "side": "light" },
+      { "text": "Do what's needed — results matter more than methods", "side": "dark" }
+    ]
+  },
+  {
+    "question": "You can save one or many, but not all. You...",
+    "answers": [
+      { "text": "Save as many as possible and bear the weight of loss", "side": "light" },
+      { "text": "Save whoever is most strategically important", "side": "dark" }
+    ]
+  },
+  {
+    "question": "If you could feel the Force, how would you use it?",
+    "answers": [
+      { "text": "To protect the weak and maintain peace", "side": "light" },
+      { "text": "To achieve my own goals and dominate", "side": "dark" }
+    ]
+  },
+  {
+    "question": "The Jedi forbid attachments. Your opinion?",
+    "answers": [
+      { "text": "Wise — love leads to fear of loss and darkness", "side": "light" },
+      { "text": "Cruel — depriving people of love is unnatural", "side": "dark" }
+    ]
+  },
+  {
+    "question": "The Sith say: 'Through strength I gain victory'. You...",
+    "answers": [
+      { "text": "Disagree — true strength is in self-control, not domination", "side": "light" },
+      { "text": "Agree — weakness deserves contempt, only strength is respected", "side": "dark" }
+    ]
+  },
+  {
+    "question": "The Jedi Code or the Sith Code — which is closer to you?",
+    "answers": [
+      { "text": "Jedi — peace, knowledge, harmony, the Force", "side": "light" },
+      { "text": "Sith — passion, power, victory, freedom", "side": "dark" }
+    ]
+  },
+  {
+    "question": "Your master is wrong and jeopardizes the mission. You...",
+    "answers": [
+      { "text": "Speak up honestly — even masters can be wrong", "side": "light" },
+      { "text": "Act independently — waiting for advice is too dangerous", "side": "dark" }
+    ]
+  },
+  {
+    "question": "Lying to save innocents is...",
+    "answers": [
+      { "text": "Justified — moral flexibility is sometimes necessary", "side": "light" },
+      { "text": "Irrelevant — I tell the truth always, regardless of consequences", "side": "dark" }
+    ]
+  },
+  {
+    "question": "A criminal who did good deeds to survive. You...",
+    "answers": [
+      { "text": "Consider the context — a person is more than their acts", "side": "light" },
+      { "text": "The law is the law — a crime remains a crime", "side": "dark" }
+    ]
+  },
+  {
+    "question": "Someone you love committed a terrible crime. You...",
+    "answers": [
+      { "text": "Painfully turn them in — justice above all", "side": "light" },
+      { "text": "Protect and help them escape — loyalty over law", "side": "dark" }
+    ]
+  },
+  {
+    "question": "You learned a terrible truth that will shatter someone's happiness. You...",
+    "answers": [
+      { "text": "Tell the truth — even painful truth is better than a happy lie", "side": "light" },
+      { "text": "Stay silent — why destroy someone's happiness for 'truth'?", "side": "dark" }
+    ]
+  },
+  {
+    "question": "You're allowed to do evil for the 'greater good'. You...",
+    "answers": [
+      { "text": "Refuse — a path to good cannot be built on evil", "side": "light" },
+      { "text": "Agree — great goals require difficult sacrifices", "side": "dark" }
+    ]
+  },
+  {
+    "question": "How do you treat those weaker than you?",
+    "answers": [
+      { "text": "Protect and support them — strength is given to defend", "side": "light" },
+      { "text": "Respect only those who earn it through strength", "side": "dark" }
+    ]
+  },
+  {
+    "question": "You can get everything you want through dishonesty. You...",
+    "answers": [
+      { "text": "Refuse — the journey matters more than the reward", "side": "light" },
+      { "text": "Take it — results justify the means", "side": "dark" }
+    ]
+  },
+  {
+    "question": "Your favorite negotiation tactic?",
+    "answers": [
+      { "text": "Mutual benefit and honesty — that's how relationships are built", "side": "light" },
+      { "text": "Pressure and dominance — the weak always concede first", "side": "dark" }
+    ]
+  },
+  {
+    "question": "When you make a mistake, you...",
+    "answers": [
+      { "text": "Admit it and learn — that's the path to growth", "side": "light" },
+      { "text": "Analyze why the plan failed and do better next time", "side": "dark" }
+    ]
+  },
+  {
+    "question": "What do you do in your free time?",
+    "answers": [
+      { "text": "Meditate, train, help others", "side": "light" },
+      { "text": "Sharpen my skills and plan the next steps", "side": "dark" }
+    ]
+  },
+  {
+    "question": "You're on Tatooine. Your stance on slavery here?",
+    "answers": [
+      { "text": "Fight it at any cost — it's a despicable evil", "side": "light" },
+      { "text": "Sad, but that's the local reality. Not my jurisdiction", "side": "dark" }
+    ]
+  },
+  {
+    "question": "Galactic Republic or Galactic Empire?",
+    "answers": [
+      { "text": "Republic — democracy and freedom are worth defending", "side": "light" },
+      { "text": "Empire — order and stability matter more than the illusion of freedom", "side": "dark" }
+    ]
+  },
+  {
+    "question": "You're invited to join the Jedi Order. You...",
+    "answers": [
+      { "text": "Accept — serving the Force and the Galaxy is an honor", "side": "light" },
+      { "text": "Decline — too many restrictions and rules", "side": "dark" }
+    ]
+  },
+  {
+    "question": "The destruction of Alderaan is...",
+    "answers": [
+      { "text": "A horror and war crime — no goal justifies this", "side": "light" },
+      { "text": "Brutal, but an effective demonstration of power", "side": "dark" }
+    ]
+  },
+  {
+    "question": "You have a chance to destroy the Death Star, but thousands of Imperial soldiers will die. You...",
+    "answers": [
+      { "text": "Act — stopping a weapon of mass destruction is more important", "side": "light" },
+      { "text": "Look for a way to do it without casualties first", "side": "dark" }
+    ]
+  },
+  {
+    "question": "What inspires you?",
+    "answers": [
+      { "text": "Love for those close to me and the desire to make the world better", "side": "light" },
+      { "text": "Ambitions, achievements, and the desire to leave a mark in history", "side": "dark" }
+    ]
+  },
+  {
+    "question": "Your leadership style?",
+    "answers": [
+      { "text": "Inspire and support the team — we're stronger together", "side": "light" },
+      { "text": "Clear orders and high standards — results matter most", "side": "dark" }
+    ]
+  },
+  {
+    "question": "How do you treat strangers?",
+    "answers": [
+      { "text": "Everyone deserves a chance — I don't judge by appearance", "side": "light" },
+      { "text": "I trust only the proven — excessive openness is dangerous", "side": "dark" }
+    ]
+  },
+  {
+    "question": "Your best friend made a terrible mistake. You...",
+    "answers": [
+      { "text": "Support them, help fix it, and move forward together", "side": "light" },
+      { "text": "Tell them the hard truth straight to their face", "side": "dark" }
+    ]
+  },
+  {
+    "question": "What matters more — freedom or security?",
+    "answers": [
+      { "text": "Freedom — without it, security becomes a cage", "side": "light" },
+      { "text": "Security — freedom without safety is just chaos", "side": "dark" }
+    ]
+  },
+  {
+    "question": "The Dark Side offers to bring back a dead loved one. You...",
+    "answers": [
+      { "text": "Refuse — death is part of the Force, it can't be cheated", "side": "light" },
+      { "text": "Accept — I'll do anything for those I love", "side": "dark" }
+    ]
+  },
+  {
+    "question": "You sense the Dark Side gives more power. You...",
+    "answers": [
+      { "text": "Resist — power without wisdom destroys", "side": "light" },
+      { "text": "Explore it — why refuse greater power?", "side": "dark" }
+    ]
+  },
+  {
+    "question": "Someone tells you: 'Your emotions are your strength'. You...",
+    "answers": [
+      { "text": "Skeptical — uncontrolled emotion leads to mistakes", "side": "light" },
+      { "text": "Agree — I won't suppress what makes me stronger", "side": "dark" }
+    ]
+  },
+  {
+    "question": "You see a vision of a terrible future. Your reaction?",
+    "answers": [
+      { "text": "Accept it as a warning and proceed carefully", "side": "light" },
+      { "text": "Do everything possible to prevent it at any cost", "side": "dark" }
+    ]
+  },
+  {
+    "question": "You can read other people's minds. You...",
+    "answers": [
+      { "text": "Don't do it without permission — privacy is sacred", "side": "light" },
+      { "text": "Use it — knowledge is power, sentiments are irrelevant", "side": "dark" }
+    ]
+  },
+  {
+    "question": "Before a great battle, you...",
+    "answers": [
+      { "text": "Plan to minimize casualties and seek a peaceful solution", "side": "light" },
+      { "text": "Develop a plan to win at any cost", "side": "dark" }
+    ]
+  },
+  {
+    "question": "An ally betrays you at a critical moment. You...",
+    "answers": [
+      { "text": "Adapt to the situation and find new paths", "side": "light" },
+      { "text": "Make sure they regret their decision", "side": "dark" }
+    ]
+  },
+  {
+    "question": "Your enemy is twice as strong as you. You...",
+    "answers": [
+      { "text": "Find weaknesses, use wit and tactics instead of direct combat", "side": "light" },
+      { "text": "Accept the challenge — retreat is shameful", "side": "dark" }
+    ]
+  },
+  {
+    "question": "How do you feel about espionage?",
+    "answers": [
+      { "text": "Only as a last resort and only against a real threat", "side": "light" },
+      { "text": "A useful tool — the better informed wins", "side": "dark" }
+    ]
+  },
+  {
+    "question": "Your reaction to an unexpected defeat?",
+    "answers": [
+      { "text": "Analyze the mistakes, recover, and move forward with new knowledge", "side": "light" },
+      { "text": "Anger motivates me to grow stronger so I never lose again", "side": "dark" }
+    ]
+  },
+  {
+    "question": "What kind of person do you want to be remembered as after death?",
+    "answers": [
+      { "text": "Someone who protected the weak and left the world better", "side": "light" },
+      { "text": "Someone who changed the galaxy and left an unforgettable mark", "side": "dark" }
+    ]
+  },
+  {
+    "question": "What does 'being good' mean to you?",
+    "answers": [
+      { "text": "Acting honestly, with compassion and respect for all", "side": "light" },
+      { "text": "Being effective — weak goodness helps no one", "side": "dark" }
+    ]
+  },
+  {
+    "question": "You meet a Sith Lord you respect. You...",
+    "answers": [
+      { "text": "Stay true to my principles — respect doesn't mean agreement", "side": "light" },
+      { "text": "Listen to his philosophy — wisdom has no color", "side": "dark" }
+    ]
+  },
+  {
+    "question": "If the Force chose you — where would it direct you?",
+    "answers": [
+      { "text": "To protect those who cannot protect themselves", "side": "light" },
+      { "text": "To the heights of power, to rebuild the galaxy in my image", "side": "dark" }
+    ]
+  },
+  {
+    "question": "Your final choice before death?",
+    "answers": [
+      { "text": "Forgive even enemies — and become one with the Force", "side": "light" },
+      { "text": "Take as many enemies as possible with me — to the end", "side": "dark" }
+    ]
+  },
+  {
+    "question": "You're in Mos Eisley Cantina. Someone threatens you. You...",
+    "answers": [
+      { "text": "Try to defuse the situation with words first", "side": "light" },
+      { "text": "Shoot first — better not to risk it", "side": "dark" }
+    ]
+  },
+  {
+    "question": "Your droid did something wrong. You...",
+    "answers": [
+      { "text": "Recalibrate it and patiently explain what went wrong", "side": "light" },
+      { "text": "Penalize it — mistakes have consequences even for droids", "side": "dark" }
+    ]
+  },
+  {
+    "question": "You're invited to join the Rebellion or the Empire. You...",
+    "answers": [
+      { "text": "Rebellion — freedom and resistance to tyranny above all", "side": "light" },
+      { "text": "Empire — order, resources, and real power", "side": "dark" }
+    ]
+  },
+  {
+    "question": "You find a Dark Side Force artifact. You...",
+    "answers": [
+      { "text": "Destroy it or hand it to a secure Order vault", "side": "light" },
+      { "text": "Study it — knowledge of the enemy gives an advantage", "side": "dark" }
+    ]
+  },
+  {
+    "question": "A Mandalorian offers you a weapon in exchange for a favor. You...",
+    "answers": [
+      { "text": "Ask what the favor is and whether it conflicts with my values", "side": "light" },
+      { "text": "Agree immediately — good weapons rarely come free", "side": "dark" }
+    ]
+  },
+  {
+    "question": "Your stance on slavery?",
+    "answers": [
+      { "text": "Absolute evil that must be eradicated immediately", "side": "light" },
+      { "text": "Tragic reality — first become strong enough to change the system", "side": "dark" }
+    ]
+  },
+  {
+    "question": "You're asked to spy on a friend for the 'greater good'. You...",
+    "answers": [
+      { "text": "Refuse — friendship and trust cannot be sacrificed", "side": "light" },
+      { "text": "Agree — in the big game, personal ties are secondary", "side": "dark" }
+    ]
+  },
+  {
+    "question": "If you could rewrite the Jedi Code, you would...",
+    "answers": [
+      { "text": "Allow more humanity — love and empathy make us stronger", "side": "light" },
+      { "text": "Make it stricter — discipline above everything", "side": "dark" }
+    ]
+  },
+  {
+    "question": "Your enemy asks for a truce. You...",
+    "answers": [
+      { "text": "Listen — even enemies may have a valid point", "side": "light" },
+      { "text": "Don't trust it — it's a trap or a stalling tactic", "side": "dark" }
+    ]
+  },
+  {
+    "question": "You captured an enemy commander. You...",
+    "answers": [
+      { "text": "Take them prisoner and follow the rules of captivity", "side": "light" },
+      { "text": "Interrogate by any means — we need the information", "side": "dark" }
+    ]
+  },
+  {
+    "question": "What trait are you most proud of?",
+    "answers": [
+      { "text": "Compassion — I always try to understand others", "side": "light" },
+      { "text": "Determination — I don't stop before obstacles", "side": "dark" }
+    ]
+  },
+  {
+    "question": "Your master betrays you. You...",
+    "answers": [
+      { "text": "Suffer, but try to understand their motives", "side": "light" },
+      { "text": "Cut all ties — a master's betrayal is unforgivable", "side": "dark" }
+    ]
+  },
+  {
+    "question": "Your favorite Star Wars planet?",
+    "answers": [
+      { "text": "Naboo or Coruscant — civilization and beauty", "side": "light" },
+      { "text": "Mustafar or Korriban — power and mystery", "side": "dark" }
+    ]
+  },
+  {
+    "question": "You see someone's food being taken by force. You...",
+    "answers": [
+      { "text": "Intervene immediately — even if it's risky", "side": "light" },
+      { "text": "Assess the situation before acting — rash actions cause harm", "side": "dark" }
+    ]
+  },
+  {
+    "question": "Who is a true hero to you?",
+    "answers": [
+      { "text": "Someone who sacrifices themselves for others without glory", "side": "light" },
+      { "text": "Someone who achieves the impossible by sheer force of will", "side": "dark" }
+    ]
+  },
+  {
+    "question": "You can stop a conflict only by deceiving both sides. You...",
+    "answers": [
+      { "text": "Find another solution — peace built on lies is fragile", "side": "light" },
+      { "text": "Do it — stability matters more than perfect methods", "side": "dark" }
+    ]
+  },
+  {
+    "question": "How do you view the Jedi Order overall?",
+    "answers": [
+      { "text": "With respect — imperfect, but an important guardian of peace", "side": "light" },
+      { "text": "Critically — their pride and blindness doomed the Republic", "side": "dark" }
+    ]
+  },
+  {
+    "question": "You need to pass through enemy territory. You...",
+    "answers": [
+      { "text": "Seek a diplomatic pass or an alternate route", "side": "light" },
+      { "text": "Break through by force — speed and aggression decide", "side": "dark" }
+    ]
+  },
+  {
+    "question": "A child asks you to teach them the Force. You...",
+    "answers": [
+      { "text": "Teach responsibly — wisdom first, then technique", "side": "light" },
+      { "text": "Teach powerful techniques immediately — let them choose their own path", "side": "dark" }
+    ]
+  },
+  {
+    "question": "What does 'being free' mean to you?",
+    "answers": [
+      { "text": "Acting in accordance with your values without coercion", "side": "light" },
+      { "text": "Having enough power so no one can stop you", "side": "dark" }
+    ]
+  },
+  {
+    "question": "After a great victory, you...",
+    "answers": [
+      { "text": "Honor the fallen and think about the next step", "side": "light" },
+      { "text": "Enjoy the moment of triumph — victory deserves celebration", "side": "dark" }
+    ]
+  },
+  {
+    "question": "You're called to join a coup against a tyrant. You...",
+    "answers": [
+      { "text": "Join — tyranny cannot stand forever", "side": "light" },
+      { "text": "Assess the odds first, then decide", "side": "dark" }
+    ]
+  },
+  {
+    "question": "How do you perceive death?",
+    "answers": [
+      { "text": "As part of the natural cycle of the Force — not an enemy", "side": "light" },
+      { "text": "As an enemy to defeat or push as far away as possible", "side": "dark" }
+    ]
+  },
+  {
+    "question": "You're offered immortality, but the price is your soul. You...",
+    "answers": [
+      { "text": "Refuse — immortality without a soul is not life", "side": "light" },
+      { "text": "Consider it — immortality gives infinite time for achievement", "side": "dark" }
+    ]
+  },
+  {
+    "question": "You know that lying could save thousands. You...",
+    "answers": [
+      { "text": "Tell the truth and find another way to save them", "side": "light" },
+      { "text": "Lie without hesitation — thousands of lives outweigh my honesty", "side": "dark" }
+    ]
+  },
+  {
+    "question": "What matters more — order or justice?",
+    "answers": [
+      { "text": "Justice — unjust order is worse than chaos", "side": "light" },
+      { "text": "Order — without it, justice is impossible", "side": "dark" }
+    ]
+  },
+  {
+    "question": "You're on a team where everyone is stronger than you. You...",
+    "answers": [
+      { "text": "Find my unique role and contribute what I can", "side": "light" },
+      { "text": "Train relentlessly to become the strongest on the team", "side": "dark" }
+    ]
+  },
+  {
+    "question": "You're offered leadership of a Dark Order. You...",
+    "answers": [
+      { "text": "Refuse — not my path", "side": "light" },
+      { "text": "Consider it — power over such an organization offers vast possibilities", "side": "dark" }
+    ]
+  },
+  {
+    "question": "You receive an order to destroy an entire planet. You...",
+    "answers": [
+      { "text": "Refuse and rebel against this order", "side": "light" },
+      { "text": "Execute it — strategic necessity is sometimes horrific", "side": "dark" }
+    ]
+  },
+  {
+    "question": "What is attractive about the Dark Side?",
+    "answers": [
+      { "text": "Nothing — it seduces, but leads to self-destruction", "side": "light" },
+      { "text": "Its directness — it's honest about the nature of power", "side": "dark" }
+    ]
+  },
+  {
+    "question": "You find out you've been used. You...",
+    "answers": [
+      { "text": "Confront honestly and decide whether to continue the relationship", "side": "light" },
+      { "text": "Make the manipulator regret their decision", "side": "dark" }
+    ]
+  },
+  {
+    "question": "You're asked to betray the Order to save your loved one. You...",
+    "answers": [
+      { "text": "Find a way to save them without betrayal — both paths aren't the only ones", "side": "light" },
+      { "text": "Betray — no organization is worth more than someone I love", "side": "dark" }
+    ]
+  },
+  {
+    "question": "Your reaction to an unjust law?",
+    "answers": [
+      { "text": "Fight to change it through legitimate means", "side": "light" },
+      { "text": "Break it — an unjust law has no moral authority", "side": "dark" }
+    ]
+  },
+  {
+    "question": "You're the only witness to a Jedi's crime. You...",
+    "answers": [
+      { "text": "Report it to the Council — no one is above the law, even a Jedi", "side": "light" },
+      { "text": "Hide it — the Order's reputation matters more than one incident", "side": "dark" }
+    ]
+  },
+  {
+    "question": "What scares you most?",
+    "answers": [
+      { "text": "Becoming what I fought against my entire life", "side": "light" },
+      { "text": "Being powerless against a threat I couldn't stop", "side": "dark" }
+    ]
+  },
+  {
+    "question": "You meet someone stronger than you in the Force. You...",
+    "answers": [
+      { "text": "Try to learn from them — strength is no reason for rivalry", "side": "light" },
+      { "text": "Study their weaknesses — every advantage is temporary", "side": "dark" }
+    ]
+  },
+  {
+    "question": "You're unjustly thrown in prison. You...",
+    "answers": [
+      { "text": "Seek a legal way out and appeal the verdict", "side": "light" },
+      { "text": "Escape — unjust imprisonment doesn't obligate me to stay", "side": "dark" }
+    ]
+  },
+  {
+    "question": "Your reaction to a stranger's suffering?",
+    "answers": [
+      { "text": "Help immediately — indifference contradicts my nature", "side": "light" },
+      { "text": "Assess the situation — their motives may not be honest", "side": "dark" }
+    ]
+  },
+  {
+    "question": "If you could speak with Darth Vader, you would...",
+    "answers": [
+      { "text": "Try to find the spark of Anakin Skywalker still alive in him", "side": "light" },
+      { "text": "Study his tactics and power — the greatest always has something to teach", "side": "dark" }
+    ]
+  },
+  {
+    "question": "What does 'victory' mean to you?",
+    "answers": [
+      { "text": "When everyone can live in peace and dignity after the battle", "side": "light" },
+      { "text": "When the goal is achieved and the enemy is no longer a threat", "side": "dark" }
+    ]
+  },
+  {
+    "question": "You're cursed as a traitor after making the right decision. You...",
+    "answers": [
+      { "text": "Bear this cross — truth matters more than reputation", "side": "light" },
+      { "text": "Force people to see the truth — even by force if necessary", "side": "dark" }
+    ]
+  },
+  {
+    "question": "Your ideal ending to a great galactic saga?",
+    "answers": [
+      { "text": "Peace, restoration, and reconciliation between all sides", "side": "light" },
+      { "text": "Total victory and a new order established by a strong hand", "side": "dark" }
+    ]
+  },
+  {
+    "question": "You find an enemy's diary and see — they suffered. You...",
+    "answers": [
+      { "text": "Pause — even enemies are people with pain and their own truth", "side": "light" },
+      { "text": "Look for useful information — I'll process emotions later", "side": "dark" }
+    ]
+  },
+  {
+    "question": "What weapon would you fight with?",
+    "answers": [
+      { "text": "A lightsaber — the weapon of skill and the Force", "side": "light" },
+      { "text": "A dual blade or Dark Force weapon — maximum power", "side": "dark" }
+    ]
+  },
+  {
+    "question": "What would you say to Emperor Palpatine?",
+    "answers": [
+      { "text": "I will never join — no power is worth betraying humanity", "side": "light" },
+      { "text": "What are you offering? — I'll hear the terms before answering", "side": "dark" }
+    ]
+  },
+  {
+    "question": "After a long war, peace has come. You...",
+    "answers": [
+      { "text": "Rejoice and help rebuild what was destroyed", "side": "light" },
+      { "text": "Stay alert — peace is often just a pause before the next storm", "side": "dark" }
+    ]
+  }
+]

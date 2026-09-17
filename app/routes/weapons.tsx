@@ -1,18 +1,19 @@
 import { Link } from 'react-router';
 import Card from '~/components/Card';
-import useList from '~/hooks/useList';
 import parseURL from '~/utils/parseURL';
 import usePagination from '~/hooks/usePagination';
 import Pagination from '~/components/Pagination';
 import type { Weapons } from '~/types/types';
 import DataWrapper from '~/components/DataWrapper';
+import useAsync from '~/hooks/useAsync';
+import StarWarsListAPI from '~/api/StarWarsListAPI';
 
 const Weapons = () => {
   const {
     data: weapons,
     loading,
     error,
-  } = useList<Weapons[]>({ resource: 'weapons' });
+  } = useAsync<Weapons[]>(() => StarWarsListAPI('weapons'));
   const { currentPageItems, currentPage, totalPages, goToPage } = usePagination(
     {
       items: weapons || [],

@@ -224,6 +224,7 @@ export type Films = {
   release_date: string;
   canon: boolean;
   image?: string;
+  url: string;
 };
 
 export type Organizations = {

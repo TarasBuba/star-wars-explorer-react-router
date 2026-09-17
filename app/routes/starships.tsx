@@ -1,18 +1,19 @@
 import { Link } from 'react-router';
 import Card from '~/components/Card';
-import useList from '~/hooks/useList';
 import parseURL from '~/utils/parseURL';
 import usePagination from '~/hooks/usePagination';
 import Pagination from '~/components/Pagination';
 import type { Starships } from '~/types/types';
 import DataWrapper from '~/components/DataWrapper';
+import StarWarsListAPI from '~/api/StarWarsListAPI';
+import useAsync from '~/hooks/useAsync';
 
 const Starships = () => {
   const {
     data: starships,
     loading,
     error,
-  } = useList<Starships[]>({ resource: 'starships' });
+  } = useAsync<Starships[]>(() => StarWarsListAPI('starships'));
   const { currentPageItems, currentPage, totalPages, goToPage } = usePagination(
     {
       items: starships || [],

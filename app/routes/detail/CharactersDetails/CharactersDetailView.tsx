@@ -10,6 +10,7 @@ type Props = {
 const CharactersDetailView = ({ allcharacters, characters }: Props) => {
   return (
     <Card
+      variant="detail"
       heading={characters?.name}
       image={characters?.image}
       fields={[

@@ -1,4 +1,4 @@
-import StarWarsListAPI from '~/api/StarWarsListAPI';
+import StarWarsListAPI from './StarWarsListAPI';
 import StarWarsDetailsAPI from './StarWarsDetailsAPI';
 
 export const getAllCharacters = () => StarWarsListAPI('characters');
